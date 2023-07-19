@@ -1,0 +1,42 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: #1f2e19;
+    color: white;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+body p {
+    margin: 0;
+}
+
+    body::-webkit-scrollbar{
+        display: none;
+    }
+
+#navigation {
+    border-bottom: solid .25rem black;
+}
+
+#home-img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 500px;
+    height: 800px;
+}
