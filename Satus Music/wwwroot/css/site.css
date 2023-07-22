@@ -37,6 +37,12 @@ body p {
 #home-img {
     background-size: cover;
     background-repeat: no-repeat;
-    width: 500px;
-    height: 800px;
+    width: 600px;
+    height: 600px;
+}
+
+.home-intro {
+    display: grid;
+    align-content: center;
+    min-height: 100vh;
 }

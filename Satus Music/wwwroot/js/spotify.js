@@ -7,9 +7,9 @@ if (!code) {
 else {
     const accessToken = await getAccessToken(clientId, code);
     const profile = await fetchProfile(accessToken);
-    const artist = await fetchTopArtist(accessToken);
-    const album = await fetchArtistAlbum(accessToken, artist);
-    populateUI(profile, album);
+    const track = await fetchTopTrack(accessToken);
+    const art = await fetchAlbumArt(accessToken, track);
+    populateUI(profile, art, track);
 }
 function generateRandomString(length) {
     let text = '';
@@ -67,40 +67,26 @@ async function fetchProfile(token) {
     const data = userInfo.json();
     return await data;
 }
-async function fetchTopArtist(token) {
-    const artist = await fetch(' https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=5', {
+async function fetchTopTrack(token) {
+    const track = await fetch(' https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=5', {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
-    const data = artist.json();
+    const data = track.json();
     return await data;
 }
-async function fetchArtistAlbum(token, artists) {
-    let prefix = 'https://api.spotify.com/v1/artists/';
-    let location = prefix.concat(artists.items[0].id, "/albums");
+async function fetchAlbumArt(token, track) {
+    let prefix = 'https://api.spotify.com/v1/albums/';
+    let location = prefix.concat(track.items[0].album.id);
     const album = await fetch(location, {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
     const data = album.json();
     return await data;
 }
-//async function fetchPlaylistCoverArt(playlist: string, token: string): Promise<any> {
-//    let prefix = 'https://api.spotify.com/v1/playlists/'
-//    let location = prefix.concat(playlist, "/images");
-//    const coverArt = await fetch(location, {
-//        method: "GET", headers: { Authorization: `Bearer ${token}` }
-//    });
-//    const data = await coverArt.json();
-//}
-function populateUI(profile, album) {
-    var _a;
+function populateUI(profile, art, track) {
     document.getElementById("displayName").innerText = profile.display_name;
-    //if (profile.images[0]) {
-    //    const profileImage = new Image(200, 200);
-    //    profileImage.src = profile.images[0].url;
-    //    document.getElementById("avatar")!.appendChild(profileImage);
-    //}
-    //document.getElementById("home-img")!.style.backgroundImage = "url(" + profile.images[0]?.url ?? '(no profile image)' + ")";
-    document.getElementById("home-img").style.backgroundImage = "url(" + ((_a = album.items[0].images[0]) === null || _a === void 0 ? void 0 : _a.url) + ")";
+    document.getElementById("home-img").style.backgroundImage = "url(" + art.images[0].url + ")";
+    document.getElementById("top-track").textContent = track.items[0].name;
 }
 export {};
 //# sourceMappingURL=spotify.js.map
