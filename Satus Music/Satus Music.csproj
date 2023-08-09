@@ -17,6 +17,9 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Scripts\Tracks\" />
+    <Folder Include="Scripts\User\" />
+    <Folder Include="wwwroot\js\compiledtypescript\" />
   </ItemGroup>
 
 </Project>

@@ -15,7 +15,7 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: #1f2e19;
+    background-color: #000;
     color: white;
     overflow-x: hidden;
     -ms-overflow-style: none;
@@ -31,7 +31,7 @@ body p {
     }
 
 #navigation {
-    border-bottom: solid .25rem black;
+    border-bottom: solid .15rem white;
 }
 
 #home-img {
@@ -39,6 +39,8 @@ body p {
     background-repeat: no-repeat;
     width: 600px;
     height: 600px;
+    justify-content: center;
+    display: flex;
 }
 
 .home-intro {

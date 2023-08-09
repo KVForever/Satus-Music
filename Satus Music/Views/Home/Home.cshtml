@@ -1,6 +1,6 @@
 ﻿
 @{
-    Layout = "~/Views/Shared/Shared_layout.cshtml";
+   Layout = "~/Views/Shared/Shared_layout.cshtml";
 }
 
 
@@ -16,13 +16,16 @@
 				<div id="image-accent-box position-absolute z-n1"></div>
             </div>
             
-            <div class="position-absolute bg-black fw-bold fs-1 p-3 z-1" style="top:30%;left:15%;box-shadow: 6px 11px 5px black;">
-                <p>Welcome to Satus <span id="displayName"></span></p>
+            <div class="position-absolute bg-red fw-bold fs-1 p-3 z-1" style="top:30%;left:15%;box-shadow: 6px 11px 5px black;">
+                <p>Welcome to Satus, <span id="displayName"></span></p>
             </div>
-            <p class="d-flex justify-content-center">Your top track: <span id="top-track" class="ms-1">null</span></p>
-            <div id="home-img" style="background-image: url();box-shadow: 6px 11px 5px black;" class="m-auto"></div>
 
-            <div class="position-absolute p-3 fs-3 fw-bold bg-black " style="right:5%;top:50%;width:40vw;box-shadow: 6px 11px 5px black;">
+            <p class="d-flex justify-content-center">Your top track: <span id="top-track" class="ms-1">null</span></p>
+            <canvas id="home-img" style="background-image: url();box-shadow: 6px 11px 5px black;" class="m-auto">
+                
+            </canvas>
+
+            <div class="position-absolute p-3 fs-3 fw-bold bg-red " style="right:5%;top:50%;width:40vw;box-shadow: 6px 11px 5px black;">
                 <p >Lets look at the music tastes and habits that make up your musical profile.</p>
             </div>
         </div>
