@@ -9,6 +9,11 @@
     {
       "library": "jquery@3.6.4",
       "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "three@0.154.0",
+      "destination": "wwwroot/lib/three/"
     }
   ]
 }
