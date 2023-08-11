@@ -2,14 +2,13 @@ class Track {
     constructor(token) {
         this.token = token;
     }
-    async fetchAlbumArt(token, track) {
-        let prefix = 'https://api.spotify.com/v1/albums/';
-        let location = prefix.concat(track.items[0].album.id);
-        const album = await fetch(location, {
-            method: "GET", headers: { Authorization: `Bearer ${token}` }
+    async fetchTrack(trackId) {
+        const album = await fetch('https://api.spotify.com/v1/tracks/' + trackId, {
+            method: "GET", headers: { Authorization: `Bearer ${this.token}` }
         });
         const data = album.json();
-        return await data;
+        this.getTrack = data;
     }
 }
+export { Track };
 //# sourceMappingURL=track.js.map
