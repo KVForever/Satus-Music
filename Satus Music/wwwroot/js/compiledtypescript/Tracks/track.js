@@ -7,7 +7,7 @@ class Track {
             method: "GET", headers: { Authorization: `Bearer ${this.token}` }
         });
         const data = album.json();
-        this.getTrack = data;
+        return data;
     }
 }
 export { Track };

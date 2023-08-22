@@ -1,25 +1,21 @@
 
 class Auth {
-    private clientId = '41a7b7283e534f44b0761ffb963a0759';
-    private urlParams = new URLSearchParams(window.location.search);
-    private code = this.urlParams.get('code');
-    token: Promise<any>
-    constructor() {
-        const token = this.authenticate();
-        this.token = token
-    }
+    private static clientId = '41a7b7283e534f44b0761ffb963a0759';
+    private static urlParams = new URLSearchParams(window.location.search);
+    private static code = this.urlParams.get('code');
+    public static token: Promise<any>
 
-    public authenticate(): Promise<any> {
+    public static async authenticate(): Promise<any> {
         if (!this.code) {
             this.redirectToAuthCodeFlow();
         } else {
-            const token = this.getAccessToken();
-            return token;
+            const token = await this.getAccessToken();
+            Auth.token = token;
         }
     }
     
 
-    private generateRandomString(length: number): string {
+    private static generateRandomString(length: number): string {
         let text = '';
         let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -29,7 +25,7 @@ class Auth {
         return text;
     }
 
-    private generateCodeChallenge(codeVerifier: string) {
+    private static async generateCodeChallenge(codeVerifier: string) {
         function base64encode(string) {
             return btoa(String.fromCharCode.apply(null, new Uint8Array(string)))
                 .replace(/\+/g, '-')
@@ -39,15 +35,15 @@ class Auth {
 
         const encoder = new TextEncoder();
         const data = encoder.encode(codeVerifier);
-        const digest = window.crypto.subtle.digest('SHA-256', data);
+        const digest = await window.crypto.subtle.digest('SHA-256', data);
 
         return base64encode(digest);
     }
 
 
-     private redirectToAuthCodeFlow() {
+     private static async redirectToAuthCodeFlow() {
         const verifier = this.generateRandomString(128);
-        const challenge = this.generateCodeChallenge(verifier);
+        const challenge = await this.generateCodeChallenge(verifier);
 
         localStorage.setItem("verifier", verifier);
 
@@ -61,8 +57,7 @@ class Auth {
         document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
     }
 
-
-    private async  getAccessToken() {
+    private static async getAccessToken() {
         const verifier = localStorage.getItem("verifier");
 
         const params = new URLSearchParams();
@@ -70,7 +65,7 @@ class Auth {
         params.append("grant_type", "authorization_code");
         params.append("code", this.code);
         params.append("redirect_uri", "https://localhost:7195");
-        params.append("code_verifier", verifier);
+        params.append("code_verifier", verifier!);
 
         const result = await fetch("https://accounts.spotify.com/api/token", {
             method: "POST",
@@ -78,8 +73,8 @@ class Auth {
             body: params
         });
 
-        const access_token = result.json;
-        console.log(access_token);
+        const { access_token } = await result.json();
+        return access_token;
     }
 }
 
