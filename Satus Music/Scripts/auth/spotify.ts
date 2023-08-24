@@ -9,60 +9,77 @@ async function spotify() {
     const profile = await user.currentProfile();
     const topTracks = await user.usersTopItems("tracks");
 
-    document.getElementById("displayName").innerText = profile.display_name;
-    document.getElementById("top-track").textContent = topTracks.items[0].name;
-    //document.getElementById("home-img").style.backgroundImage = "url(" + topTracks.items[0].album.images[0].url + ")";
-    const canvas = document.getElementById("home-img") as HTMLCanvasElement;
+    document.getElementById("display-name").innerText = profile.display_name;
+    document.getElementById("top-track-name").textContent = topTracks.items[5].name;
+    const canvas = document.getElementById("home-canvas") as HTMLCanvasElement;
     const context = canvas.getContext("2d");
-    const topTrackImage = topTracks.items[0].album.images[0].url;
     var img = new Image();
     img.crossOrigin = "anonymous";
-    img.src = "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg";
-    img.onload = function () {
-        context.drawImage(img, 0, 0, canvas.width, canvas.height);
-        const imgData = context.getImageData(canvas.width / 2 - 30, canvas.height / 2 - 30, 30, 30);
-        let count = -1;
+    img.src = topTracks.items[5].album.images[0].url;
+
+    canvas.width = topTracks.items[5].album.images[0].width;
+    canvas.height = topTracks.items[5].album.images[0].height;
+    let mostCommonColor;
+    let commonRed;
+    let commonGreen;
+    let commonBlue;
+     img.onload = function () {
+        context.drawImage(img, 0, 0);
+         const imgData = context.getImageData(canvas.width / 2, canvas.height / 2, canvas.width / 4, canvas.height / 4);
+         //context.putImageData(imgData, 100, 100)
+        let count = 0;
         const redArray = new Array();
         const greenArray = new Array();
         const blueArray = new Array();
         let colors = [redArray, blueArray, greenArray];
-        for (var a = 0; a < colors.length; a++) {
-            count++;
+        for (var a = 0; a < colors.length; a++) {          
             for (var i = count; i < imgData.data.length / 3; i += 4) {
-                colors[a].push(imgData.data[i]);
-                
+                colors[a].push(imgData.data[i]);               
             }
+            count++;
         }
-        count = -1;
+        count = 0;
         let m = 0
         let mf = 1;
         var item;
-        for (var c = 0; c < colors.length; c++) {
-            count++
+        for (var c = 0; c < colors.length; c++) {            
             for (var d = count; d < colors[c].length; d++) {
                 for (var e = d; e < colors[c].length; e++) {
                     if (colors[c][d] == colors[c][e]) {
                         m++;
                         if (mf < m) {
                             mf = m;
-                            item = colors[c][d]
-                            
+                            item = colors[c][d];
+                            if (count == 0) {
+                                commonRed = colors[c][d];
+                            } else if (count == 1) {
+                                commonGreen = colors[c][d];
+                            } else {
+                                commonBlue = colors[c][d];
+                            }
+                                
                         }
                     }
-                }
-                
+                }               
                 m = 0;
             }
+            mf = 0;
+            count++
             console.log(item);
-        }
-        
-        
+            mostCommonColor = "rgba(" + commonRed + "," + commonGreen + "," + commonBlue + ")";
+            const test = 0;
+         }
+         //document.getElementById("welcome").style.color = mostCommonColor;
+         //document.getElementById("top-track").style.color = mostCommonColor;
+         //document.getElementById("home-canvas").style.boxShadow = " 0px 0px 30px 10px " + mostCommonColor;
+         document.body.style.backgroundColor = mostCommonColor
     };
-    
-    
+
+   
 }
 
 spotify();
+
 
 //export { }
 

@@ -19,6 +19,7 @@
     <Folder Include="Models\" />
     <Folder Include="Scripts\Utitlites\" />
     <Folder Include="Scripts\Tracks\" />
+    <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\js\compiledtypescript\" />
   </ItemGroup>
 
