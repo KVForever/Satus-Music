@@ -363,4 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 #My Ignores
-Scripts/Auth/auth.ts
+/SatausMusic/Scripts/Auth/auth.ts
