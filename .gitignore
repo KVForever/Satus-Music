@@ -34,7 +34,7 @@ bld/
 [Ll]ogs/
 
 #My Ignores
-Satus Music\Scripts\Auth\auth.ts
+Satus Music/Scripts/Auth/auth.ts
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
