@@ -1,4 +1,4 @@
-﻿import { Auth } from '../Auth/auth.js'
+﻿import { Auth } from './auth.js'
 import { Track } from '../Tracks/track.js'
 import { User } from '../User/user.js'
 

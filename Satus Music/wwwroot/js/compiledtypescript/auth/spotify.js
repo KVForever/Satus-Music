@@ -1,4 +1,4 @@
-import { Auth } from '../Auth/auth.js';
+import { Auth } from './auth.js';
 import { User } from '../User/user.js';
 async function spotify() {
     await Auth.authenticate();
