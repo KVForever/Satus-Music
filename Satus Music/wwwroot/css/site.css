@@ -16,7 +16,7 @@ html {
 body {
     margin-bottom: 60px;
     background-color: #000;
-     color: white;
+    color: white;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -37,10 +37,20 @@ body p {
 #home-canvas {
     justify-content: center;
     display: flex;
+    align-items: center;
 }
 
 .home-intro {
     display: grid;
     align-content: center;
     min-height: 100vh;
+}
+
+#home-gradient {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
 }
