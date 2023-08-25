@@ -12,8 +12,8 @@ class Stack {
     pop() {
         return this.storage.pop();
     }
-    peek() {
-        return this.storage[this.size() - 1];
+    peek(index) {
+        return this.storage[index];
     }
     size() {
         return this.storage.length;

@@ -1,13 +1,13 @@
 import { Auth } from './auth.js';
 import { User } from '../User/user.js';
-import { Stack } from '../Utilites/Stack.js';
+import { Queue } from '../Utilites/Queue.js';
 async function spotify() {
     await Auth.authenticate();
     const user = new User(Auth.token);
     const profile = await user.currentProfile();
     const topTracks = await user.usersTopItems("tracks");
     document.getElementById("display-name").innerText = profile.display_name;
-    grabImageColors(topTracks, 0);
+    grabImageColors(topTracks, 5);
 }
 spotify();
 var a = 1;
@@ -32,7 +32,6 @@ function grabImageColors(topTracks, imageNum) {
     colorCanvas.width = sampleImage.width;
     colorCanvas.height = sampleImage.height;
     let mostCommonColor, commonRed, commonGreen, commonBlue;
-    let second;
     img.onload = function () {
         context.drawImage(img, 0, 0);
     };
@@ -48,43 +47,44 @@ function grabImageColors(topTracks, imageNum) {
             }
             count++;
         }
-        const topRed = new Stack(3);
-        const topGreen = new Stack(3);
-        const topBlue = new Stack(3);
+        var limit = 3;
+        const topRed = new Queue(limit);
+        const topGreen = new Queue(limit);
+        const topBlue = new Queue(limit);
         count = 0;
-        let m = 0, mf = 1, item;
+        let n = 0, mostfreq = 1, item;
         for (var c = 0; c < colors.length; c++) {
             for (var d = count; d < colors[c].length; d++) {
                 for (var e = d; e < colors[c].length; e++) {
                     if (colors[c][d] == colors[c][e]) {
-                        m++;
-                        if (mf < m) {
-                            mf = m;
+                        n++;
+                        if (mostfreq < n) {
+                            mostfreq = n;
                             if (count == 0) {
-                                if (topRed.size() < 3) {
-                                    topRed.push(mf);
+                                if (topRed.size() < limit) {
+                                    topRed.enqueue(colors[c][d]);
                                 }
                                 else {
-                                    topRed.pop();
-                                    topRed.push(mf);
+                                    topRed.dequeue();
+                                    topRed.enqueue(colors[c][d]);
                                 }
                             }
                             else if (count == 1) {
-                                if (topGreen.size() < 3) {
-                                    topGreen.push(mf);
+                                if (topGreen.size() < limit) {
+                                    topGreen.enqueue(colors[c][d]);
                                 }
                                 else {
-                                    topGreen.pop();
-                                    topGreen.push(mf);
+                                    topGreen.dequeue();
+                                    topGreen.enqueue(colors[c][d]);
                                 }
                             }
                             else {
-                                if (topBlue.size() < 3) {
-                                    topBlue.push(mf);
+                                if (topBlue.size() < limit) {
+                                    topBlue.enqueue(colors[c][d]);
                                 }
                                 else {
-                                    topBlue.pop();
-                                    topBlue.push(mf);
+                                    topBlue.dequeue();
+                                    topBlue.enqueue(colors[c][d]);
                                 }
                             }
                             item = colors[c][d];
@@ -100,20 +100,31 @@ function grabImageColors(topTracks, imageNum) {
                         }
                     }
                 }
-                m = 0;
+                n = 0;
             }
-            mf = 0;
+            mostfreq = 1;
             count++;
             mostCommonColor = "rgba(" + commonRed + "," + commonGreen + "," + commonBlue + ")";
         }
         console.log(topRed, topGreen, topBlue);
+        let checkColor;
+        function notBadColor() {
+            if ((commonRed == commonGreen && commonRed == commonBlue) || (Math.abs(commonRed - commonBlue) <= 10 && Math.abs(commonRed - commonGreen) <= 10)) {
+                commonRed = topRed.read(checkColor);
+                commonGreen = topGreen.read(checkColor);
+                commonBlue = topBlue.read(checkColor);
+                checkColor++;
+                notBadColor();
+            }
+        }
+        notBadColor();
         document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${commonRed - 30}, ${commonGreen - 30}, ${commonBlue - 30}, 1) 14%, rgba(${commonRed - 20}, ${commonGreen - 20}, ${commonBlue - 20}, 1) 33%, rgba(${commonRed - 10}, ${commonGreen - 10}, ${commonBlue - 10}, 0.9) 50%, rgba(${commonRed}, ${commonGreen}, ${commonBlue}, 0.6) 66%, rgba(${commonRed + 10}, ${commonGreen + 10}, ${commonBlue + 10}, 0.00001) 85%)`;
     };
-    setTimeout(() => {
-        grabImageColors(topTracks, a);
-        if (a < topTracks.items.length) {
-            a++;
-        }
-    }, 4000);
+    //setTimeout(() => {
+    //    grabImageColors(topTracks, a);
+    //    if (a < topTracks.items.length) {
+    //        a++;
+    //    }
+    //}, 4000);
 }
 //# sourceMappingURL=spotify.js.map

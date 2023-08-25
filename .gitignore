@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Satus Music/Scripts/Auth/auth.ts
+/Satus Music/wwwroot/js/compiledtypescript/auth/auth.js
+/Satus Music/wwwroot/js/compiledtypescript/auth/auth.js.map

@@ -14,11 +14,12 @@
     }
 
     pop(): T | undefined {
+        
         return this.storage.pop();
     }
 
-    peek(): T | undefined {
-        return this.storage[this.size() - 1];
+    peek(index: number): T | undefined {
+        return this.storage[index];
     }
 
     size(): number {
