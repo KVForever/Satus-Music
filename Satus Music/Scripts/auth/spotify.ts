@@ -2,28 +2,31 @@
 import { Track } from '../Tracks/track.js'
 import { User } from '../User/user.js'
 import { Queue } from '../Utilites/Queue.js'
+import { Pixel } from '../Utilites/Pixel.js'
 async function spotify() {
     await Auth.authenticate();
 
     const user = new User(Auth.token);
     const profile = await user.currentProfile();
-    const topTracks = await user.usersTopItems("tracks");
+    const topTracks = await user.usersTopItems("tracks", "long_term");
 
     document.getElementById("display-name").innerText = profile.display_name;
-    grabImageColors(topTracks, 5);
+    
+    grabImageColors(topTracks, 0, true);
     
 }
 
 spotify();
 
 var a = 1;
-function grabImageColors(topTracks, imageNum: number) {
+function grabImageColors(topTracks, imageNum: number, repeat: boolean) {
 
     document.getElementById("top-track-name").textContent = topTracks.items[imageNum].name;
+    document.getElementById("top-track-artist-name").innerText = topTracks.items[imageNum].artists[0].name
     const canvas = document.getElementById("home-canvas") as HTMLCanvasElement;
     const context = canvas.getContext("2d");
-    var displayImage = topTracks.items[imageNum].album.images[0];
-    var img = new Image();
+    let displayImage = topTracks.items[imageNum].album.images[0];
+    let img = new Image();
     img.crossOrigin = "anonymous";
     img.src = displayImage.url;
     img.width = displayImage.width;
@@ -36,14 +39,14 @@ function grabImageColors(topTracks, imageNum: number) {
     const colorContext = colorCanvas.getContext("2d", {willReadFrequently: true});
 
     const sampleImage = topTracks.items[imageNum].album.images[2];
-    var grabColorImage = new Image();
+    let grabColorImage = new Image();
     grabColorImage.crossOrigin = "anonymous";
     grabColorImage.src = sampleImage.url;
 
     colorCanvas.width = sampleImage.width;
     colorCanvas.height = sampleImage.height;
 
-    let mostCommonColor, commonRed, commonGreen, commonBlue;
+    let mostCommonColor;
     img.onload = function () {
         context.drawImage(img, 0, 0);
     };
@@ -51,91 +54,68 @@ function grabImageColors(topTracks, imageNum: number) {
     grabColorImage.onload = function () {
         colorContext.drawImage(grabColorImage, 0, 0);
         const imgData = colorContext.getImageData(0, 0, colorCanvas.width, colorCanvas.height);
-
-        let count = 0;
-        const redArray = new Array(), greenArray = new Array, blueArray = new Array;
-        let colors = [redArray, blueArray, greenArray];
-        for (var a = 0; a < colors.length; a++) {
-            for (var i = count; i < imgData.data.length / 3; i += 4) {
-                colors[a].push(imgData.data[i]);
-            }
-            count++;
+        
+        let numPixels = 0;
+        let pixelMap = new Map();
+        for (var a = 0; a < imgData.data.length; a += 4) {
+            let r = imgData.data[a];
+            let g = imgData.data[a + 1];
+            let  b = imgData.data[a + 2];
+            let pixelToAdd = new Pixel(r, g, b);     
+            pixelMap.set(numPixels, pixelToAdd);
+            numPixels++;
         }
-        var limit = 3
-        const topRed = new Queue<number>(limit);
-        const topGreen = new Queue<number>(limit);
-        const topBlue = new Queue<number>(limit);
-        count = 0;
-        let n = 0, mostfreq = 1, item;
-        for (var c = 0; c < colors.length; c++) {
-            for (var d = count; d < colors[c].length; d++) {
-                for (var e = d; e < colors[c].length; e++) {
-                    if (colors[c][d] == colors[c][e]) {
-                        n++;
-                        if (mostfreq < n) {
-                            mostfreq = n;
-                            if (count == 0) {
-                                if (topRed.size() < limit) {
-                                    topRed.enqueue(colors[c][d]);
-                                } else {
-                                    topRed.dequeue();
-                                    topRed.enqueue(colors[c][d]);                                    
-                                }
-                            } else if (count == 1) {
-                                if (topGreen.size() < limit) {
-                                    topGreen.enqueue(colors[c][d]);
-                                } else {
-                                    topGreen.dequeue();
-                                    topGreen.enqueue(colors[c][d]);  
-                                }
-                            } else {
-                                if (topBlue.size() < limit) {
-                                    topBlue.enqueue(colors[c][d]);
-                                } else {
-                                    topBlue.dequeue();
-                                    topBlue.enqueue(colors[c][d]);
-                                }
-                            }
-                            
-                            
-                            item = colors[c][d];
-                            if (count == 0) {
-                                commonRed = colors[c][d];
-                            } else if (count == 1) {
-                                commonGreen = colors[c][d];
-                            } else {
-                                commonBlue = colors[c][d];
-                            }
-
+        let topColors = new Queue<Pixel>(20);
+        let n = 0, mostFreq = 1, item;
+        for (var d = 0; d < pixelMap.size; d++) {
+            for (var e = d; e < pixelMap.size; e++) {
+                if (pixelMap.get(e) == pixelMap.get(d)) {
+                    n++;
+                    if (mostFreq < n) {
+                        mostFreq = n;
+                        let newGreatest = pixelMap.get(d);
+                        if (topColors.size() < 20) {
+                            topColors.enqueue(pixelMap.get(d));
                         }
+                        else {
+                            topColors.dequeue();
+                            topColors.enqueue(pixelMap.get(d));
+                        }
+                        
+                        item = newGreatest;
+                        n = 0;
                     }
+                    
                 }
-                n = 0;
+                
             }
-            mostfreq = 1;
-            count++
-            
-            mostCommonColor = "rgba(" + commonRed + "," + commonGreen + "," + commonBlue + ")";
-        }
-        console.log(topRed, topGreen, topBlue)
-        let checkColor;
-        function notBadColor() {
-            if ((commonRed == commonGreen && commonRed == commonBlue) || (Math.abs(commonRed - commonBlue) <= 10 && Math.abs(commonRed - commonGreen) <= 10)) {
-                commonRed = topRed.read(checkColor);
-                commonGreen = topGreen.read(checkColor);
-                commonBlue = topBlue.read(checkColor);
-                checkColor++;
-                notBadColor();
-            }
-        }
-        notBadColor();
-        document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${ commonRed - 30}, ${commonGreen - 30}, ${commonBlue - 30}, 1) 14%, rgba(${commonRed - 20}, ${commonGreen - 20}, ${commonBlue - 20}, 1) 33%, rgba(${commonRed - 10}, ${commonGreen -10}, ${commonBlue - 10}, 0.9) 50%, rgba(${commonRed}, ${commonGreen}, ${commonBlue}, 0.6) 66%, rgba(${commonRed + 10}, ${commonGreen + 10}, ${commonBlue + 10}, 0.00001) 85%)`;
-    }
 
-    //setTimeout(() => {
-    //    grabImageColors(topTracks, a);
-    //    if (a < topTracks.items.length) {
-    //        a++;
-    //    }
-    //}, 4000);
+        }
+        mostCommonColor = item;
+        console.log(item, topColors);
+        let checkColor = 0;
+        notBadColor();
+        function notBadColor() {
+            if ((Math.abs(topColors.read(checkColor).r - topColors.read(checkColor).b) || 10 && Math.abs(topColors.read(checkColor).r - topColors.read(checkColor).g) >= 10) || Math.abs(topColors.read(checkColor).g - topColors.read(checkColor).b) >= 10) {
+                mostCommonColor.r = topColors.read(checkColor).r;
+                mostCommonColor.g = topColors.read(checkColor).g;
+                mostCommonColor.b = topColors.read(checkColor).b;
+                return;
+            }
+            checkColor++;
+            notBadColor();
+        }
+        document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${mostCommonColor.r - 30}, ${mostCommonColor.g - 30}, ${mostCommonColor.b - 30}, 1) 14%, rgba(${mostCommonColor.r - 20}, ${mostCommonColor.g - 20}, ${mostCommonColor.b - 20}, 1) 33%, rgba(${mostCommonColor.r - 10}, ${mostCommonColor.g - 10}, ${mostCommonColor.b - 10}, 0.9) 50%, rgba(${mostCommonColor.r}, ${mostCommonColor.g}, ${mostCommonColor.b}, 0.6) 66%, rgba(${mostCommonColor.r + 10}, ${mostCommonColor.g + 10}, ${mostCommonColor.b + 10}, 0.00001) 85%)`;
+       
+    }
+    if (repeat == true) {
+        setTimeout(() => {
+        
+            if (a < topTracks.items.length) {
+                grabImageColors(topTracks, a, repeat);
+                a++;
+            }
+        }, 4000);
+    }
+    
 }
