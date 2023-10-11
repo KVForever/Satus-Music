@@ -1,0 +1,26 @@
+@import '../base.scss';
+
+#navigation {
+    border-bottom: solid .15rem white;
+}
+
+#home-canvas {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.home-intro {
+    display: grid;
+    align-content: center;
+    min-height: 100vh;
+}
+
+#home-gradient {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}

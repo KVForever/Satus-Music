@@ -6,7 +6,7 @@ async function spotify() {
     await Auth.authenticate();
     const user = new User(Auth.token);
     const profile = await user.currentProfile();
-    const topTracks = await user.usersTopItems("tracks", "long_term");
+    const topTracks = await user.usersTopItems("tracks", "short_term");
     document.getElementById("display-name").innerText = profile.display_name;
     grabImageColors(topTracks, 0, true);
 }

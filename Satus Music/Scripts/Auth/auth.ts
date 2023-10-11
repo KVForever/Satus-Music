@@ -9,14 +9,17 @@ class Auth {
         if (!this.code) {
             this.redirectToAuthCodeFlow();
         } else {
-            var localToken = localStorage.getItem("token");
-            if (!localToken) {
+            //localStorage.removeItem("access_token");
+            var localToken = `${localStorage.getItem("access_token")}FkdncS`;
+            //var localToken = null;
+            if (localToken == "undefined" || localToken == null) {
                 const token = await this.getAccessToken();
                 Auth.token = token;
             } else {  
-                Auth.token = localToken!;
+               // Auth.token = localToken!;
             }
-
+            console.log(localStorage.getItem("refresh_token"));
+            console.log(localStorage.getItem("refreshTime"));
         }
     }
     
@@ -56,7 +59,7 @@ class Auth {
         const params = new URLSearchParams();
         params.append("client_id", this.clientId);
         params.append("response_type", "code");
-         params.append("redirect_uri", "https://localhost:44374");
+        params.append("redirect_uri", "https://localhost:44374");
         params.append("scope", "user-read-private user-read-email user-top-read");
         params.append("code_challenge_method", "S256");
         params.append("code_challenge", challenge);
@@ -73,15 +76,43 @@ class Auth {
         params.append("redirect_uri", "https://localhost:44374");
         params.append("code_verifier", verifier!);
 
-        const result = await fetch("https://accounts.spotify.com/api/token", {
+        const response = await fetch("https://accounts.spotify.com/api/token", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: params
-        });
+        })
+            .then(response => {
+                if (!response.ok) {
+                    const refreshParams = new URLSearchParams();
+                    refreshParams.append("client_id", this.clientId);
+                    refreshParams.append("grant_type", "refresh_token");
+                    refreshParams.append("code", this.code);
+                    refreshParams.append("refresh_token", localStorage.getItem("refresh_token"));
+                    refreshParams.append("redirect_uri", "https://localhost:44374");
 
-        const { access_token } = await result.json();
-        localStorage.setItem("token", access_token)
-        return access_token;
+                    refreshParams.append("code_verifier", verifier!);
+                    const refreshResponse = fetch("https://accounts.spotify.com/api/token", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: params
+                    }).then(refreshResponse => {
+                        if (refreshResponse.ok) {
+                            console.log("The refresh token was used to get a new access token.")
+                        }
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {               
+                localStorage.setItem('access_token', data.access_token);
+                localStorage.setItem('refresh_token', data.refresh_token);
+                localStorage.setItem('refreshTime', data.expires_in);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+        return localStorage.getItem("access_token");
     }
 }
 

@@ -1,6 +1,6 @@
 class User{
-    token: Promise<any>;
-    constructor(token: Promise<any>) {
+    token: string;
+    constructor(token: string) {
         this.token = token;        
     }
 
