@@ -2,24 +2,28 @@ class Auth {
     private static clientId = '41a7b7283e534f44b0761ffb963a0759';
     private static urlParams = new URLSearchParams(window.location.search);
     private static code = this.urlParams.get('code');
-    public static token: string
+    public static token: string;
 
     public static async authenticate(): Promise<any> {
-        
+   
+        var localToken = localStorage.getItem("access_token");
+        var refreshToken = localStorage.getItem("refresh_token");
+        const currentTime = new Date().getTime() / 1000;
+        const refresh = localStorage.getItem("refreshTime");
         if (!this.code) {
             this.redirectToAuthCodeFlow();
-        } else {
-            //localStorage.removeItem("access_token");
-            var localToken = `${localStorage.getItem("access_token")}FkdncS`;
-            //var localToken = null;
-            if (localToken == "undefined" || localToken == null) {
-                const token = await this.getAccessToken();
-                Auth.token = token;
-            } else {  
-               // Auth.token = localToken!;
+        } else if (localToken && refresh && refreshToken) {
+           
+            if (currentTime < Number(refresh)) {
+                Auth.token = localToken;
+            } else {
+                const newToken = await Auth.refreshAccessToken(refreshToken);
+                Auth.token = newToken;
             }
-            console.log(localStorage.getItem("refresh_token"));
-            console.log(localStorage.getItem("refreshTime"));
+
+        } else {
+            const initalToken = await Auth.getAccessToken();
+            Auth.token = initalToken;
         }
     }
     
@@ -59,21 +63,22 @@ class Auth {
         const params = new URLSearchParams();
         params.append("client_id", this.clientId);
         params.append("response_type", "code");
-        params.append("redirect_uri", "https://localhost:44374");
+        params.append("redirect_uri", "https://localhost:7195");
         params.append("scope", "user-read-private user-read-email user-top-read");
         params.append("code_challenge_method", "S256");
         params.append("code_challenge", challenge);
         document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
     }
 
-    private static async getAccessToken() {
+    private static async getAccessToken(): Promise<string> {
         const verifier = localStorage.getItem("verifier");
+        const currentTime = new Date().getTime() / 1000;
 
         const params = new URLSearchParams();
         params.append("client_id", this.clientId);
         params.append("grant_type", "authorization_code");
         params.append("code", this.code);
-        params.append("redirect_uri", "https://localhost:44374");
+        params.append("redirect_uri", "https://localhost:7195");
         params.append("code_verifier", verifier!);
 
         const response = await fetch("https://accounts.spotify.com/api/token", {
@@ -83,33 +88,54 @@ class Auth {
         })
             .then(response => {
                 if (!response.ok) {
-                    const refreshParams = new URLSearchParams();
-                    refreshParams.append("client_id", this.clientId);
-                    refreshParams.append("grant_type", "refresh_token");
-                    refreshParams.append("code", this.code);
-                    refreshParams.append("refresh_token", localStorage.getItem("refresh_token"));
-                    refreshParams.append("redirect_uri", "https://localhost:44374");
-
-                    refreshParams.append("code_verifier", verifier!);
-                    const refreshResponse = fetch("https://accounts.spotify.com/api/token", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                        body: params
-                    }).then(refreshResponse => {
-                        if (refreshResponse.ok) {
-                            console.log("The refresh token was used to get a new access token.")
-                        }
-                    });
+                    throw new Error('HTTP status ' + response.status);
                 }
                 return response.json();
             })
             .then(data => {               
                 localStorage.setItem('access_token', data.access_token);
                 localStorage.setItem('refresh_token', data.refresh_token);
-                localStorage.setItem('refreshTime', data.expires_in);
+                const refreshTime = currentTime + data.expires_in;
+                localStorage.setItem('refreshTime', refreshTime);
             })
             .catch(error => {
                 console.error('Error:', error);
+                throw error;
+            });
+
+        return localStorage.getItem("access_token");
+    }
+
+    private static async refreshAccessToken(refreshToken: string): Promise<string> {
+        if (!refreshToken) {
+            throw new Error('No resfresh token available');
+        }
+        const currentTime = new Date().getTime() / 1000;
+        const params = new URLSearchParams();
+        params.append("client_id", this.clientId);
+        params.append("grant_type", "refresh_token");
+        params.append("refresh_token", localStorage.getItem("refresh_token"));
+
+        const response = await fetch("https://accounts.spotify.com/api/token", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: params
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('HTTP status ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                localStorage.setItem('access_token', data.access_token);
+                localStorage.setItem('refresh_token', data.refresh_token);
+                const refreshTime = currentTime + data.expires_in;
+                localStorage.setItem('refreshTime', refreshTime);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                throw error;
             });
 
         return localStorage.getItem("access_token");

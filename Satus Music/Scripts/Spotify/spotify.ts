@@ -1,31 +1,28 @@
-﻿import { Auth } from './auth.js'
-import { Track } from '../Tracks/track.js'
-import { User } from '../User/user.js'
+﻿import { Auth } from './Auth/auth.js'
+import { Track } from './Tracks/track.js'
+import { User } from './User/user.js'
 import { Queue } from '../Utilites/Queue.js'
 import { Pixel } from '../Utilites/Pixel.js'
+
 async function spotify() {
     await Auth.authenticate();
 
     const user = new User(Auth.token);
     const profile = await user.currentProfile();
-    const topTracks = await user.usersTopItems("tracks", "short_term");
+    const topTracks = await user.usersTopItems("tracks", "long_term");
 
-    document.getElementById("display-name").innerText = profile.display_name;
-    
+    document.getElementById("username").innerText = profile.display_name;
     grabImageColors(topTracks, 0, true);
     
 }
 
-spotify();
+function grabImageColors(topTracks, imageStart: number, repeat?: boolean) {
 
-var a = 1;
-function grabImageColors(topTracks, imageNum: number, repeat: boolean) {
-
-    document.getElementById("top-track-name").textContent = topTracks.items[imageNum].name;
-    document.getElementById("top-track-artist-name").innerText = topTracks.items[imageNum].artists[0].name
+    document.getElementById("top-track-name").textContent = topTracks.items[imageStart].name;
+    document.getElementById("top-track-artist-name").innerText = topTracks.items[imageStart].artists[0].name
     const canvas = document.getElementById("home-canvas") as HTMLCanvasElement;
     const context = canvas.getContext("2d");
-    let displayImage = topTracks.items[imageNum].album.images[0];
+    let displayImage = topTracks.items[imageStart].album.images[0];
     let img = new Image();
     img.crossOrigin = "anonymous";
     img.src = displayImage.url;
@@ -38,7 +35,7 @@ function grabImageColors(topTracks, imageNum: number, repeat: boolean) {
     const colorCanvas = document.getElementById("home-color-canvas") as HTMLCanvasElement;
     const colorContext = colorCanvas.getContext("2d", {willReadFrequently: true});
 
-    const sampleImage = topTracks.items[imageNum].album.images[2];
+    const sampleImage = topTracks.items[imageStart].album.images[2];
     let grabColorImage = new Image();
     grabColorImage.crossOrigin = "anonymous";
     grabColorImage.src = sampleImage.url;
@@ -106,16 +103,18 @@ function grabImageColors(topTracks, imageNum: number, repeat: boolean) {
             notBadColor();
         }
         document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${mostCommonColor.r - 30}, ${mostCommonColor.g - 30}, ${mostCommonColor.b - 30}, 1) 14%, rgba(${mostCommonColor.r - 20}, ${mostCommonColor.g - 20}, ${mostCommonColor.b - 20}, 1) 33%, rgba(${mostCommonColor.r - 10}, ${mostCommonColor.g - 10}, ${mostCommonColor.b - 10}, 0.9) 50%, rgba(${mostCommonColor.r}, ${mostCommonColor.g}, ${mostCommonColor.b}, 0.6) 66%, rgba(${mostCommonColor.r + 10}, ${mostCommonColor.g + 10}, ${mostCommonColor.b + 10}, 0.00001) 85%)`;
-       
+        document.getElementById("home-background").style.backgroundColor = `rgba(${mostCommonColor.r},${mostCommonColor.g},${mostCommonColor.b}, 1)`;
+        //document.getElementById("home-greeting").style.backgroundImage = `linear-gradient(180deg, rgba(${mostCommonColor.r - 30}, ${mostCommonColor.g - 30}, ${mostCommonColor.b - 30}, 1) 14%, rgba(${mostCommonColor.r - 20}, ${mostCommonColor.g - 20}, ${mostCommonColor.b - 20}, 1) 33%, rgba(${mostCommonColor.r - 10}, ${mostCommonColor.g - 10}, ${mostCommonColor.b - 10}, 0.9) 50%, rgba(${mostCommonColor.r}, ${mostCommonColor.g}, ${mostCommonColor.b}, 0.6) 66%, rgba(${mostCommonColor.r + 10}, ${mostCommonColor.g + 10}, ${mostCommonColor.b + 10}, 0.00001) 85%)`;
     }
     if (repeat == true) {
-        setTimeout(() => {
-        
-            if (a < topTracks.items.length) {
-                grabImageColors(topTracks, a, repeat);
-                a++;
+        setTimeout(() => {        
+            if (imageStart < topTracks.items.length) {
+                imageStart++;
+                grabImageColors(topTracks, imageStart, repeat);
             }
         }, 4000);
     }
     
 }
+
+export { spotify }

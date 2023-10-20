@@ -31,8 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Scripts\Tracks\" />
-    <Folder Include="wwwroot\js\compiledtypescript\" />
+    <Folder Include="FrontEndDev\allstyles\" />
+    <Folder Include="Scripts\Spotify\Tracks\" />
+    <Folder Include="wwwroot\css\allstyles\" />
+    <Folder Include="wwwroot\css\home\" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,52 @@
 {
-  "version": "1.0.0",
-  "name": "asp.net",
-  "private": true,
   "devDependencies": {
-      "gulp": "4.0.2",
-      "@types/jquery": "5.3.1"
-  }
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-gzip": "^1.4.2",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-preprocess": "^4.0.2",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-terser": "^2.1.0",
+    "gulp-webp": "^4.0.1",
+    "rename": "^1.0.4",
+    "sass": "^1.69.3",
+    "undici-types": "^5.26.3",
+    "webpack": "^5.89.0"
+  },
+  "name": "satus-music",
+  "description": "Exploring your music taste through Spotify.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "gulp-util": "^3.0.8",
+    "gulplog": "^1.0.0"
+  },
+  "overrides": {
+    "graceful-fs": "^4.2.11"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp": "gulp",
+    "build": "build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KVForever/Satus-Music.git"
+  },
+  "keywords": [
+    "[\"spotify\"",
+    "\"music\"",
+    "\"typescript\"",
+    "\"javascript\"]"
+  ],
+  "author": "Kalkidan Vassar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KVForever/Satus-Music/issues"
+  },
+  "homepage": "https://github.com/KVForever/Satus-Music#readme"
 }

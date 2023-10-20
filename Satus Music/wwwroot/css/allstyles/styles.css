@@ -1,0 +1,82 @@
+html {
+  font-size: 14px;
+  position: relative;
+  min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+body {
+  background-color: #000;
+  color: white;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body p {
+  margin: 0;
+}
+body ::-webkit-scrollbar {
+  display: none;
+}
+
+#navigation {
+  text-align: left;
+}
+#navigation #right-group a {
+  text-decoration: none;
+  padding-bottom: 0.5px;
+  border-bottom: 2px solid white;
+  font-size: 18px;
+  color: white;
+}
+
+/***************Home Styles***************/
+#home-canvas {
+  margin-top: 10%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+#home-image {
+  width: 50%;
+}
+
+.home-intro {
+  display: grid;
+  align-content: center;
+  min-height: 100%;
+}
+
+#home-gradient {
+  border-radius: 1%;
+  margin-top: 5%;
+  margin-left: 5%;
+  height: 90%;
+  width: 90%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+#home-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+#home-greeting {
+  width: 50%;
+  font-size: 4rem;
+  /* background-clip: text;
+   color: transparent;*/
+}
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,36 @@
+html {
+  font-size: 14px;
+  position: relative;
+  min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+body {
+  background-color: #000;
+  color: white;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body p {
+  margin: 0;
+}
+body ::-webkit-scrollbar {
+  display: none;
+}
+
+#navigation {
+  text-align: left;
+}
+#navigation #right-group a {
+  text-decoration: none;
+  padding-bottom: 0.5px;
+  border-bottom: 2px solid white;
+  font-size: 18px;
+  color: white;
+}
+/*# sourceMappingURL=base.css.map */

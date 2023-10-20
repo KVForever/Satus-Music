@@ -5,30 +5,20 @@
 
 
 
-<section class="home-intro">
-    <div id="home-gradient"></div>
+<div id="home-background">
+    <div id="home-gradient">
+        <div class="row">
+            <div id="home-greeting" class="text-start align-items-center my-auto ms-3 col">Welcome to Alfonic, <span id="username">null</span></div>
+            <div class="my-auto me-3" id="home-image">
+                <canvas id="home-canvas" class="d-flex mx-auto"></canvas>
+                <canvas id="home-color-canvas" class="m-auto d-flex justify-content-center d-none"></canvas>
 
-    <div class="row">
-        <div class="col-12">
-            <div id="home-image-accents">
-				<div id="image-accent-box position-absolute z-n1"></div>
-				<div id="image-accent-box position-absolute z-n1"></div>
-				<div id="image-accent-box position-absolute z-n1"></div>
+                <div id="image-description" class="fs-1 p-3 col">
+                    <p id="top-track-name" class="fs-2 text-center">null</p>
+                    <p id="top-track-artist-name" class="fs-2 text-center">null</p>
+                </div>
             </div>
-
-			<p id="top-track-name" class="d-flex justify-content-center fs-2 text-center">null</p>
-            <p id="top-track-artist-name" class="d-flex justify-content-center fs-4 text-center">null</p>
-
-            <canvas id="home-canvas" class="m-auto"></canvas>
-            <canvas id="home-color-canvas" class="m-auto d-flex justify-content-center d-none"></canvas>
-
-			<div class="d-flex justify-content-center bg-red fs-1 p-3 z-1" style="top:80%;left:40%;">
-				<p id="welcome">Welcome to Satus, <span id="display-name"></span></p>
-			</div>
-            
         </div>
-		
-    </div>
-    
 
-</section>
+    </div>
+</div>
