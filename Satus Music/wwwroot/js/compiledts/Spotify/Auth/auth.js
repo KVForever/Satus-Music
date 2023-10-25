@@ -1,4 +1,5 @@
 var _a;
+//This class will return an authentication token that can be use for API requests for Spotify.
 class Auth {
     static async authenticate() {
         var localToken = localStorage.getItem("access_token");

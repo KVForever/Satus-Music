@@ -1,3 +1,4 @@
+//This class will return an authentication token that can be use for API requests for Spotify.
 class Auth {
     private static clientId = '41a7b7283e534f44b0761ffb963a0759';
     private static urlParams = new URLSearchParams(window.location.search);

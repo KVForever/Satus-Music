@@ -39,7 +39,11 @@
 
 #home-greeting {
     width: 50%;
-    font-size: 4rem;
+    color: rgb(247, 247, 247);
+    & p:first-of-type {
+        font-size: 3rem;
+        color: white;
+    }
    //for text gradients. not being used right now.
    /* background-clip: text;
     color: transparent;*/

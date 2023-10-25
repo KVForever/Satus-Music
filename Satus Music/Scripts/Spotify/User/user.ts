@@ -31,6 +31,11 @@ class User{
         }
         
     }
+
+    //public async getTrack(tracks) {
+    //    tracks.items.forEach(track)
+    //    const track = await fetch('https://api.spotify.com/tracks?')
+    //}
 }
 
 export { User }

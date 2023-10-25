@@ -1,7 +1,7 @@
-﻿import { Auth } from './Auth/auth.js'
-import { Track } from './Tracks/track.js'
-import { User } from './User/user.js'
-import { Spotify } from '../js/compiledts/Spotify.js'
+﻿//import { Auth } from '../js/compiledts/Auth/auth.js'
+//import { Track } from '../js/compiledts/Tracks/track.js'
+//import { User } from '../js/compiledts/User/user.js'
+import { spotify } from '../js/compiledts/Spotify/Spotify.js'
 
 //await Auth.authenticate();
 
@@ -14,4 +14,4 @@ import { Spotify } from '../js/compiledts/Spotify.js'
 //imageStart = 0
 //grabImageColors(topTracks, 0, true);
 
-Spotify();
+spotify();

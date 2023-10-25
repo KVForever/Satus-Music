@@ -1,5 +1,8 @@
+//This class will return a track.
+//@params: requires an API token.
+//@output: returns a track object.
 class Track {
-    token: Promise<any>;
+    private token: Promise<any>;
     public constructor(token: Promise<any>) {
         this.token = token;
     }

@@ -1,3 +1,6 @@
+//This class will return a track.
+//@params: requires an API token.
+//@output: returns a track object.
 class Track {
     constructor(token) {
         this.token = token;

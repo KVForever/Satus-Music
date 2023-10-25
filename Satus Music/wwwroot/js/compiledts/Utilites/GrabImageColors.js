@@ -1,31 +1,20 @@
 import { Queue } from './Queue.js';
 import { Pixel } from './Pixel.js';
-var a = 1;
-function grabImageColors(topTracks, imageNum, repeat) {
-    document.getElementById("top-track-name").textContent = topTracks.items[imageNum].name;
-    document.getElementById("top-track-artist-name").innerText = topTracks.items[imageNum].artists[0].name;
-    const canvas = document.getElementById("home-canvas");
-    const context = canvas.getContext("2d");
-    let displayImage = topTracks.items[imageNum].album.images[0];
-    let img = new Image();
-    img.crossOrigin = "anonymous";
-    img.src = displayImage.url;
-    img.width = displayImage.width;
-    img.height = displayImage.height;
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const colorCanvas = document.getElementById("home-color-canvas");
+//Grabs top colors in an image.
+/*@params: canvas = name of the color canvas;
+           image(s) = what image you are checking;
+           imageStart = if there are multiple images what one to start with
+*/
+function grabImageColors(canvas, tracks, imageStart) {
+    const colorCanvas = document.getElementById(canvas);
     const colorContext = colorCanvas.getContext("2d", { willReadFrequently: true });
-    const sampleImage = topTracks.items[imageNum].album.images[2];
+    const sampleImage = tracks.items[imageStart].album.images[2];
     let grabColorImage = new Image();
     grabColorImage.crossOrigin = "anonymous";
     grabColorImage.src = sampleImage.url;
     colorCanvas.width = sampleImage.width;
     colorCanvas.height = sampleImage.height;
     let mostCommonColor;
-    img.onload = function () {
-        context.drawImage(img, 0, 0);
-    };
     grabColorImage.onload = function () {
         colorContext.drawImage(grabColorImage, 0, 0);
         const imgData = colorContext.getImageData(0, 0, colorCanvas.width, colorCanvas.height);
@@ -63,30 +52,29 @@ function grabImageColors(topTracks, imageNum, repeat) {
         }
         mostCommonColor = item;
         console.log(item, topColors);
-        let checkColor = 0;
+        let checkColor = topColors.size();
         notBadColor();
         function notBadColor() {
-            if ((Math.abs(topColors.read(checkColor).r - topColors.read(checkColor).b) || 10 && Math.abs(topColors.read(checkColor).r - topColors.read(checkColor).g) >= 10) || Math.abs(topColors.read(checkColor).g - topColors.read(checkColor).b) >= 10) {
-                mostCommonColor.r = topColors.read(checkColor).r;
-                mostCommonColor.g = topColors.read(checkColor).g;
-                mostCommonColor.b = topColors.read(checkColor).b;
-                return;
+            if (checkColor >= 0) {
+                if ((Math.abs((topColors.read(checkColor).r) - (topColors.read(checkColor).b)) >= 10) && (Math.abs((topColors.read(checkColor).r) - (topColors.read(checkColor).g)) >= 10) && (Math.abs((topColors.read(checkColor).g) - (topColors.read(checkColor).b)) >= 10)) {
+                    mostCommonColor = topColors.dequeue();
+                    //mostCommonColor.r = topColors.read(checkColor).r;
+                    //mostCommonColor.g = topColors.read(checkColor).g;
+                    //mostCommonColor.b = topColors.read(checkColor).b;
+                    //return;
+                }
+                checkColor--;
+                notBadColor();
             }
-            checkColor++;
-            notBadColor();
+            else {
+                return topColors;
+            }
         }
-        document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${mostCommonColor.r - 30}, ${mostCommonColor.g - 30}, ${mostCommonColor.b - 30}, 1) 14%, rgba(${mostCommonColor.r - 20}, ${mostCommonColor.g - 20}, ${mostCommonColor.b - 20}, 1) 33%, rgba(${mostCommonColor.r - 10}, ${mostCommonColor.g - 10}, ${mostCommonColor.b - 10}, 0.9) 50%, rgba(${mostCommonColor.r}, ${mostCommonColor.g}, ${mostCommonColor.b}, 0.6) 66%, rgba(${mostCommonColor.r + 10}, ${mostCommonColor.g + 10}, ${mostCommonColor.b + 10}, 0.00001) 85%)`;
-        document.getElementById("home-background").style.backgroundColor = `rgba(${mostCommonColor.r},${mostCommonColor.g},${mostCommonColor.b}, 1)`;
+        //return topColors;
+        //document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${mostCommonColor.r - 30}, ${mostCommonColor.g - 30}, ${mostCommonColor.b - 30}, 1) 14%, rgba(${mostCommonColor.r - 20}, ${mostCommonColor.g - 20}, ${mostCommonColor.b - 20}, 1) 33%, rgba(${mostCommonColor.r - 10}, ${mostCommonColor.g - 10}, ${mostCommonColor.b - 10}, 0.9) 50%, rgba(${mostCommonColor.r}, ${mostCommonColor.g}, ${mostCommonColor.b}, 0.6) 66%, rgba(${mostCommonColor.r + 10}, ${mostCommonColor.g + 10}, ${mostCommonColor.b + 10}, 0.00001) 85%)`;
+        //document.getElementById("home-background").style.backgroundColor = `rgba(${mostCommonColor.r},${mostCommonColor.g},${mostCommonColor.b}, 1)`;
         //document.getElementById("home-greeting").style.backgroundImage = `linear-gradient(180deg, rgba(${mostCommonColor.r - 30}, ${mostCommonColor.g - 30}, ${mostCommonColor.b - 30}, 1) 14%, rgba(${mostCommonColor.r - 20}, ${mostCommonColor.g - 20}, ${mostCommonColor.b - 20}, 1) 33%, rgba(${mostCommonColor.r - 10}, ${mostCommonColor.g - 10}, ${mostCommonColor.b - 10}, 0.9) 50%, rgba(${mostCommonColor.r}, ${mostCommonColor.g}, ${mostCommonColor.b}, 0.6) 66%, rgba(${mostCommonColor.r + 10}, ${mostCommonColor.g + 10}, ${mostCommonColor.b + 10}, 0.00001) 85%)`;
     };
-    if (repeat == true) {
-        setTimeout(() => {
-            if (a < topTracks.items.length) {
-                grabImageColors(topTracks, a, repeat);
-                a++;
-            }
-        }, 4000);
-    }
 }
 export { grabImageColors };
 //# sourceMappingURL=GrabImageColors.js.map

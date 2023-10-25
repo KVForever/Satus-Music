@@ -38,8 +38,12 @@
 
 #home-greeting {
   width: 50%;
-  font-size: 4rem;
+  color: rgb(247, 247, 247);
   /* background-clip: text;
    color: transparent;*/
+}
+#home-greeting p:first-of-type {
+  font-size: 3rem;
+  color: white;
 }
 /*# sourceMappingURL=home.css.map */
