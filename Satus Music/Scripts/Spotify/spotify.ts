@@ -10,14 +10,15 @@ async function spotify() {
     const user = new User(Auth.token);
     const profile = await user.currentProfile();
     const tracks = await user.usersTopItems("tracks", "long_term");
-    let imageStart = 0;
-    grabImageColors("home-color-canvas", tracks, imageStart);
+    let imageStart = 4;
+    let topColors = grabImageColors("home-color-canvas", tracks, imageStart);
+    //document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${topColors[1].r - 30}, ${topColors[1].g - 30}, ${topColors[1].b - 30}, 1) 14%, rgba(${topColors[1].r - 20}, ${topColors[1].g - 20}, ${topColors[1].b - 20}, 1) 33%, rgba(${topColors[1].r - 10}, ${topColors[1].g - 10}, ${topColors[1].b - 10}, 0.9) 50%, rgba(${topColors[1].r}, ${topColors[1].g}, ${topColors[1].b}, 0.6) 66%, rgba(${topColors[1].r + 10}, ${topColors[1].g + 10}, ${topColors[1].b + 10}, 0.00001) 85%)`;
+    //document.getElementById("home-background").style.backgroundColor = `rgba(${topColors[1].r},${topColors[1].g},${topColors[1].b}, 1)`;
     document.getElementById("username").innerText = profile.display_name;
     document.getElementById("top-track-name").textContent = tracks.items[imageStart].name;
     document.getElementById("top-track-artist-name").innerText = tracks.items[imageStart].artists[0].name
 
-    grabImageColors("home-color-canvas", tracks, imageStart);
-
+   
     const canvas = document.getElementById("home-canvas") as HTMLCanvasElement;
     const context = canvas.getContext("2d");
     let displayImage = tracks.items[imageStart].album.images[0];
@@ -35,7 +36,7 @@ async function spotify() {
     repeat();
 
     function repeat() {
-        setTimeout(() => {
+        setTimeout(async () => {
             if (imageStart < tracks.items.length) {
                 imageStart++;
                 
@@ -44,8 +45,9 @@ async function spotify() {
                 document.getElementById("top-track-artist-name").innerText = tracks.items[imageStart].artists[0].name
 
                 let topColors = grabImageColors("home-color-canvas", tracks, imageStart);
-                document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${topColors[1].r - 30}, ${topColors[1].g - 30}, ${topColors[1].b - 30}, 1) 14%, rgba(${topColors[1].r - 20}, ${topColors[1].g - 20}, ${topColors[1].b - 20}, 1) 33%, rgba(${topColors[1].r - 10}, ${topColors[1].g - 10}, ${topColors[1].b - 10}, 0.9) 50%, rgba(${topColors[1].r}, ${topColors[1].g}, ${topColors[1].b}, 0.6) 66%, rgba(${topColors[1].r + 10}, ${topColors[1].g + 10}, ${topColors[1].b + 10}, 0.00001) 85%)`;
-                document.getElementById("home-background").style.backgroundColor = `rgba(${topColors[1].r},${topColors[1].g},${topColors[1].b}, 1)`;
+                var text = `linear-gradient(180deg, rgba(${topColors.read(1).r - 30}, ${topColors.read(1).g - 30}, ${topColors.read(1).b - 30}, 1) 14%, rgba(${topColors.read(1).r - 20}, ${topColors.read(1).g - 20}, ${topColors.read(1).b - 20}, 1) 33%, rgba(${topColors.read(1).r - 10}, ${topColors.read(1).g - 10}, ${topColors.read(1).b - 10}, 0.9) 50%, rgba(${topColors.read(1).r}, ${topColors.read(1).g}, ${topColors.read(1).b}, 0.6) 66%, rgba(${topColors.read(1).r + 10}, ${topColors.read(1).g + 10}, ${topColors.read(1).b + 10}, 0.00001) 85%)`
+                //document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${topColors.read(1).r - 30}, ${topColors.read(1).g - 30}, ${topColors.read(1).b - 30}, 1) 14%, rgba(${topColors.read(1).r - 20}, ${topColors.read(1).g - 20}, ${topColors.read(1).b - 20}, 1) 33%, rgba(${topColors.read(1).r - 10}, ${topColors.read(1).g - 10}, ${topColors.read(1).b - 10}, 0.9) 50%, rgba(${topColors.read(1).r}, ${topColors.read(1).g}, ${topColors.read(1).b}, 0.6) 66%, rgba(${topColors.read(1).r + 10}, ${topColors.read(1).g + 10}, ${topColors.read(1).b + 10}, 0.00001) 85%)`;
+                //document.getElementById("home-background").style.backgroundColor = `rgba(${topColors.read(1).r},${topColors.read(1).g},${topColors.read(1).b}, 1)`;
 
                 const canvas = document.getElementById("home-canvas") as HTMLCanvasElement;
                 const context = canvas.getContext("2d");
@@ -82,7 +84,7 @@ function grabImageColors( canvas: string, tracks, imageStart: number, repeat?: b
     colorCanvas.height = sampleImage.height;
 
     let mostCommonColor;
-
+    let topColors = new Queue<Pixel>(20);
     grabColorImage.onload = function () {
         colorContext.drawImage(grabColorImage, 0, 0);
         const imgData = colorContext.getImageData(0, 0, colorCanvas.width, colorCanvas.height);
@@ -97,7 +99,7 @@ function grabImageColors( canvas: string, tracks, imageStart: number, repeat?: b
             pixelMap.set(numPixels, pixelToAdd);
             numPixels++;
         }
-        let topColors = new Queue<Pixel>(20);
+        
         let n = 0, mostFreq = 1, item;
         for (var d = 0; d < pixelMap.size; d++) {
             for (var e = d; e < pixelMap.size; e++) {
@@ -125,20 +127,20 @@ function grabImageColors( canvas: string, tracks, imageStart: number, repeat?: b
         }
         mostCommonColor = item;
         console.log(item, topColors);
-        let checkColor = topColors.size();
+        let checkColor = 0;
         notBadColor();
         function notBadColor() {
-            if (checkColor >= 0) {
-                if ((Math.abs((topColors.read(checkColor).r) - (topColors.read(checkColor).b)) >= 10) && (Math.abs((topColors.read(checkColor).r) - (topColors.read(checkColor).g)) >= 10) && (Math.abs((topColors.read(checkColor).g) - (topColors.read(checkColor).b)) >= 10)) {
-                    mostCommonColor = topColors.dequeue();
+            if (checkColor <= topColors.size()) {
+                if (!(Math.abs((topColors.read(checkColor).r) - (topColors.read(checkColor).b)) >= 10) && !(Math.abs((topColors.read(checkColor).r) - (topColors.read(checkColor).g)) >= 10) && !(Math.abs((topColors.read(checkColor).g) - (topColors.read(checkColor).b)) >= 10)) {                   
+                    topColors.dequeue();                                
                 }
-                checkColor--;
+                checkColor++;
                 notBadColor();
-            } else {
-                return topColors;
-            } 
+            }
         }
+           
     }
+    return topColors; 
 }
 
 export { spotify }
