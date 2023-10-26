@@ -1,3 +1,7 @@
+:root {
+  --site-text-color: white;
+}
+
 html {
   font-size: 14px;
   position: relative;
@@ -11,10 +15,11 @@ html {
 }
 body {
   background-color: #000;
-  color: white;
+  color: var(--site-text-color);
   overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  font-family: "Times New Roman", Times, serif;
 }
 body p {
   margin: 0;
@@ -23,14 +28,12 @@ body ::-webkit-scrollbar {
   display: none;
 }
 
-#navigation {
-  text-align: left;
+#navigation #middle-group {
+  text-align: center;
 }
-#navigation #right-group a {
+#navigation #middle-group a {
   text-decoration: none;
   padding-bottom: 0.5px;
   border-bottom: 2px solid white;
-  font-size: 18px;
-  color: white;
 }
 /*# sourceMappingURL=base.css.map */

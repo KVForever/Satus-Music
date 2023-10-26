@@ -1,3 +1,4 @@
+@import '../variables/vars.scss';
 
 #home-canvas {
     margin-top: 10%;
@@ -39,10 +40,9 @@
 
 #home-greeting {
     width: 50%;
-    color: rgb(247, 247, 247);
+
     & p:first-of-type {
         font-size: 3rem;
-        color: white;
     }
    //for text gradients. not being used right now.
    /* background-clip: text;

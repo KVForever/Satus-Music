@@ -1,3 +1,7 @@
+:root {
+  --site-text-color: white;
+}
+
 html {
   font-size: 14px;
   position: relative;
@@ -11,10 +15,11 @@ html {
 }
 body {
   background-color: #000;
-  color: white;
+  color: var(--site-text-color);
   overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  font-family: "Times New Roman", Times, serif;
 }
 body p {
   margin: 0;
@@ -23,18 +28,24 @@ body ::-webkit-scrollbar {
   display: none;
 }
 
-#navigation {
-  text-align: left;
+#navigation svg {
+  fill: var(--site-text-color);
 }
-#navigation #right-group a {
+#navigation #middle-group {
+  text-align: center;
+}
+#navigation #middle-group a {
   text-decoration: none;
   padding-bottom: 0.5px;
-  border-bottom: 2px solid white;
-  font-size: 18px;
-  color: white;
+  border-bottom: 2px solid var(--site-text-color);
+  color: var(--site-text-color);
 }
 
 /***************Home Styles***************/
+:root {
+  --site-text-color: white;
+}
+
 #home-canvas {
   margin-top: 10%;
   justify-content: center;
@@ -75,12 +86,10 @@ body ::-webkit-scrollbar {
 
 #home-greeting {
   width: 50%;
-  color: rgb(247, 247, 247);
   /* background-clip: text;
    color: transparent;*/
 }
 #home-greeting p:first-of-type {
   font-size: 3rem;
-  color: white;
 }
 /*# sourceMappingURL=styles.css.map */

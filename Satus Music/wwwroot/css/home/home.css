@@ -1,3 +1,7 @@
+:root {
+  --site-text-color: white;
+}
+
 #home-canvas {
   margin-top: 10%;
   justify-content: center;
@@ -38,12 +42,10 @@
 
 #home-greeting {
   width: 50%;
-  color: rgb(247, 247, 247);
   /* background-clip: text;
    color: transparent;*/
 }
 #home-greeting p:first-of-type {
   font-size: 3rem;
-  color: white;
 }
 /*# sourceMappingURL=home.css.map */
