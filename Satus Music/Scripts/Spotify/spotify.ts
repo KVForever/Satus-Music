@@ -9,7 +9,7 @@ async function spotify() {
     const user = new User(Auth.token);
     const profile = await user.currentProfile();
     document.getElementById("username").innerText = profile.display_name;
-    const tracks = await user.usersTopItems("tracks", "medium_term");
+    const tracks = await user.usersTopItems("tracks", "long_term");
 
     let imageStart = 0;
     let displayImage = tracks.items[imageStart].album.images[0];
@@ -31,7 +31,8 @@ async function spotify() {
         textColor = "rgba(255, 255, 255, 1)";
     }
 
-    document.documentElement.style.setProperty("--site-text-color", textColor)
+    document.documentElement.style.setProperty("--site-text-color", textColor);
+    document.documentElement.style.setProperty("--home-canvas-border-color", textColor);
     document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${(topColors.read(0).r - 30)}, ${topColors.read(0).g - 30}, 
         ${topColors.read(0).b - 30}, 1) 14%, rgba(${topColors.read(0).r - 20}, ${topColors.read(0).g - 20}, ${topColors.read(0).b - 20}, 1) 33%, rgba(${topColors.read(0).r - 10}, 
         ${topColors.read(0).g - 10}, ${topColors.read(0).b - 10}, 0.9) 50%, rgba(${topColors.read(0).r}, ${topColors.read(0).g}, ${topColors.read(0).b}, 0.6) 66%, 
@@ -65,7 +66,7 @@ async function spotify() {
                     }
 
                     document.documentElement.style.setProperty("--site-text-color", textColor)
-                   
+                    document.documentElement.style.setProperty("--home-canvas-border-color", textColor);
                     document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${(topColors.read(0).r - 30)}, ${topColors.read(0).g - 30}, 
                         ${topColors.read(0).b - 30}, 1) 14%, rgba(${topColors.read(0).r - 20}, ${topColors.read(0).g - 20}, ${topColors.read(0).b - 20}, 1) 33%, rgba(${topColors.read(0).r - 10}, 
                         ${topColors.read(0).g - 10}, ${topColors.read(0).b - 10}, 0.9) 50%, rgba(${topColors.read(0).r}, ${topColors.read(0).g}, ${topColors.read(0).b}, 0.6) 66%, 

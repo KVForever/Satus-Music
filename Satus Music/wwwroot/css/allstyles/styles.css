@@ -1,5 +1,7 @@
+/*Marvel Is Better Than DC*/
 :root {
   --site-text-color: white;
+  --home-canvas-border-color: white;
 }
 
 html {
@@ -44,6 +46,7 @@ body ::-webkit-scrollbar {
 /***************Home Styles***************/
 :root {
   --site-text-color: white;
+  --home-canvas-border-color: white;
 }
 
 #home-canvas {
@@ -51,6 +54,7 @@ body ::-webkit-scrollbar {
   justify-content: center;
   display: flex;
   align-items: center;
+  border: solid 1px var(--home-canvas-border-color);
 }
 
 #home-image {
@@ -92,4 +96,11 @@ body ::-webkit-scrollbar {
 #home-greeting p:first-of-type {
   font-size: 3rem;
 }
+
+/***************Variable Styles***********/
+:root {
+  --site-text-color: white;
+  --home-canvas-border-color: white;
+}
+
 /*# sourceMappingURL=styles.css.map */

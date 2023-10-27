@@ -36,7 +36,10 @@
     <Folder Include="Scripts\Spotify\Auth\" />
     <Folder Include="Scripts\Spotify\Tracks\" />
     <Folder Include="wwwroot\css\allstyles\" />
-    <Folder Include="wwwroot\css\home\" />
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="call &quot;$(C:\Users\kvassar\source\repos\Satus-Music\Satus Music\Satus Music)compilescss.bat&quot;" />
+  </Target>
 
 </Project>
