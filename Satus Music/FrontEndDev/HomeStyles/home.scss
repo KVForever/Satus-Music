@@ -6,6 +6,7 @@
     display: flex;
     align-items: center;
     border: solid 1px var(--home-canvas-border-color);
+    width: 70%;
 }
 
 #home-image {
@@ -20,11 +21,10 @@
 
 #home-gradient {
     border-radius: 1%;
-    margin-top: 5%;
-    margin-left: 5%;
+    margin-top: 5rem;
+    margin-left: 5rem;
     height: 90%;
     width: 90%;
-    position: absolute;
     left: 0;
     top: 0;
     z-index: -1;
@@ -48,4 +48,26 @@
    //for text gradients. not being used right now.
    /* background-clip: text;
     color: transparent;*/
+}
+
+#top-track-podium {
+    margin-top: 10rem;
+
+    & h1 {
+        font-size: 3rem;
+        margin-bottom: 5rem;
+    }
+
+    & #top-song-one {
+        width: 99%;
+    }
+
+    & #top-song-two {
+        width: 60%;
+
+    }
+
+    & #top-song-three {
+        width: 60%;
+    }
 }

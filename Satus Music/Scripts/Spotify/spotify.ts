@@ -9,15 +9,28 @@ async function spotify() {
     const user = new User(Auth.token);
     const profile = await user.currentProfile();
     document.getElementById("username").innerText = profile.display_name;
-    const tracks = await user.usersTopItems("tracks", "long_term");
+    const tracks = await user.usersTopItems("tracks", "short_term");
+    let imageStart = Math.floor(Math.random() * 19);
 
-    let imageStart = 0;
+    let trackOne = tracks.items[0].album.images[0];
+    let trackOneName = tracks.items[0].artists[0].name;
+    let trackOneArtist = tracks.items[0].name;
+    let trackTwo = tracks.items[1].album.images[0];
+    let trackTwoName = tracks.items[1].artists[0].name;
+    let trackTwoArtist = tracks.items[1].name;
+    let trackThree = tracks.items[2].album.images[0];
+    let trackThreeName = tracks.items[2].artists[0].name;
+    let trackThreeArtist = tracks.items[2].name;
+
+    setImage("top-song-one", trackOne, "top-song-one-name", trackOneName, "top-song-one-artist-name", trackOneArtist);
+    setImage("top-song-two", trackTwo, "top-song-two-name", trackTwoName, "top-song-two-artist-name", trackTwoArtist);
+    setImage("top-song-three", trackThree, "top-song-three-name", trackThreeName, "top-song-three-artist-name", trackThreeArtist);
     let displayImage = tracks.items[imageStart].album.images[0];
     let colorImage = tracks.items[imageStart].album.images[2];
     let track = tracks.items[imageStart].artists[0].name;
     let artist = tracks.items[imageStart].name;
 
-    setImage("home-canvas", displayImage, "top-track-artist-name", track, "top-track-name", artist);
+    setImage("home-canvas", displayImage, "top-track-name", track, "top-track-artist-name", artist);
     let topColors = await grabImageColors("home-color-canvas", colorImage);
     //If the color is closer to white set text to black do the opposite of the opposite is true. They are multiplied because humans percive color and litness differently 
     let textColor;
@@ -37,46 +50,47 @@ async function spotify() {
         ${topColors.read(0).b - 30}, 1) 14%, rgba(${topColors.read(0).r - 20}, ${topColors.read(0).g - 20}, ${topColors.read(0).b - 20}, 1) 33%, rgba(${topColors.read(0).r - 10}, 
         ${topColors.read(0).g - 10}, ${topColors.read(0).b - 10}, 0.9) 50%, rgba(${topColors.read(0).r}, ${topColors.read(0).g}, ${topColors.read(0).b}, 0.6) 66%, 
         rgba(${topColors.read(0).r + 10}, ${topColors.read(0).g + 10}, ${topColors.read(0).b + 10}, 0.00001) 85%)`;
-    document.getElementById("home-background").style.backgroundColor = `rgba(${topColors.read(0).r},${topColors.read(0).g},${topColors.read(0).b}, 1)`;
-          
-    
-    repeat();
+    let siteBackgroundColor = `rgba(${topColors.read(0).r},${topColors.read(0).g},${topColors.read(0).b}, 1)`;
+    document.documentElement.style.setProperty("--site-background-color", siteBackgroundColor);      
 
-    function repeat() {
-        setTimeout(async () => {
-            if (imageStart < tracks.items.length - 1) {
-                imageStart++;               
-                    let displayImage = tracks.items[imageStart].album.images[0];
-                    let colorImage = tracks.items[imageStart].album.images[2];
-                    let track = tracks.items[imageStart].artists[0].name;
-                    let artist = tracks.items[imageStart].name;
+   
+/*    repeat();*/
 
-                    setImage("home-canvas", displayImage, "top-track-artist-name", track, "top-track-name", artist);
-                    let topColors = await grabImageColors("home-color-canvas", colorImage);
-                    //inverte top color, grayscale, and check if closer to black or white
-                    let textColor;
-                    let r = (255 - (topColors.read(0).r)) * .3;
-                    let g = (255 - (topColors.read(0).g)) * .59;
-                    let b = (255 - (topColors.read(0).b)) * .11;
-                    let grayScaleColor = r + g + b;
-                    if (grayScaleColor > 128) {
-                        textColor = "rgba(255, 255, 255, 1)";
-                    } else {
-                        textColor = "rgba(0, 0, 0, 1)";
-                    }
+    //function repeat() {
+    //    setTimeout(async () => {
+    //        if (imageStart < tracks.items.length - 1) {
+    //            imageStart++;               
+    //                let displayImage = tracks.items[imageStart].album.images[0];
+    //                let colorImage = tracks.items[imageStart].album.images[2];
+    //                let track = tracks.items[imageStart].artists[0].name;
+    //                let artist = tracks.items[imageStart].name;
 
-                    document.documentElement.style.setProperty("--site-text-color", textColor)
-                    document.documentElement.style.setProperty("--home-canvas-border-color", textColor);
-                    document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${(topColors.read(0).r - 30)}, ${topColors.read(0).g - 30}, 
-                        ${topColors.read(0).b - 30}, 1) 14%, rgba(${topColors.read(0).r - 20}, ${topColors.read(0).g - 20}, ${topColors.read(0).b - 20}, 1) 33%, rgba(${topColors.read(0).r - 10}, 
-                        ${topColors.read(0).g - 10}, ${topColors.read(0).b - 10}, 0.9) 50%, rgba(${topColors.read(0).r}, ${topColors.read(0).g}, ${topColors.read(0).b}, 0.6) 66%, 
-                        rgba(${topColors.read(0).r + 10}, ${topColors.read(0).g + 10}, ${topColors.read(0).b + 10}, 0.00001) 85%)`;
-                    document.getElementById("home-background").style.backgroundColor = `rgba(${topColors.read(0).r},${topColors.read(0).g},${topColors.read(0).b}, 1)`;
+    //                setImage("home-canvas", displayImage, "top-track-artist-name", track, "top-track-name", artist);
+    //                let topColors = await grabImageColors("home-color-canvas", colorImage);
+    //                //inverte top color, grayscale, and check if closer to black or white
+    //                let textColor;
+    //                let r = (255 - (topColors.read(0).r)) * .3;
+    //                let g = (255 - (topColors.read(0).g)) * .59;
+    //                let b = (255 - (topColors.read(0).b)) * .11;
+    //                let grayScaleColor = r + g + b;
+    //                if (grayScaleColor > 128) {
+    //                    textColor = "rgba(255, 255, 255, 1)";
+    //                } else {
+    //                    textColor = "rgba(0, 0, 0, 1)";
+    //                }
+
+    //                document.documentElement.style.setProperty("--site-text-color", textColor)
+    //                document.documentElement.style.setProperty("--home-canvas-border-color", textColor);
+    //                document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${(topColors.read(0).r - 30)}, ${topColors.read(0).g - 30}, 
+    //                    ${topColors.read(0).b - 30}, 1) 14%, rgba(${topColors.read(0).r - 20}, ${topColors.read(0).g - 20}, ${topColors.read(0).b - 20}, 1) 33%, rgba(${topColors.read(0).r - 10}, 
+    //                    ${topColors.read(0).g - 10}, ${topColors.read(0).b - 10}, 0.9) 50%, rgba(${topColors.read(0).r}, ${topColors.read(0).g}, ${topColors.read(0).b}, 0.6) 66%, 
+    //                    rgba(${topColors.read(0).r + 10}, ${topColors.read(0).g + 10}, ${topColors.read(0).b + 10}, 0.00001) 85%)`;
+    //                document.getElementById("home-background").style.backgroundColor = `rgba(${topColors.read(0).r},${topColors.read(0).g},${topColors.read(0).b}, 1)`;
          
-                    repeat();
-                }
-        }, 4000);
-    }
+    //                repeat();
+    //            }
+    //    }, 4000);
+    //}
    
 }
 

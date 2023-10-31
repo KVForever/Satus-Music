@@ -1,5 +1,6 @@
 /*Marvel Is Better Than DC*/
 :root {
+  --site-background-color: black;
   --site-text-color: white;
   --home-canvas-border-color: white;
 }
@@ -16,7 +17,7 @@ html {
   }
 }
 body {
-  background-color: #000;
+  background-color: var(--site-background-color);
   color: var(--site-text-color);
   overflow-x: hidden;
   -ms-overflow-style: none;
@@ -45,6 +46,7 @@ body ::-webkit-scrollbar {
 
 /***************Home Styles***************/
 :root {
+  --site-background-color: black;
   --site-text-color: white;
   --home-canvas-border-color: white;
 }
@@ -55,6 +57,7 @@ body ::-webkit-scrollbar {
   display: flex;
   align-items: center;
   border: solid 1px var(--home-canvas-border-color);
+  width: 70%;
 }
 
 #home-image {
@@ -69,11 +72,10 @@ body ::-webkit-scrollbar {
 
 #home-gradient {
   border-radius: 1%;
-  margin-top: 5%;
-  margin-left: 5%;
+  margin-top: 5rem;
+  margin-left: 5rem;
   height: 90%;
   width: 90%;
-  position: absolute;
   left: 0;
   top: 0;
   z-index: -1;
@@ -97,8 +99,26 @@ body ::-webkit-scrollbar {
   font-size: 3rem;
 }
 
+#top-track-podium {
+  margin-top: 10rem;
+}
+#top-track-podium h1 {
+  font-size: 3rem;
+  margin-bottom: 10rem;
+}
+#top-track-podium #top-song-one {
+  width: 99%;
+}
+#top-track-podium #top-song-two {
+  width: 60%;
+}
+#top-track-podium #top-song-three {
+  width: 60%;
+}
+
 /***************Variable Styles***********/
 :root {
+  --site-background-color: black;
   --site-text-color: white;
   --home-canvas-border-color: white;
 }

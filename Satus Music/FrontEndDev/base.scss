@@ -13,7 +13,7 @@ html {
 }
 
 body {
-	background-color: #000;
+	background-color: var(--site-background-color);
 	color: var(--site-text-color);
 	overflow-x: hidden;
 	-ms-overflow-style: none;
