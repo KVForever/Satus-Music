@@ -1,4 +1,19 @@
 @import '../variables/vars.scss';
+#landing {
+    height: calc(100vh - 52px);
+}
+
+#landing-background {
+    background-size: 100% 100%;
+    background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
+    background-image: var(--home-background-color);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
 
 #home-canvas {
     margin-top: 10%;
@@ -21,12 +36,6 @@
 
 #home-gradient {
     border-radius: 1%;
-    margin-top: 5rem;
-    margin-left: 5rem;
-    height: 90%;
-    width: 90%;
-    left: 0;
-    top: 0;
     z-index: -1;
 }
 
@@ -52,6 +61,7 @@
 
 #top-track-podium {
     margin-top: 10rem;
+    color: white;
 
     & h1 {
         font-size: 3rem;

@@ -9,7 +9,7 @@ async function spotify() {
     const user = new User(Auth.token);
     const profile = await user.currentProfile();
     document.getElementById("username").innerText = profile.display_name;
-    const tracks = await user.usersTopItems("tracks", "short_term");
+    const tracks = await user.usersTopItems("tracks", "long_term");
     let imageStart = Math.floor(Math.random() * 19);
 
     let trackOne = tracks.items[0].album.images[0];
@@ -46,12 +46,19 @@ async function spotify() {
 
     document.documentElement.style.setProperty("--site-text-color", textColor);
     document.documentElement.style.setProperty("--home-canvas-border-color", textColor);
+    let siteBackgroundColor = `radial-gradient(18% 28% at 24% 50%, rgba(${topColors.read(12).r}, ${topColors.read(12).g}, ${topColors.read(12).b}, 1) 7%, #073AFF00 100%),radial-gradient(18% 28% at 18% 71%, rgba(${topColors.read(10).r}, ${topColors.read(10).g}, ${topColors.read(10).b}, 1) 6%, #073AFF00 100%),
+    radial-gradient(70% 53% at 36% 76%, rgba(${topColors.read(9).r}, ${topColors.read(9).g}, ${topColors.read(9).b}, 1) 0%, #073AFF00 100%),radial-gradient(42% 53% at 15% 94%, rgba(${topColors.read(8).r}, ${topColors.read(8).g}, ${topColors.read(8).b}, 1) 7%, #073AFF00 100%),
+    radial-gradient(42% 53% at 34% 72%, rgba(${topColors.read(7).r}, ${topColors.read(7).g}, ${topColors.read(7).b}, 1) 7%, #073AFF00 100%),radial-gradient(18% 28% at 35% 87%, rgba(${topColors.read(6).r}, ${topColors.read(6).g}, ${topColors.read(6).b}, 1) 7%, #073AFF00 100%),
+    radial-gradient(31% 43% at 7% 98%, rgba(${topColors.read(5).r}, ${topColors.read(5).g}, ${topColors.read(5).b}, 1) 24%, #073AFF00 100%),radial-gradient(21% 37% at 72% 23%, rgba(${topColors.read(4).r}, ${topColors.read(4).g}, ${topColors.read(4).b}, 1) 24%, #073AFF00 100%),
+    radial-gradient(35% 56% at 91% 74%, rgba(${topColors.read(3).r}, ${topColors.read(3).g}, ${topColors.read(3).b}, 1) 9%, #073AFF00 100%),radial-gradient(74% 86% at 67% 38%, rgba(${topColors.read(2).r}, ${topColors.read(2).g}, ${topColors.read(2).b}, 1) 24%, #073AFF00 100%),
+    linear-gradient(125deg,  rgba(${topColors.read(0).r}, ${topColors.read(0).g}, ${topColors.read(0).b}, 1) 1%,  rgba(${topColors.read(1).r}, ${topColors.read(1).g}, 
+    ${topColors.read(1).b}, 1) 100%)`;
+    document.documentElement.style.setProperty("--home-background-color", siteBackgroundColor);
     document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${(topColors.read(0).r - 30)}, ${topColors.read(0).g - 30}, 
         ${topColors.read(0).b - 30}, 1) 14%, rgba(${topColors.read(0).r - 20}, ${topColors.read(0).g - 20}, ${topColors.read(0).b - 20}, 1) 33%, rgba(${topColors.read(0).r - 10}, 
         ${topColors.read(0).g - 10}, ${topColors.read(0).b - 10}, 0.9) 50%, rgba(${topColors.read(0).r}, ${topColors.read(0).g}, ${topColors.read(0).b}, 0.6) 66%, 
         rgba(${topColors.read(0).r + 10}, ${topColors.read(0).g + 10}, ${topColors.read(0).b + 10}, 0.00001) 85%)`;
-    let siteBackgroundColor = `rgba(${topColors.read(0).r},${topColors.read(0).g},${topColors.read(0).b}, 1)`;
-    document.documentElement.style.setProperty("--site-background-color", siteBackgroundColor);      
+
 
    
 /*    repeat();*/

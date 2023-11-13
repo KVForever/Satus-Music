@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Satus_Music</RootNamespace>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,7 +39,7 @@
     <Folder Include="wwwroot\css\allstyles\" />
   </ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="call &quot;$(C:\Users\kvassar\source\repos\Satus-Music\Satus Music\Satus Music)compilescss.bat&quot;" />
   </Target>
 

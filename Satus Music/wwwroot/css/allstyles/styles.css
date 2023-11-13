@@ -1,7 +1,7 @@
 /*Marvel Is Better Than DC*/
 :root {
-  --site-background-color: black;
   --site-text-color: white;
+  --home-background-color: black;
   --home-canvas-border-color: white;
 }
 
@@ -17,7 +17,7 @@ html {
   }
 }
 body {
-  background-color: var(--site-background-color);
+  background-color: black;
   color: var(--site-text-color);
   overflow-x: hidden;
   -ms-overflow-style: none;
@@ -46,9 +46,25 @@ body ::-webkit-scrollbar {
 
 /***************Home Styles***************/
 :root {
-  --site-background-color: black;
   --site-text-color: white;
+  --home-background-color: black;
   --home-canvas-border-color: white;
+}
+
+#landing {
+  height: calc(100vh - 52px);
+}
+
+#landing-background {
+  background-size: 100% 100%;
+  background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+  background-image: var(--home-background-color);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
 }
 
 #home-canvas {
@@ -72,12 +88,6 @@ body ::-webkit-scrollbar {
 
 #home-gradient {
   border-radius: 1%;
-  margin-top: 5rem;
-  margin-left: 5rem;
-  height: 90%;
-  width: 90%;
-  left: 0;
-  top: 0;
   z-index: -1;
 }
 
@@ -101,10 +111,11 @@ body ::-webkit-scrollbar {
 
 #top-track-podium {
   margin-top: 10rem;
+  color: white;
 }
 #top-track-podium h1 {
   font-size: 3rem;
-  margin-bottom: 10rem;
+  margin-bottom: 5rem;
 }
 #top-track-podium #top-song-one {
   width: 99%;
@@ -118,8 +129,8 @@ body ::-webkit-scrollbar {
 
 /***************Variable Styles***********/
 :root {
-  --site-background-color: black;
   --site-text-color: white;
+  --home-background-color: black;
   --home-canvas-border-color: white;
 }
 
