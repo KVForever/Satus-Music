@@ -1,18 +1,28 @@
 @import '../variables/vars.scss';
+
+.scroll-snap {
+    scroll-snap-align: center;
+}
+
+#home {
+    scroll-snap-type: y mandatory;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
 #landing {
-    height: calc(100vh - 52px);
+    height: 100vh;
 }
 
 #landing-background {
     background-size: 100% 100%;
     background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
     background-image: var(--home-background-color);
-    position: absolute;
-    left: 0;
-    top: 0;
     width: 100vw;
     height: 100vh;
     z-index: -1;
+    display: flex;
+    align-items: center;
 }
 
 #home-canvas {
@@ -35,6 +45,8 @@
 }
 
 #home-gradient {
+    width: 90%;
+    margin-left: 5%;
     border-radius: 1%;
     z-index: -1;
 }
@@ -60,24 +72,25 @@
 }
 
 #top-track-podium {
-    margin-top: 10rem;
-    color: white;
+    color: black;
+    height: 100vh;
 
     & h1 {
         font-size: 3rem;
-        margin-bottom: 5rem;
     }
 
     & #top-song-one {
         width: 99%;
+       
     }
 
     & #top-song-two {
         width: 60%;
-
+      
     }
 
     & #top-song-three {
         width: 60%;
+       
     }
 }

@@ -4,55 +4,63 @@
 }
 
 
+<div id="home" class="">
+    <section id="landing" class="scroll-snap d-flex align-items-center justify-content-center">
+        <div id="landing-background">
+            <div id="home-gradient" class="d-flex">
+                <div class="row">
+                    <div id="home-greeting" class="text-start align-items-center my-auto ms-5 col">
+                        <p class="">Welcome to Satus, <span id="username">null</span></p>
+                        <p class="fs-5">From rock to pop, jazz to country, music is for everyone. Its a beautiful expression of who you are. Lets explore what music expresses your one-of-a-kind personality.</p>
+                    </div>
+                    <div class="my-auto me-3" id="home-image">
+                        <canvas id="home-canvas" class="d-flex mx-auto"></canvas>
+                        <canvas id="home-color-canvas" class="d-none"></canvas>
 
-<div id="landing-background"></div>
-<div id="landing" class="d-flex align-items-center justify-content-center">
-    <div id="home-gradient" class="d-flex">
-        <div class="row">
-            <div id="home-greeting" class="text-start align-items-center my-auto ms-5 col">
-                <p class="">Welcome to Satus, <span id="username">null</span></p>
-                <p class="fs-5">From rock to pop, jazz to country, music is for everyone. Its a beautiful expression of who you are. Lets explore what music expresses your one-of-a-kind personality.</p>
-            </div>
-            <div class="my-auto me-3" id="home-image">
-                <canvas id="home-canvas" class="d-flex mx-auto"></canvas>
-                <canvas id="home-color-canvas" class="m-auto d-flex justify-content-center d-none"></canvas>
-
-                <div id="image-description" class="fs-1 p-3 col">
-                    <p id="top-track-name" class="fs-2 text-center">null</p>
-                    <p id="top-track-artist-name" class="fs-2 text-center">null</p>
+                        <div id="image-description" class="fs-1 p-3 col">
+                            <p id="top-track-name" class="fs-2 text-center">null</p>
+                            <p id="top-track-artist-name" class="fs-2 text-center">null</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 
-<div id="top-track-podium" class="">
-    <h1 class="text-center">Your Top Songs</h1>
-    <div class="row d-flex align-items-center">
-        <div class="col text-center">
-            <p class="fs-2">#2</p>
-            <canvas id="top-song-two" class="d-flex mx-auto"></canvas>
-            <div id="image-description" class="fs-1 p-3 col">
-                <p id="top-song-two-name" class="fs-2">null</p>
-                <p id="top-song-two-artist-name" class="fs-2">null</p>
-            </div>           
-        </div>
-        <div class="col text-center">
-            <p class="fs-2">#1</p>
-            <canvas id="top-song-one" class="d-flex mx-auto"></canvas>
-            <div id="image-description" class="fs-1 p-3 col">
-                <p id="top-song-one-name" class="fs-2">null</p>
-                <p id="top-song-one-artist-name" class="fs-2">null</p>
+    <section id="top-track-podium" class="scroll-snap d-flex align-items-center row">
+        <h1 class="text-center col-12">Your Top Songs</h1>
+        <div class="d-flex align-items-center">
+            <div class="col4 text-center">
+                <p class="fs-2">#2</p>
+                <canvas id="top-song-two" class="d-flex mx-auto"></canvas>
+                <canvas id="top-song-two-color-canvas" class="d-none"></canvas>
+                <div id="image-description" class="fs-1 p-3 col">
+                    <p id="top-song-two-name" class="fs-2">null</p>
+                    <p id="top-song-two-artist-name" class="fs-2">null</p>
+                </div>           
             </div>
+            <div class="col-4 text-center">
+                <p class="fs-2">#1</p>
+                <canvas id="top-song-one" class="d-flex mx-auto"></canvas>
+                <canvas id="top-song-one-color-canvas" class="d-none"></canvas>
+                <div id="image-description" class="fs-1 p-3 col">
+                    <p id="top-song-one-name" class="fs-2">null</p>
+                    <p id="top-song-one-artist-name" class="fs-2">null</p>
+                </div>
+            </div>
+            <div class="col-4 text-center">         
+                <p class="fs-2">#3</p>
+                <canvas id="top-song-three" class="d-flex mx-auto"></canvas>
+                <canvas id="top-song-three-color-canvas" class="d-none"></canvas>
+                <div id="image-description" class="fs-1 p-3 col">
+                    <p id="top-song-three-name" class="fs-2">null</p>
+                    <p id="top-song-three-artist-name" class="fs-2">null</p>
+                </div>           
+            </div>       
         </div>
-       <div class="col text-center">         
-            <p class="fs-2">#3</p>
-            <canvas id="top-song-three" class="d-flex mx-auto"></canvas>
-            <div id="image-description" class="fs-1 p-3 col">
-                <p id="top-song-three-name" class="fs-2">null</p>
-                <p id="top-song-three-artist-name" class="fs-2">null</p>
-            </div>           
-       </div>       
-    </div>
-</div>
+    </section>
 
+    <section style="height: 100vh; background-color: black;" class="scroll-snap">
+
+    </section>
+</div>

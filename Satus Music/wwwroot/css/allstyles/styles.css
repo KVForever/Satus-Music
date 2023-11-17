@@ -17,7 +17,7 @@ html {
   }
 }
 body {
-  background-color: black;
+  background-color: white;
   color: var(--site-text-color);
   overflow-x: hidden;
   -ms-overflow-style: none;
@@ -29,6 +29,12 @@ body p {
 }
 body ::-webkit-scrollbar {
   display: none;
+}
+
+header {
+  position: absolute;
+  width: 100%;
+  left: 0;
 }
 
 #navigation svg {
@@ -51,20 +57,29 @@ body ::-webkit-scrollbar {
   --home-canvas-border-color: white;
 }
 
+.scroll-snap {
+  scroll-snap-align: center;
+}
+
+#home {
+  scroll-snap-type: y mandatory;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
 #landing {
-  height: calc(100vh - 52px);
+  height: 100vh;
 }
 
 #landing-background {
   background-size: 100% 100%;
   background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
   background-image: var(--home-background-color);
-  position: absolute;
-  left: 0;
-  top: 0;
   width: 100vw;
   height: 100vh;
   z-index: -1;
+  display: flex;
+  align-items: center;
 }
 
 #home-canvas {
@@ -87,6 +102,8 @@ body ::-webkit-scrollbar {
 }
 
 #home-gradient {
+  width: 90%;
+  margin-left: 5%;
   border-radius: 1%;
   z-index: -1;
 }
@@ -110,12 +127,11 @@ body ::-webkit-scrollbar {
 }
 
 #top-track-podium {
-  margin-top: 10rem;
-  color: white;
+  color: black;
+  height: 100vh;
 }
 #top-track-podium h1 {
   font-size: 3rem;
-  margin-bottom: 5rem;
 }
 #top-track-podium #top-song-one {
   width: 99%;

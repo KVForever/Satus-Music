@@ -3,15 +3,11 @@
 //import { User } from '../js/compiledts/User/user.js'
 import { spotify } from '../js/compiledts/Spotify/Spotify.js'
 
-//await Auth.authenticate();
-
-//const user = new User(Auth.token);
-//const profile = await user.currentProfile();
-//const topTracks = await user.usersTopItems("tracks", "long_term");
-
-//document.getElementById("username").innerText = profile.display_name;
-
-//imageStart = 0
-//grabImageColors(topTracks, 0, true);
-
 spotify();
+//let previousScrollPosition = 0;
+//window.addEventListener("scroll", () => {  
+//    const currentSection = Math.floor(window.scrollY / window.innerHeight);
+//    document.body.style.backgroundColor = (currentSection % 2 === 0) ? '#000' : '#333';
+//});
+
+
