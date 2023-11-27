@@ -13,29 +13,7 @@ async function spotify() {
     /*let imageStart = Math.floor(Math.random() * 19);*/
     let imageStart = 0;
 
-    let trackOne = tracks.items[0].album.images[0];
-    let trackOneColorImage = tracks.items[0].album.images[2];
-    let trackOneName = tracks.items[0].artists[0].name;
-    let trackOneArtist = tracks.items[0].name;
-    let trackTwo = tracks.items[1].album.images[0];
-    let trackTwoColorImage = tracks.items[1].album.images[2];
-    let trackTwoName = tracks.items[1].artists[0].name;
-    let trackTwoArtist = tracks.items[1].name;
-    let trackThree = tracks.items[2].album.images[0];
-    let trackThreeColorImage = tracks.items[2].album.images[2];
-    let trackThreeName = tracks.items[2].artists[0].name;
-    let trackThreeArtist = tracks.items[2].name;
-
-    setImage("top-song-one", trackOne, "top-song-one-name", trackOneName, "top-song-one-artist-name", trackOneArtist);
-    let trackOneColors = await grabImageColors("top-song-one-color-canvas", trackOneColorImage);
-    document.getElementById("top-song-one").style.boxShadow = `1px 0px 20px 5px rgba(${trackOneColors.read(0).r}, ${trackOneColors.read(0).g}, ${trackOneColors.read(0).b}, 1)`;
-    setImage("top-song-two", trackTwo, "top-song-two-name", trackTwoName, "top-song-two-artist-name", trackTwoArtist);
-    let trackTwoColors = await grabImageColors("top-song-two-color-canvas", trackTwoColorImage);
-    document.getElementById("top-song-two").style.boxShadow = `1px 0px 20px 5px rgba(${trackTwoColors.read(0).r}, ${trackTwoColors.read(0).g}, ${trackTwoColors.read(0).b}, 1)`;
-    setImage("top-song-three", trackThree, "top-song-three-name", trackThreeName, "top-song-three-artist-name", trackThreeArtist);
-    let trackThreeColors = await grabImageColors("top-song-three-color-canvas", trackThreeColorImage);
-    document.getElementById("top-song-three").style.boxShadow = `1px 0px 20px 5px rgba(${trackThreeColors.read(0).r}, ${trackThreeColors.read(0).g}, ${trackThreeColors.read(0).b}, 1)`;
-
+    
     let displayImage = tracks.items[imageStart].album.images[0];
     let colorImage = tracks.items[imageStart].album.images[2];
     let track = tracks.items[imageStart].artists[0].name;
@@ -133,26 +111,7 @@ async function spotify() {
 
 }
 
-function setImage(canvasName, image, trackDescriptionId, trackName, artistDescriptionId, artistName) {
 
-    const canvas = document.getElementById(canvasName) as HTMLCanvasElement;
-    const context = canvas.getContext("2d");
-    let displayImage = image;
-    let img = new Image();
-    img.crossOrigin = "anonymous";
-    img.src = displayImage.url;
-    img.width = displayImage.width;
-    img.height = displayImage.height;
-
-    canvas.width = img.width;
-    canvas.height = img.height;
-    img.onload = function () {
-        context.drawImage(img, 0, 0);
-        document.getElementById(trackDescriptionId).textContent = trackName;
-        document.getElementById(artistDescriptionId).innerText = artistName;
-    };
-
-}
 
 function grabImageColors(canvas: string, image) {
     return new Promise<Queue<Pixel>>((resolve) => {
@@ -227,4 +186,24 @@ function grabImageColors(canvas: string, image) {
     });
 }
 
+function setImage(canvasName, image, trackDescriptionId, trackName, artistDescriptionId, artistName) {
+
+    const canvas = document.getElementById(canvasName) as HTMLCanvasElement;
+    const context = canvas.getContext("2d");
+    let displayImage = image;
+    let img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = displayImage.url;
+    img.width = displayImage.width;
+    img.height = displayImage.height;
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+    img.onload = function () {
+        context.drawImage(img, 0, 0);
+        document.getElementById(trackDescriptionId).textContent = trackName;
+        document.getElementById(artistDescriptionId).innerText = artistName;
+    };
+
+}
 export { spotify }

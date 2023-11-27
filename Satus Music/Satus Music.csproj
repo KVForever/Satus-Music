@@ -34,6 +34,7 @@
   <ItemGroup>
     <Folder Include="FrontEndDev\allstyles\" />
     <Folder Include="FrontEndDev\variables\" />
+    <Folder Include="Scripts\Home\" />
     <Folder Include="Scripts\Spotify\Auth\" />
     <Folder Include="Scripts\Spotify\Tracks\" />
     <Folder Include="wwwroot\css\allstyles\" />

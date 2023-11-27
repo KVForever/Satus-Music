@@ -1,8 +1,8 @@
-import { Auth } from './Auth/auth.js';
-import { User } from './User/user.js';
-import { Queue } from '../Utilites/Queue.js';
-import { Pixel } from '../Utilites/Pixel.js';
-async function spotify() {
+import { Auth } from '../Spotify/Auth/auth.js'
+import { User } from '../Spotify/User/user.js'
+import { Images } from '../Utilites/Images.js'
+
+async function home() {
     await Auth.authenticate();
     const user = new User(Auth.token);
     const profile = await user.currentProfile();
@@ -10,12 +10,15 @@ async function spotify() {
     const tracks = await user.usersTopItems("tracks", "long_term");
     /*let imageStart = Math.floor(Math.random() * 19);*/
     let imageStart = 0;
+
+
     let displayImage = tracks.items[imageStart].album.images[0];
     let colorImage = tracks.items[imageStart].album.images[2];
     let track = tracks.items[imageStart].artists[0].name;
     let artist = tracks.items[imageStart].name;
-    setImage("home-canvas", displayImage, "top-track-name", track, "top-track-artist-name", artist);
-    let topColors = await grabImageColors("home-color-canvas", colorImage);
+
+    Images.setImage("home-canvas", displayImage, "top-track-name", track, "top-track-artist-name", artist);
+    let topColors = await Images.grabImageColors("home-color-canvas", colorImage);
     //If the color is closer to white set text to black do the opposite of the opposite is true. They are multiplied because humans percive color and litness differently 
     let textColor;
     let r = topColors.read(0).r * .3;
@@ -24,10 +27,10 @@ async function spotify() {
     let grayScaleColor = r + g + b;
     if (grayScaleColor > 128) {
         textColor = "rgba(0, 0, 0, 1)";
-    }
-    else {
+    } else {
         textColor = "rgba(255, 255, 255, 1)";
     }
+
     document.documentElement.style.setProperty("--site-text-color", textColor);
     document.documentElement.style.setProperty("--home-canvas-border-color", textColor);
     let siteBackgroundColor = `radial-gradient(18% 28% at 24% 50%, rgba(${topColors.read(12).r}, ${topColors.read(12).g}, ${topColors.read(12).b}, 1) 7%, #073AFF00 100%),radial-gradient(18% 28% at 18% 71%, rgba(${topColors.read(10).r}, ${topColors.read(10).g}, ${topColors.read(10).b}, 1) 6%, #073AFF00 100%),
@@ -42,7 +45,11 @@ async function spotify() {
         ${topColors.read(0).b - 30}, 1) 14%, rgba(${topColors.read(0).r - 20}, ${topColors.read(0).g - 20}, ${topColors.read(0).b - 20}, 1) 33%, rgba(${topColors.read(0).r - 10}, 
         ${topColors.read(0).g - 10}, ${topColors.read(0).b - 10}, 0.9) 50%, rgba(${topColors.read(0).r}, ${topColors.read(0).g}, ${topColors.read(0).b}, 0.6) 66%, 
         rgba(${topColors.read(0).r + 10}, ${topColors.read(0).g + 10}, ${topColors.read(0).b + 10}, 0.00001) 85%)`;
+
+
+
     repeat();
+
     function repeat() {
         setTimeout(async () => {
             if (imageStart < tracks.items.length - 1) {
@@ -56,15 +63,17 @@ async function spotify() {
                 let trackThree = tracks.items[2].album.images[0];
                 let trackThreeName = tracks.items[2].artists[0].name;
                 let trackThreeArtist = tracks.items[2].name;
-                setImage("top-song-one", trackOne, "top-song-one-name", trackOneName, "top-song-one-artist-name", trackOneArtist);
-                setImage("top-song-two", trackTwo, "top-song-two-name", trackTwoName, "top-song-two-artist-name", trackTwoArtist);
-                setImage("top-song-three", trackThree, "top-song-three-name", trackThreeName, "top-song-three-artist-name", trackThreeArtist);
+
+                Images.setImage("top-song-one", trackOne, "top-song-one-name", trackOneName, "top-song-one-artist-name", trackOneArtist);
+                Images.setImage("top-song-two", trackTwo, "top-song-two-name", trackTwoName, "top-song-two-artist-name", trackTwoArtist);
+                Images.setImage("top-song-three", trackThree, "top-song-three-name", trackThreeName, "top-song-three-artist-name", trackThreeArtist);
                 let displayImage = tracks.items[imageStart].album.images[0];
                 let colorImage = tracks.items[imageStart].album.images[2];
                 let track = tracks.items[imageStart].artists[0].name;
                 let artist = tracks.items[imageStart].name;
-                setImage("home-canvas", displayImage, "top-track-name", track, "top-track-artist-name", artist);
-                let topColors = await grabImageColors("home-color-canvas", colorImage);
+
+                Images.setImage("home-canvas", displayImage, "top-track-name", track, "top-track-artist-name", artist);
+                let topColors = await Images.grabImageColors("home-color-canvas", colorImage);
                 //If the color is closer to white set text to black do the opposite of the opposite is true. They are multiplied because humans percive color and litness differently 
                 let textColor;
                 let r = topColors.read(0).r * .3;
@@ -73,10 +82,10 @@ async function spotify() {
                 let grayScaleColor = r + g + b;
                 if (grayScaleColor > 128) {
                     textColor = "rgba(0, 0, 0, 1)";
-                }
-                else {
+                } else {
                     textColor = "rgba(255, 255, 255, 1)";
                 }
+
                 document.documentElement.style.setProperty("--site-text-color", textColor);
                 document.documentElement.style.setProperty("--home-canvas-border-color", textColor);
                 let siteBackgroundColor = `radial-gradient(18% 28% at 24% 50%, rgba(${topColors.read(12).r}, ${topColors.read(12).g}, ${topColors.read(12).b}, 1) 7%, #073AFF00 100%),radial-gradient(18% 28% at 18% 71%, rgba(${topColors.read(10).r}, ${topColors.read(10).g}, ${topColors.read(10).b}, 1) 6%, #073AFF00 100%),
@@ -91,89 +100,13 @@ async function spotify() {
                     ${topColors.read(0).b - 30}, 1) 14%, rgba(${topColors.read(0).r - 20}, ${topColors.read(0).g - 20}, ${topColors.read(0).b - 20}, 1) 33%, rgba(${topColors.read(0).r - 10}, 
                     ${topColors.read(0).g - 10}, ${topColors.read(0).b - 10}, 0.9) 50%, rgba(${topColors.read(0).r}, ${topColors.read(0).g}, ${topColors.read(0).b}, 0.6) 66%, 
                     rgba(${topColors.read(0).r + 10}, ${topColors.read(0).g + 10}, ${topColors.read(0).b + 10}, 0.00001) 85%)`;
+
+
                 repeat();
             }
         }, 4000);
     }
+
 }
-function grabImageColors(canvas, image) {
-    return new Promise((resolve) => {
-        const colorCanvas = document.getElementById(canvas);
-        const colorContext = colorCanvas.getContext("2d", { willReadFrequently: true });
-        const sampleImage = image;
-        let grabColorImage = new Image();
-        grabColorImage.crossOrigin = "anonymous";
-        grabColorImage.src = sampleImage.url;
-        colorCanvas.width = sampleImage.width;
-        colorCanvas.height = sampleImage.height;
-        let mostCommonColor;
-        let topColors = new Queue(20);
-        grabColorImage.onload = function () {
-            colorContext.drawImage(grabColorImage, 0, 0);
-            const imgData = colorContext.getImageData(0, 0, colorCanvas.width, colorCanvas.height);
-            let numPixels = 0;
-            let pixelMap = new Map();
-            for (var a = 0; a < imgData.data.length; a += 4) {
-                let r = imgData.data[a];
-                let g = imgData.data[a + 1];
-                let b = imgData.data[a + 2];
-                let pixelToAdd = new Pixel(r, g, b);
-                pixelMap.set(numPixels, pixelToAdd);
-                numPixels++;
-            }
-            let n = 0, mostFreq = 1, item;
-            for (var d = 0; d < pixelMap.size; d++) {
-                for (var e = d; e < pixelMap.size; e++) {
-                    if (pixelMap.get(e) == pixelMap.get(d)) {
-                        n++;
-                        if (mostFreq < n) {
-                            mostFreq = n;
-                            let newGreatest = pixelMap.get(d);
-                            if (topColors.size() < 20) {
-                                topColors.enqueue(pixelMap.get(d));
-                            }
-                            else {
-                                topColors.dequeue();
-                                topColors.enqueue(pixelMap.get(d));
-                            }
-                            item = newGreatest;
-                            n = 0;
-                        }
-                    }
-                }
-            }
-            let checkColors = new Array();
-            for (var a = 0; a < topColors.size(); a++) {
-                checkColors.push(topColors.read(a));
-            }
-            mostCommonColor = item;
-            for (var i = 0; i < topColors.size(); i++) {
-                let color = checkColors[i];
-                if ((Math.abs((color.r) - (color.b)) >= 15) && (Math.abs((color.r) - (color.g)) >= 15) && (Math.abs((color.g) - (color.b)) >= 15)) {
-                    topColors.dequeue();
-                }
-                i++;
-            }
-            resolve(topColors);
-        };
-    });
-}
-function setImage(canvasName, image, trackDescriptionId, trackName, artistDescriptionId, artistName) {
-    const canvas = document.getElementById(canvasName);
-    const context = canvas.getContext("2d");
-    let displayImage = image;
-    let img = new Image();
-    img.crossOrigin = "anonymous";
-    img.src = displayImage.url;
-    img.width = displayImage.width;
-    img.height = displayImage.height;
-    canvas.width = img.width;
-    canvas.height = img.height;
-    img.onload = function () {
-        context.drawImage(img, 0, 0);
-        document.getElementById(trackDescriptionId).textContent = trackName;
-        document.getElementById(artistDescriptionId).innerText = artistName;
-    };
-}
-export { spotify };
-//# sourceMappingURL=spotify.js.map
+
+export { home }
