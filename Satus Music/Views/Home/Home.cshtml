@@ -8,7 +8,8 @@
     <section id="landing" class="scroll-snap d-flex align-items-center justify-content-center">
         <div id="landing-background">
             <div id="home-gradient" class="d-flex">
-                <div class="row">
+                <div class="row position-relative">
+                    <div id="greeting-background"></div>
                     <div id="home-greeting" class="text-start align-items-center my-auto ms-5 col">
                         <p class="">Welcome to Satus, <span id="username">null</span></p>
                         <p class="fs-5">From rock to pop, jazz to country, music is for everyone. Its a beautiful expression of who you are. Lets explore what music expresses your one-of-a-kind personality.</p>
@@ -28,8 +29,8 @@
     </section>
 
     <section id="top-track-podium" class="scroll-snap d-flex align-items-center row">
-        <h1 class="text-center col-12">Your Top Songs</h1>
-        <div class="d-flex align-items-center">
+        <h1 class="text-center col-12 mt-5">Your Top Songs</h1>
+        <div class="spot-2 d-flex align-items-center">
             <div class="col4 text-center">
                 <p class="fs-2">#2</p>
                 <canvas id="top-song-two" class="d-flex mx-auto"></canvas>
@@ -39,7 +40,7 @@
                     <p id="top-song-two-artist-name" class="fs-2">null</p>
                 </div>           
             </div>
-            <div class="col-4 text-center">
+            <div class="spot-1 col-4 text-center">
                 <p class="fs-2">#1</p>
                 <canvas id="top-song-one" class="d-flex mx-auto"></canvas>
                 <canvas id="top-song-one-color-canvas" class="d-none"></canvas>
@@ -48,7 +49,7 @@
                     <p id="top-song-one-artist-name" class="fs-2">null</p>
                 </div>
             </div>
-            <div class="col-4 text-center">         
+            <div class="spot-3 col-4 text-center">         
                 <p class="fs-2">#3</p>
                 <canvas id="top-song-three" class="d-flex mx-auto"></canvas>
                 <canvas id="top-song-three-color-canvas" class="d-none"></canvas>

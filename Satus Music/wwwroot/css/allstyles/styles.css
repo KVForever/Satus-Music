@@ -35,13 +35,20 @@ header {
   position: absolute;
   width: 100%;
   left: 0;
+  z-index: 1;
 }
 
+#navigation {
+  justify-content: space-between;
+}
 #navigation svg {
   fill: var(--site-text-color);
 }
 #navigation #middle-group {
   text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 #navigation #middle-group a {
   text-decoration: none;
@@ -117,6 +124,16 @@ header {
   z-index: -1;
 }
 
+#greeting-background {
+  position: absolute;
+  height: 90%;
+  width: 50%;
+  left: 0;
+  top: 10%;
+  border-radius: 10px;
+  z-index: -1;
+}
+
 #home-greeting {
   width: 50%;
   /* background-clip: text;
@@ -132,6 +149,9 @@ header {
 }
 #top-track-podium h1 {
   font-size: 3rem;
+}
+#top-track-podium .spot-1 {
+  transform: scale(0.9);
 }
 #top-track-podium #top-song-one {
   width: 99%;

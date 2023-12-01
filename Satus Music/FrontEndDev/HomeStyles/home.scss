@@ -60,6 +60,16 @@
     z-index: -1;
 }
 
+#greeting-background {
+    position: absolute;
+    height: 90%;
+    width: 50%;
+    left: 0;
+    top: 10%;
+    border-radius: 10px;
+    z-index: -1;
+}
+
 #home-greeting {
     width: 50%;
 
@@ -79,9 +89,12 @@
         font-size: 3rem;
     }
 
+    .spot-1{
+        transform: scale(.9);
+    }
+
     & #top-song-one {
         width: 99%;
-       
     }
 
     & #top-song-two {

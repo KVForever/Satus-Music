@@ -69,6 +69,7 @@ async function spotify() {
                 setImage("top-song-one", trackOne, "top-song-one-name", trackOneName, "top-song-one-artist-name", trackOneArtist);
                 setImage("top-song-two", trackTwo, "top-song-two-name", trackTwoName, "top-song-two-artist-name", trackTwoArtist);
                 setImage("top-song-three", trackThree, "top-song-three-name", trackThreeName, "top-song-three-artist-name", trackThreeArtist);
+
                 let displayImage = tracks.items[imageStart].album.images[0];
                 let colorImage = tracks.items[imageStart].album.images[2];
                 let track = tracks.items[imageStart].artists[0].name;
