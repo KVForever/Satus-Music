@@ -6,9 +6,11 @@ async function home() {
     const user = new User(Auth.token);
     const profile = await user.currentProfile();
     document.getElementById("username").innerText = profile.display_name;
-    const tracks = await user.usersTopItems("tracks", "medium_term");
+    const tracks = await user.usersTopTracks("tracks", "medium_term");
+    const artists = await user.usersTopArtists("artists", "short-term");
     let imageStart = Math.floor(Math.random() * 19);
     /*let imageStart = 0;*/
+    //track
     let trackOne = tracks.items[0].album.images[0];
     let trackOneColorImage = tracks.items[0].album.images[2];
     let trackOneName = tracks.items[0].artists[0].name;
@@ -30,6 +32,16 @@ async function home() {
     Images.setImage("top-song-three", trackThree, "top-song-three-name", trackThreeName, "top-song-three-artist-name", trackThreeArtist);
     let songThreeColors = await Images.grabImageColors("top-song-three-color-canvas", trackThreeColorImage);
     document.getElementById("top-song-one").style.boxShadow = `2px 1px 20px 5px rgba(${songThreeColors.read(0).r}, ${songThreeColors.read(0).g}, ${songThreeColors.read(0).b}, 1)`;
+    //artist
+    let artistOneImage = artists.items[0].images[0];
+    let artistOneName = artists.items[0].name;
+    let artistTwoImage = artists.items[1].images[0];
+    let artistTwoName = artists.items[1].name;
+    let artistThreeImage = artists.items[2].images[0];
+    let artistThreeName = artists.items[2].name;
+    Images.setArtistImage("top-artist-one", artistOneImage, "top-artist-one-name", artistOneName);
+    Images.setArtistImage("top-artist-two", artistTwoImage, "top-artist-two-name", artistTwoName);
+    Images.setArtistImage("top-artist-three", artistThreeImage, "top-artist-three-name", artistThreeName);
     let displayImage = tracks.items[imageStart].album.images[0];
     let colorImage = tracks.items[imageStart].album.images[2];
     let track = tracks.items[imageStart].artists[0].name;

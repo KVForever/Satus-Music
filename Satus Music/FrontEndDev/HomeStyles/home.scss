@@ -107,3 +107,29 @@
        
     }
 }
+
+#top-artist-podium {
+    background-color: black;
+    color: white;
+    height: 100vh;
+
+    & h1 {
+       font-size: 3rem;
+    }
+
+    .spot-1{
+        transform: scale(.9);
+    }
+
+    & #top-artist-one {
+        width: 99%;
+    }
+
+    & #top-artist-two {
+        width: 60%;
+    }
+
+    & #top-artist-three {
+        width: 60%;
+    }
+}

@@ -86,6 +86,22 @@ class Images {
             document.getElementById(artistDescriptionId).innerText = artistName;
         };
     }
+    static setArtistImage(canvasName, image, artistDescriptionId, artistName) {
+        const canvas = document.getElementById(canvasName);
+        const context = canvas.getContext("2d");
+        let displayImage = image;
+        let img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = displayImage.url;
+        img.width = displayImage.width;
+        img.height = displayImage.height;
+        canvas.width = img.width;
+        canvas.height = img.height;
+        img.onload = function () {
+            context.drawImage(img, 0, 0);
+            document.getElementById(artistDescriptionId).innerText = artistName;
+        };
+    }
 }
 export { Images };
 //# sourceMappingURL=Images.js.map

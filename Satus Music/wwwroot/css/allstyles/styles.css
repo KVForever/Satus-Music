@@ -163,6 +163,27 @@ header {
   width: 60%;
 }
 
+#top-artist-podium {
+  background-color: black;
+  color: white;
+  height: 100vh;
+}
+#top-artist-podium h1 {
+  font-size: 3rem;
+}
+#top-artist-podium .spot-1 {
+  transform: scale(0.9);
+}
+#top-artist-podium #top-artist-one {
+  width: 99%;
+}
+#top-artist-podium #top-artist-two {
+  width: 60%;
+}
+#top-artist-podium #top-artist-three {
+  width: 60%;
+}
+
 /***************Variable Styles***********/
 :root {
   --site-text-color: white;
