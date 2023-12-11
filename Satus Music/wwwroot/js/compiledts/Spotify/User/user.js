@@ -9,24 +9,17 @@ class User {
         const data = userInfo.json();
         return data;
     }
-    async usersTopTracks(type, timeRange = "medium_term", limit = 20, offset = 0) {
+    async usersTopItems(type, timeRange = "medium_term", limit = 20, offset = 0) {
         if (limit < 0 || limit > 50) {
             console.log("You tried making a call for users top items but your limit is not in the range 0-50.");
         }
         else {
-            const track = await fetch('https://api.spotify.com/v1/me/top/' + type + '/?offset=' + offset + '&time_range=' + timeRange + '&limit=' + limit, {
+            const track = await fetch('https://api.spotify.com/v1/me/top/' + type + '?offset=' + offset + '&time_range=' + timeRange + '&limit=' + limit, {
                 method: "GET", headers: { Authorization: `Bearer ${this.token}` }
             });
             const data = track.json();
             return data;
         }
-    }
-    async usersTopArtists(type, timeRange = "medium_term") {
-        const track = await fetch('https://api.spotify.com/v1/me/top/' + type, {
-            method: "GET", headers: { Authorization: `Bearer ${this.token}` }
-        });
-        const data = track.json();
-        return data;
     }
 }
 export { User };

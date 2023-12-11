@@ -35,6 +35,7 @@ header {
   position: absolute;
   width: 100%;
   left: 0;
+  top: 0;
   z-index: 1;
 }
 
@@ -94,7 +95,6 @@ header {
   justify-content: center;
   display: flex;
   align-items: center;
-  border: solid 1px var(--home-canvas-border-color);
   width: 70%;
 }
 

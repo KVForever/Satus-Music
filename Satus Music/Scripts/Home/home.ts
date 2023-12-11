@@ -7,52 +7,10 @@ async function home() {
     const user = new User(Auth.token);
     const profile = await user.currentProfile();
     document.getElementById("username").innerText = profile.display_name;
-    const tracks = await user.usersTopTracks("tracks", "medium_term");
-    const artists = await user.usersTopArtists("artists", "short-term")
-    let imageStart = Math.floor(Math.random() * 19);
-    /*let imageStart = 0;*/
-
-
-//track
-    let trackOne = tracks.items[0].album.images[0];
-    let trackOneColorImage = tracks.items[0].album.images[2];
-    let trackOneName = tracks.items[0].artists[0].name;
-    let trackOneArtist = tracks.items[0].name;
-
-    let trackTwo = tracks.items[1].album.images[0];
-    let trackTwoColorImage = tracks.items[1].album.images[2];
-    let trackTwoName = tracks.items[1].artists[0].name;
-    let trackTwoArtist = tracks.items[1].name;
-
-    let trackThree = tracks.items[2].album.images[0];
-    let trackThreeColorImage = tracks.items[2].album.images[2];
-    let trackThreeName = tracks.items[2].artists[0].name;
-    let trackThreeArtist = tracks.items[2].name;
-
-    Images.setImage("top-song-one", trackOne, "top-song-one-name", trackOneName, "top-song-one-artist-name", trackOneArtist);
-    let songOneColors = await Images.grabImageColors("top-song-one-color-canvas", trackOneColorImage);
-    document.getElementById("top-song-one").style.boxShadow = `2px 1px 20px 5px rgba(${songOneColors.read(0).r}, ${songOneColors.read(0).g}, ${songOneColors.read(0).b}, 1)`;
-    Images.setImage("top-song-two", trackTwo, "top-song-two-name", trackTwoName, "top-song-two-artist-name", trackTwoArtist);
-    let songTwoColors = await Images.grabImageColors("top-song-two-color-canvas", trackTwoColorImage);
-    document.getElementById("top-song-one").style.boxShadow = `2px 1px 20px 5px rgba(${songTwoColors.read(0).r}, ${songTwoColors.read(0).g}, ${songTwoColors.read(0).b}, 1)`;
-    Images.setImage("top-song-three", trackThree, "top-song-three-name", trackThreeName, "top-song-three-artist-name", trackThreeArtist);
-    let songThreeColors = await Images.grabImageColors("top-song-three-color-canvas", trackThreeColorImage);
-    document.getElementById("top-song-one").style.boxShadow = `2px 1px 20px 5px rgba(${songThreeColors.read(0).r}, ${songThreeColors.read(0).g}, ${songThreeColors.read(0).b}, 1)`;
-
-    //artist
-    let artistOneImage = artists.items[0].images[0];
-    let artistOneName = artists.items[0].name;
-
-    let artistTwoImage = artists.items[1].images[0];
-    let artistTwoName = artists.items[1].name;
-
-    let artistThreeImage = artists.items[2].images[0];
-    let artistThreeName = artists.items[2].name;
-
-    Images.setArtistImage("top-artist-one", artistOneImage, "top-artist-one-name", artistOneName);
-    Images.setArtistImage("top-artist-two", artistTwoImage, "top-artist-two-name", artistTwoName);
-    Images.setArtistImage("top-artist-three", artistThreeImage, "top-artist-three-name", artistThreeName);
-
+    const tracks = await user.usersTopItems("tracks", "long_term");
+    const artists = await user.usersTopItems("artists", "long_term");
+  /*  let imageStart = Math.floor(Math.random() * 19);*/
+    let imageStart = 0;
 
     let displayImage = tracks.items[imageStart].album.images[0];
     let colorImage = tracks.items[imageStart].album.images[2];
@@ -61,6 +19,7 @@ async function home() {
 
     Images.setImage("home-canvas", displayImage, "top-track-name", track, "top-track-artist-name", artist);
     let topColors = await Images.grabImageColors("home-color-canvas", colorImage);
+   /* let test = await Images.grabImageColorsTwo("home-color-canvas", colorImage);*/
     //If the color is closer to white set text to black do the opposite of the opposite is true. They are multiplied because humans percive color and litness differently 
     let textColor;
     let r = topColors.read(0).r * .3;
@@ -88,9 +47,69 @@ async function home() {
         ${topColors.read(0).g - 10}, ${topColors.read(0).b - 10}, 0.9) 50%, rgba(${topColors.read(0).r}, ${topColors.read(0).g}, ${topColors.read(0).b}, 0.6) 66%, 
         rgba(${topColors.read(0).r + 10}, ${topColors.read(0).g + 10}, ${topColors.read(0).b + 10}, 0.00001) 85%)`;
 
+    repeat();
+
+    //track
+    let trackOne = tracks.items[0].album.images[0];
+    let trackOneColorImage = tracks.items[0].album.images[2];
+    let trackOneName = tracks.items[0].artists[0].name;
+    let trackOneArtist = tracks.items[0].name;
+
+    let trackTwo = tracks.items[1].album.images[0];
+    let trackTwoColorImage = tracks.items[1].album.images[2];
+    let trackTwoName = tracks.items[1].artists[0].name;
+    let trackTwoArtist = tracks.items[1].name;
+
+    let trackThree = tracks.items[2].album.images[0];
+    let trackThreeColorImage = tracks.items[2].album.images[2];
+    let trackThreeName = tracks.items[2].artists[0].name;
+    let trackThreeArtist = tracks.items[2].name;
+
+    Images.setImage("top-song-one", trackOne, "top-song-one-name", trackOneName, "top-song-one-artist-name", trackOneArtist);
+    let songOneColors = await Images.grabImageColors("top-song-one-color-canvas", trackOneColorImage);
+    document.getElementById("top-song-one").style.boxShadow = `2px 1px 12px 15px rgba(${songOneColors.read(0).r}, ${songOneColors.read(0).g}, ${songOneColors.read(0).b}, 1)`;
+  
+
+    Images.setImage("top-song-two", trackTwo, "top-song-two-name", trackTwoName, "top-song-two-artist-name", trackTwoArtist);
+    let songTwoColors = await Images.grabImageColors("top-song-two-color-canvas", trackTwoColorImage);
+    document.getElementById("top-song-two").style.boxShadow = `2px 1px 12px 15px rgba(${songTwoColors.read(0).r}, ${songTwoColors.read(0).g}, ${songTwoColors.read(0).b}, 1)`;
    
 
-    /*repeat();*/
+    Images.setImage("top-song-three", trackThree, "top-song-three-name", trackThreeName, "top-song-three-artist-name", trackThreeArtist);
+    let songThreeColors = await Images.grabImageColors("top-song-three-color-canvas", trackThreeColorImage);
+    document.getElementById("top-song-three").style.boxShadow = `2px 1px 12px 15px rgba(${songThreeColors.read(0).r}, ${songThreeColors.read(0).g}, ${songThreeColors.read(0).b}, 1)`;
+    
+
+
+    //artist
+    let artistOneImage = artists.items[0].images[0];
+    let artistOneColorImage = artists.items[0].images[2];
+    let artistOneName = artists.items[0].name;
+
+    let artistTwoImage = artists.items[1].images[0];
+    let artistTwoColorImage = artists.items[1].images[2];
+    let artistTwoName = artists.items[1].name;
+
+    let artistThreeImage = artists.items[2].images[0];
+    let artistThreeColorImage = artists.items[2].images[2];
+    let artistThreeName = artists.items[2].name;
+
+    Images.setArtistImage("top-artist-one", artistOneImage, "top-artist-one-name", artistOneName);
+    let artistOneColors = await Images.grabImageColors("top-artist-one-color-canvas", artistOneColorImage);
+    document.getElementById("top-artist-one").style.boxShadow = `2px 1px 12px 15px rgba(${artistOneColors.read(0).r}, ${artistOneColors.read(0).g}, ${artistOneColors.read(0).b}, 1)`;
+    
+
+    Images.setArtistImage("top-artist-two", artistTwoImage, "top-artist-two-name", artistTwoName);
+    let artistTwoColors = await Images.grabImageColors("top-artist-two-color-canvas", artistTwoColorImage);
+    document.getElementById("top-artist-two").style.boxShadow = `2px 1px 12px 15px rgba(${artistTwoColors.read(0).r}, ${artistTwoColors.read(0).g}, ${artistTwoColors.read(0).b}, 1)`;
+   
+    Images.setArtistImage("top-artist-three", artistThreeImage, "top-artist-three-name", artistThreeName);
+    let artistThreeColors = await Images.grabImageColors("top-artist-three-color-canvas", artistThreeColorImage);
+    document.getElementById("top-artist-three").style.boxShadow = `2px 1px 12px 15px rgba(${artistThreeColors.read(0).r}, ${artistThreeColors.read(0).g}, ${artistThreeColors.read(0).b}, 1)`;
+   
+
+
+  
 
     function repeat() {
         setTimeout(async () => {
@@ -126,10 +145,10 @@ async function home() {
                 linear-gradient(125deg,  rgba(${topColors.read(0).r}, ${topColors.read(0).g}, ${topColors.read(0).b}, 1) 1%,  rgba(${topColors.read(1).r}, ${topColors.read(1).g}, 
                 ${topColors.read(1).b}, 1) 100%)`;
                 document.documentElement.style.setProperty("--home-background-color", siteBackgroundColor);
-                document.getElementById("home-gradient").style.background = `linear-gradient(180deg, rgba(${(topColors.read(0).r - 30)}, ${topColors.read(0).g - 30}, 
-                    ${topColors.read(0).b - 30}, 1) 14%, rgba(${topColors.read(0).r - 20}, ${topColors.read(0).g - 20}, ${topColors.read(0).b - 20}, 1) 33%, rgba(${topColors.read(0).r - 10}, 
-                    ${topColors.read(0).g - 10}, ${topColors.read(0).b - 10}, 0.9) 50%, rgba(${topColors.read(0).r}, ${topColors.read(0).g}, ${topColors.read(0).b}, 0.6) 66%, 
-                    rgba(${topColors.read(0).r + 10}, ${topColors.read(0).g + 10}, ${topColors.read(0).b + 10}, 0.00001) 85%)`;
+                document.getElementById("greeting-background").style.background = `linear-gradient(180deg, rgba(${(topColors.read(0).r - 30)}, ${topColors.read(0).g - 30}, 
+                ${topColors.read(0).b - 30}, 1) 14%, rgba(${topColors.read(0).r - 20}, ${topColors.read(0).g - 20}, ${topColors.read(0).b - 20}, 1) 33%, rgba(${topColors.read(0).r - 10}, 
+                ${topColors.read(0).g - 10}, ${topColors.read(0).b - 10}, 0.9) 50%, rgba(${topColors.read(0).r}, ${topColors.read(0).g}, ${topColors.read(0).b}, 0.6) 66%, 
+                rgba(${topColors.read(0).r + 10}, ${topColors.read(0).g + 10}, ${topColors.read(0).b + 10}, 0.00001) 85%)`;
 
 
                 repeat();
