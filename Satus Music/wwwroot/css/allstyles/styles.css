@@ -17,7 +17,7 @@ html {
   }
 }
 body {
-  background-color: white;
+  background-color: black;
   color: var(--site-text-color);
   overflow-x: hidden;
   -ms-overflow-style: none;
@@ -41,9 +41,14 @@ header {
 
 #navigation {
   justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-bottom: white solid 0.5px;
 }
 #navigation svg {
-  fill: var(--site-text-color);
+  fill: white;
+}
+#navigation #start-group {
+  color: white;
 }
 #navigation #middle-group {
   text-align: center;
@@ -54,8 +59,8 @@ header {
 #navigation #middle-group a {
   text-decoration: none;
   padding-bottom: 0.5px;
-  border-bottom: 2px solid var(--site-text-color);
-  color: var(--site-text-color);
+  border-bottom: 2px solid white;
+  color: white;
 }
 
 /***************Home Styles***************/
@@ -132,6 +137,7 @@ header {
   top: 10%;
   border-radius: 10px;
   z-index: -1;
+  /*background-image: linear-gradient(red, transparent, transparent);*/
 }
 
 #home-greeting {
@@ -139,13 +145,39 @@ header {
   /* background-clip: text;
    color: transparent;*/
 }
-#home-greeting p:first-of-type {
+#home-greeting .greeting-heading {
   font-size: 3rem;
 }
 
+#songs-section {
+  min-height: 100vh;
+}
+
+#song-table {
+  color: white;
+  margin-top: 4rem;
+}
+#song-table tbody {
+  vertical-align: middle;
+}
+#song-table tbody th, #song-table tbody td {
+  padding: 0;
+  padding-top: 0.5rem;
+  font-size: 18px;
+  text-align: center;
+}
+#song-table tr:hover {
+  background-size: 100% 100%;
+  background-position: 0px 0px;
+  background-image: none;
+}
+#song-table thead tr {
+  font-size: 20px;
+  text-align: center;
+}
+
 #top-track-podium {
-  color: black;
-  height: 100vh;
+  min-height: 100vh;
 }
 #top-track-podium h1 {
   font-size: 3rem;
@@ -167,6 +199,9 @@ header {
   background-color: black;
   color: white;
   height: 100vh;
+}
+#top-artist-podium #artist-align {
+  width: 100%;
 }
 #top-artist-podium h1 {
   font-size: 3rem;

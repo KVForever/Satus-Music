@@ -13,7 +13,7 @@ html {
 }
 
 body {
-	background-color: white;
+	background-color: black;
 	color: var(--site-text-color);
 	overflow-x: hidden;
 	-ms-overflow-style: none;
@@ -39,9 +39,16 @@ header {
 
 #navigation {
 	justify-content: space-between;
+	background-color: rgba(0,0,0,.3);
+	border-bottom: white solid .5px;
 
 	svg {
-		fill: var(--site-text-color);
+		//fill: var(--site-text-color);
+		fill: white;
+	}
+
+	#start-group {
+		color: white;
 	}
 
 	#middle-group {
@@ -53,8 +60,10 @@ header {
 		& a {
 			text-decoration: none;
 			padding-bottom: .5px;
-			border-bottom: 2px solid var(--site-text-color);
-			color: var(--site-text-color);
+			//border-bottom: 2px solid var(--site-text-color);
+			border-bottom: 2px solid white;
+			//color: var(--site-text-color);
+			color: white;
 		}
 	}
 }

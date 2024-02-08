@@ -67,12 +67,13 @@
     top: 10%;
     border-radius: 10px;
     z-index: -1;
+    /*background-image: linear-gradient(red, transparent, transparent);*/
 }
 
 #home-greeting {
     width: 50%;
 
-    & p:first-of-type {
+    & .greeting-heading{
         font-size: 3rem;
     }
    //for text gradients. not being used right now.
@@ -80,9 +81,43 @@
     color: transparent;*/
 }
 
+#songs-section {
+    min-height: 100vh;
+}
+
+#song-table{
+    color: white;
+    margin-top: 4rem;
+
+    & tbody {
+        vertical-align: middle;
+
+        & th, td {
+            padding: 0;
+            padding-top: .5rem;
+            font-size: 18px;
+            text-align: center;
+        }
+    }
+
+    & tr:hover {
+        background-size: 100% 100%;
+        background-position: 0px 0px;
+        background-image: none;
+    }
+
+    & thead {
+        & tr {
+            font-size: 20px;
+            text-align: center;
+        }
+    }
+    
+}
+
+
 #top-track-podium {
-    color: black;
-    height: 100vh;
+    min-height: 100vh;
 
     & h1 {
         font-size: 3rem;
@@ -112,11 +147,15 @@
     color: white;
     height: 100vh;
 
-    & h1 {
-       font-size: 3rem;
+    & #artist-align {
+        width: 100%;
     }
 
-    .spot-1{
+    & h1 {
+        font-size: 3rem;
+    }
+
+    .spot-1 {
         transform: scale(.9);
     }
 
