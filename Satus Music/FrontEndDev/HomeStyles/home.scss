@@ -83,10 +83,12 @@
 
 #songs-section {
     min-height: 100vh;
+    background-color: white;
+    color: white;
 }
 
 #song-table{
-    color: white;
+    color: black;
     margin-top: 4rem;
 
     & tbody {
@@ -100,10 +102,11 @@
         }
     }
 
-    & tr:hover {
+    & tr {
         background-size: 100% 100%;
         background-position: 0px 0px;
         background-image: none;
+        background-color: white;
     }
 
     & thead {
@@ -115,16 +118,21 @@
     
 }
 
+#song-heading {
+    margin: 6rem 0 4rem 0;
+}
 
 #top-track-podium {
     min-height: 100vh;
+    color: white;
 
     & h1 {
         font-size: 3rem;
     }
 
     .spot-1{
-        transform: scale(.9);
+        display: flex;
+        align-items: center;
     }
 
     & #top-song-one {
@@ -156,7 +164,7 @@
     }
 
     .spot-1 {
-        transform: scale(.9);
+        
     }
 
     & #top-artist-one {
@@ -170,4 +178,55 @@
     & #top-artist-three {
         width: 60%;
     }
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 99%;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+.secondary-flip-card {
+    background-color: transparent;
+    width: 100%;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: transparent;
+  color: white;
+}
+
+/* Style the back side */
+.flip-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  color: white;
+  transform: rotateY(180deg);
 }

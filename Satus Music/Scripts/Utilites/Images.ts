@@ -43,7 +43,6 @@ class Images {
                     topColors.push(sortedColors[i]);
                 }
 
-                console.log(topColors);
                 resolve(topColors);
             };
         });

@@ -31,36 +31,47 @@
         </div>
     </section>
 
-    @* <section id="top-track-podium" class="scroll-snap d-flex align-items-center row">
-        <h1 class="text-center col-12 mt-5">Your Top Songs</h1>
-        <div class="spot-2 d-flex align-items-center">
-            <div class="col4 text-center">
+    <section id="top-track-podium" class="scroll-snap row">
+        <h1 class="text-center col-12" id="song-heading">Your Top Songs</h1>
+        <div class="d-flex align-items-center">
+            <div class="spot-2 col-4 text-center">              
                 <canvas id="top-song-two" class="d-flex mx-auto"></canvas>
                 <canvas id="top-song-two-color-canvas" class="d-none"></canvas>
                 <div class="fs-1 p-3 col track-description">
                     <p id="top-song-two-name" class="fs-2">null</p>
                     <p id="top-song-two-artist-name" class="fs-2">null</p>
-                </div>           
-            </div>
-            <div class="spot-1 col-4 text-center">              
-                <canvas id="top-song-one" class="d-flex mx-auto"></canvas>
-                <canvas id="top-song-one-color-canvas" class="d-none"></canvas>
-                <div class="fs-1 p-3 col track-description">
-                    <p id="top-song-one-name" class="fs-2">null</p>
-                    <p id="top-song-one-artist-name" class="fs-2">null</p>
                 </div>
             </div>
-            <div class="spot-3 col-4 text-center">                        
+            <div class="spot-1 col-4 text-center">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <canvas id="top-song-one" class="d-flex mx-auto"></canvas>
+                            <canvas id="top-song-one-color-canvas" class="d-none"></canvas>
+                            <div class="fs-1 p-3 col track-description">
+                                <p id="top-song-one-name" class="fs-2">null</p>
+                                <p id="top-song-one-artist-name" class="fs-2">null</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <p>fasjkfsdiafh fiasfhuia fsfhushf uiasfhfdfs fs f s fs sdfsuifh s fsfsa fsf sdf sdf sdffhsaf sfhufas fsa fsa sdafsdfasfasfsda
+                                sdafdfsfasdfsdaffsdfff sdfasf sdfsd fasd fsd fsd fs fsd f sdf sd ff  f f df d
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spot-3 col-4 text-center">              
                 <canvas id="top-song-three" class="d-flex mx-auto"></canvas>
                 <canvas id="top-song-three-color-canvas" class="d-none"></canvas>
                 <div class="fs-1 p-3 col track-description">
                     <p id="top-song-three-name" class="fs-2">null</p>
                     <p id="top-song-three-artist-name" class="fs-2">null</p>
-                </div>           
-            </div>       
+                </div>        
+            </div>
         </div>
-    </section> *@
-    <section id="songs-section" class="scroll-snap">
+    </section>
+@*     <section id="songs-section" class="scroll-snap">
        <div class="table-responsive">
             <table class="table" id="song-table">
                 <thead>
@@ -143,78 +154,78 @@
                         <td id="popularity10">null</td>
                         <td><canvas id="cover10">null</canvas></td>
                     </tr>
-                    @* <tr id="background11">
-                    <th scope="row">11</th>
-                    <td id="artist11">null</td>
-                    <td id="song11">null</td>
+                    <tr id="background11">
+                        <th scope="row">11</th>
+                        <td id="artist11">null</td>
+                        <td id="song11">null</td>
                     <td id="popularity11">null</td>
                     </tr>
                     <tr id="background12">
-                    <th scope="row">12</th>
-                    <td id="artist12">null</td>
-                    <td id="song12">null</td>
-                    <td id="popularity12">null</td>
+                        <th scope="row">12</th>
+                        <td id="artist12">null</td>
+                        <td id="song12">null</td>
+                        <td id="popularity12">null</td>
                     </tr>
                     <tr id="background13">
-                    <th scope="row">13</th>
-                    <td id="artist13">null</td>
-                    <td id="song13">null</td>
-                    <td id="popularity13">null</td>
+                        <th scope="row">13</th>
+                        <td id="artist13">null</td>
+                        <td id="song13">null</td>
+                        <td id="popularity13">null</td>
                     </tr>
                     <tr id="background14">
-                    <th scope="row">14</th>
-                    <td id="artist14">null</td>
-                    <td id="song14">null</td>
-                    <td id="popularity14">null</td>
+                        <th scope="row">14</th>
+                        <td id="artist14">null</td>
+                        <td id="song14">null</td>
+                        <td id="popularity14">null</td>
                     </tr>
                     <tr id="background15">
-                    <th scope="row">15</th>
-                    <td id="artist15">null</td>
-                    <td id="song15">null</td>
-                    <td id="popularity15">null</td>
+                        <th scope="row">15</th>
+                        <td id="artist15">null</td>
+                        <td id="song15">null</td>
+                        <td id="popularity15">null</td>
                     </tr>
                     <tr id="background16">
-                    <th scope="row">16</th>
-                    <td id="artist16">null</td>
-                    <td id="song16">null</td>
-                    <td id="popularity16">null</td>
+                        <th scope="row">16</th>
+                        <td id="artist16">null</td>
+                        <td id="song16">null</td>
+                        <td id="popularity16">null</td>
                     </tr>
                     <tr id="background17">
-                    <th scope="row">17</th>
-                    <td id="artist17">null</td>
-                    <td id="song17">null</td>
-                    <td id="popularity17">null</td>
+                        <th scope="row">17</th>
+                        <td id="artist17">null</td>
+                        <td id="song17">null</td>
+                        <td id="popularity17">null</td>
                     </tr>
                     <tr id="background18">
-                    <th scope="row">18</th>
-                    <td id="artist18">null</td>
-                    <td id="song18">null</td>
-                    <td id="popularity18">null</td>
+                        <th scope="row">18</th>
+                        <td id="artist18">null</td>
+                        <td id="song18">null</td>
+                        <td id="popularity18">null</td>
                     </tr>
                     <tr id="background19">
-                    <th scope="row">19</th>
-                    <td id="artist19">null</td>
-                    <td id="song19">null</td>
-                    <td id="popularity19">null</td>
+                        <th scope="row">19</th>
+                        <td id="artist19">null</td>
+                        <td id="song19">null</td>
+                        <td id="popularity19">null</td>
                     </tr>
                     <tr id="background20">
-                    <th scope="row">20</th>
-                    <td id="artist20">null</td>
-                    <td id="song20">null</td>
-                    <td id="popularity20">null</td>
-                    </tr> *@
+                        <th scope="row">20</th>
+                        <td id="artist20">null</td>
+                        <td id="song20">null</td>
+                        <td id="popularity20">null</td>
+                    </tr> 
 
                 </tbody>
             </table>
        </div>
-    </section>
+    </section> *@
     
 
     <section id="top-artist-podium" class="scroll-snap d-flex align-items-center">
         <div id="artist-align" class="row d-flex">
             <h1 class="text-center col-12 mt-5">Your Top Artists</h1>
-            <div class="spot-2 d-flex align-items-center">
-                <div class="col-4 text-center">
+            <div class="d-flex align-items-center">
+                <div class="spot-2 col-4 text-center">
                     <canvas id="top-artist-two" class="d-flex mx-auto"></canvas>
                     <canvas id="top-artist-two-color-canvas" class="d-none"></canvas>
                     <div class="artist-description fs-1 p-3 col">

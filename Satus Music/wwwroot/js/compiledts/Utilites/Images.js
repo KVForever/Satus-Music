@@ -31,7 +31,6 @@ class Images {
                 for (let i = 0; i < Math.min(sortedColors.length, 20); i++) {
                     topColors.push(sortedColors[i]);
                 }
-                console.log(topColors);
                 resolve(topColors);
             };
         });

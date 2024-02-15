@@ -38,6 +38,7 @@ header {
 }
 
 #navigation {
+	height: 4rem;
 	justify-content: space-between;
 	background-color: rgba(0,0,0,.3);
 	border-bottom: white solid .5px;
@@ -49,9 +50,14 @@ header {
 
 	#start-group {
 		color: white;
+		border-radius: 20px;
+		vertical-align: middle;
+		align-items: center;
 	}
 
 	#middle-group {
+		background-color: rgba(209, 214, 201, .3);
+		border-radius: 20px;
 		text-align: center;
 		position: absolute;
 		left: 50%;
@@ -59,11 +65,23 @@ header {
 
 		& a {
 			text-decoration: none;
-			padding-bottom: .5px;
-			//border-bottom: 2px solid var(--site-text-color);
-			border-bottom: 2px solid white;
-			//color: var(--site-text-color);
 			color: white;
+			border-radius: 20px;
+			vertical-align: middle;
+
+			&:hover {
+				background-color: rgba(209, 214, 201, .5)
+			}
+		}
+	}
+
+	#end-group {
+		background-color: rgba(209, 214, 201, .3);
+		padding: 10px;
+		border-radius: 20px;
+
+		&:hover {
+			background-color: rgba(209, 214, 201, .5)
 		}
 	}
 }

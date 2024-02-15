@@ -1,23 +1,25 @@
 import { Auth } from '../Spotify/Auth/auth.js'
 import { User } from '../Spotify/User/user.js'
 import { Images } from '../Utilites/Images.js'
+import { Track } from '../Spotify/Tracks/track.js'
 
 async function home() {
     await Auth.authenticate();
     const user = new User(Auth.token);
+    const track = new Track(Auth.token);
     const profile = await user.currentProfile();
     document.getElementById("username").innerText = profile.display_name;
-    const tracks = await user.usersTopItems("tracks", "long_term");
-    const artists = await user.usersTopItems("artists", "long_term");
+    const songs = await user.usersTopItems("tracks", "medium_term");
+    const artists = await user.usersTopItems("artists", "medium_term");
     /* let imageStart = Math.floor(Math.random() * 19);*/
     let imageStart = 0;
 
-    let displayImage = tracks.items[imageStart].album.images[0];
-    let colorImage = tracks.items[imageStart].album.images[2];
-    let track = tracks.items[imageStart].artists[0].name;
-    let artist = tracks.items[imageStart].name;
+    let displayImage = songs.items[imageStart].album.images[0];
+    let colorImage = songs.items[imageStart].album.images[2];
+    let song = songs.items[imageStart].artists[0].name;
+    let artist = songs.items[imageStart].name;
 
-    Images.setImageWithDescription("home-canvas", displayImage, "top-track-name", track, "top-track-artist-name", artist);
+    Images.setImageWithDescription("home-canvas", displayImage, "top-track-name", song, "top-track-artist-name", artist);
     let topColors = await Images.grabImageColors("home-color-canvas", colorImage);
     /* let test = await Images.grabImageColorsTwo("home-color-canvas", colorImage);*/
     
@@ -66,60 +68,87 @@ async function home() {
     
 
     //track
+    //var tableBackgroundColors: string[] = [];
+
+    //for (let i = 0; i < 10; i++){
+    //    document.getElementById(`artist${i + 1}`).innerHTML = `${songs.items[i].album.artists[0].name}`;
+    //    document.getElementById(`song${i + 1}`).innerHTML = `${songs.items[i].name}`;
+    //    document.getElementById(`popularity${i + 1}`).innerHTML = `${songs.items[i].popularity}`;
+    //    let trackImage = songs.items[i].album.images[2];
+    //    Images.setImage(`cover${i + 1}`, trackImage);
+    //    let topColors = await Images.grabImageColors(`cover${i + 1}`, trackImage);
+    //    document.getElementById(`background${i + 1}`).style.color = "black";
+    //    let gradiant = `linear-gradient(-90deg, rgba(${topColors[0]}, .8) 0%, rgba(${topColors[2]}, .8) 100%)`;
+    //    tableBackgroundColors.push(gradiant);
+    //};
+
+   
+    //var tableRows = document.querySelectorAll('#song-table tr');
+    //var i = 1
+    //tableRows.forEach(function (row) {
+    //    tableRows[i].addEventListener('mouseover', function () {
+    //        var id = row.id
+    //        let whichOne = Number(id.slice(10))
+    //        var color = tableBackgroundColors[whichOne];
+    //        this.style.backgroundImage = color;    
+    //        let textColor = blackOrWhite(color);
+    //        this.style.color = textColor;
+    //    });
+
+    //    tableRows[i].addEventListener('mouseout', function () {
+    //        this.style.backgroundImage = 'none'; // Reset background color on mouseout
+    //        this.style.backgroundColor = "white";
+    //        this.style.color = "black";
+    //    });
+    //    i++
+    //});
+   
     
-    for (let i = 0; i < 20; i++){
-        document.getElementById(`artist${i + 1}`).innerHTML = `${tracks.items[i].album.artists[0].name}`;
-        document.getElementById(`song${i + 1}`).innerHTML = `${tracks.items[i].name}`;
-        document.getElementById(`popularity${i + 1}`).innerHTML = `${tracks.items[i].popularity}`;
-        let trackImage = tracks.items[i].album.images[2];
-        Images.setImage(`cover${i + 1}`, trackImage);
-        let topColors = await Images.grabImageColors(`cover${i + 1}`, trackImage);
-        let textColor = blackOrWhite(topColors);
-        document.getElementById(`background${i + 1}`).style.color = textColor;
-        document.getElementById(`background${i + 1}`).style.background = `linear-gradient(-90deg, rgb(${topColors[0]}) 0%, rgb(${topColors[2]}) 100%)`;
-    };
-
-    //let trackOne = tracks.items[0].album.images[0];
-    //let trackOneColorImage = tracks.items[0].album.images[2];
-    //let trackOneName = tracks.items[0].artists[0].name;
-    //let trackOneArtist = tracks.items[0].name;
-
-    //let trackTwo = tracks.items[1].album.images[0];
-    //let trackTwoColorImage = tracks.items[1].album.images[2];
-    //let trackTwoName = tracks.items[1].artists[0].name;
-    //let trackTwoArtist = tracks.items[1].name;
-
-    //let trackThree = tracks.items[2].album.images[0];
-    //let trackThreeColorImage = tracks.items[2].album.images[2];
-    //let trackThreeName = tracks.items[2].artists[0].name;
-    //let trackThreeArtist = tracks.items[2].name;
-
-    //Images.setImageWithDescription("top-song-one", trackOne, "top-song-one-name", trackOneName, "top-song-one-artist-name", trackOneArtist);
-    //let songOneColors = await Images.grabImageColors("top-song-one-color-canvas", trackOneColorImage);
-    //document.getElementById("top-song-one").style.boxShadow = `2px 1px 12px 15px rgba(${songOneColors[0]}, 1)`;
-  
-
-    //Images.setImageWithDescription("top-song-two", trackTwo, "top-song-two-name", trackTwoName, "top-song-two-artist-name", trackTwoArtist);
-    //let songTwoColors = await Images.grabImageColors("top-song-two-color-canvas", trackTwoColorImage);
-    //document.getElementById("top-song-two").style.boxShadow = `2px 1px 12px 15px rgba(${songTwoColors[0]}, 1)`;
    
 
-    //Images.setImageWithDescription("top-song-three", trackThree, "top-song-three-name", trackThreeName, "top-song-three-artist-name", trackThreeArtist);
-    //let songThreeColors = await Images.grabImageColors("top-song-three-color-canvas", trackThreeColorImage);
-    //document.getElementById("top-song-three").style.boxShadow = `2px 1px 12px 15px rgba(${songThreeColors[0]}, 1)`;
+    let trackOne = songs.items[0].album.images[0];
+    let trackOneColorImage = songs.items[0].album.images[2];
+    let trackOneName = songs.items[0].artists[0].name;
+    let trackOneArtist = songs.items[0].name;
+    let trackId = songs.items[0].id;
+    let fetures = track.tracksFeatures(trackId)
+
+    let trackTwo = songs.items[1].album.images[0];
+    let trackTwoColorImage = songs.items[1].album.images[2];
+    let trackTwoName = songs.items[1].artists[0].name;
+    let trackTwoArtist = songs.items[1].name;
+
+    let trackThree = songs.items[2].album.images[0];
+    let trackThreeColorImage = songs.items[2].album.images[2];
+    let trackThreeName = songs.items[2].artists[0].name;
+    let trackThreeArtist = songs.items[2].name;
+
+    Images.setImageWithDescription("top-song-one", trackOne, "top-song-one-name", trackOneName, "top-song-one-artist-name", trackOneArtist);
+    let songOneColors = await Images.grabImageColors("top-song-one-color-canvas", trackOneColorImage);
+    document.getElementById("top-song-one").style.boxShadow = `2px 1px 12px 15px rgba(${songOneColors[0]}, 1)`;
+  
+
+    Images.setImageWithDescription("top-song-two", trackTwo, "top-song-two-name", trackTwoName, "top-song-two-artist-name", trackTwoArtist);
+    let songTwoColors = await Images.grabImageColors("top-song-two-color-canvas", trackTwoColorImage);
+    document.getElementById("top-song-two").style.boxShadow = `2px 1px 12px 15px rgba(${songTwoColors[0]}, 1)`;
+   
+
+    Images.setImageWithDescription("top-song-three", trackThree, "top-song-three-name", trackThreeName, "top-song-three-artist-name", trackThreeArtist);
+    let songThreeColors = await Images.grabImageColors("top-song-three-color-canvas", trackThreeColorImage);
+    document.getElementById("top-song-three").style.boxShadow = `2px 1px 12px 15px rgba(${songThreeColors[0]}, 1)`;
     
 
 
   
     function repeat() {
         setTimeout(async () => {
-            if (imageStart < tracks.items.length - 1) {
+            if (imageStart < songs.items.length - 1) {
                 imageStart++;
 
-                let displayImage = tracks.items[imageStart].album.images[0];
-                let colorImage = tracks.items[imageStart].album.images[2];
-                let track = tracks.items[imageStart].artists[0].name;
-                let artist = tracks.items[imageStart].name;
+                let displayImage = songs.items[imageStart].album.images[0];
+                let colorImage = songs.items[imageStart].album.images[2];
+                let track = songs.items[imageStart].artists[0].name;
+                let artist = songs.items[imageStart].name;
 
                 Images.setImageWithDescription("home-canvas", displayImage, "top-track-name", track, "top-track-artist-name", artist);
                 let topColors = await Images.grabImageColors("home-color-canvas", colorImage);
