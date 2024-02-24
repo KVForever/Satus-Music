@@ -196,8 +196,27 @@ header {
   text-align: center;
 }
 
+.card {
+  margin-right: 23rem;
+}
+
+#card-container {
+  overflow-x: scroll;
+}
+
 #song-heading {
-  margin: 6rem 0 4rem 0;
+  margin: 6rem 0 1rem 0;
+}
+
+.song-image {
+  width: 65%;
+}
+
+#center-intersection {
+  position: absolute;
+  top: 0;
+  left: 33.33%;
+  height: 100%;
 }
 
 #top-track-podium {
@@ -207,18 +226,9 @@ header {
 #top-track-podium h1 {
   font-size: 3rem;
 }
-#top-track-podium .spot-1 {
-  display: flex;
-  align-items: center;
-}
-#top-track-podium #top-song-one {
-  width: 99%;
-}
-#top-track-podium #top-song-two {
-  width: 60%;
-}
-#top-track-podium #top-song-three {
-  width: 60%;
+
+#artist-heading {
+  margin: 6rem 0 1rem 0;
 }
 
 #top-artist-podium {
@@ -244,7 +254,7 @@ header {
 
 .flip-card {
   background-color: transparent;
-  width: 99%;
+  width: 90%;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 

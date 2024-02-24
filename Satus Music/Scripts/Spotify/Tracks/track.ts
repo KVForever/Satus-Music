@@ -1,6 +1,5 @@
 //This class will return a track.
 //@params: requires an API token.
-//@output: returns a track object.
 class Track {
     private token: string;
     public constructor(token: string) {

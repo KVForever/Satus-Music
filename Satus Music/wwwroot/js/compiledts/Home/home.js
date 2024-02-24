@@ -70,7 +70,7 @@ async function home() {
     //        var id = row.id
     //        let whichOne = Number(id.slice(10))
     //        var color = tableBackgroundColors[whichOne];
-    //        this.style.backgroundImage = color;    
+    //        this.style.backgroundImage = color;
     //        let textColor = blackOrWhite(color);
     //        this.style.color = textColor;
     //    });
@@ -81,29 +81,85 @@ async function home() {
     //    });
     //    i++
     //});
-    let trackOne = songs.items[0].album.images[0];
-    let trackOneColorImage = songs.items[0].album.images[2];
-    let trackOneName = songs.items[0].artists[0].name;
-    let trackOneArtist = songs.items[0].name;
-    let trackId = songs.items[0].id;
-    let fetures = track.tracksFeatures(trackId);
-    let trackTwo = songs.items[1].album.images[0];
-    let trackTwoColorImage = songs.items[1].album.images[2];
-    let trackTwoName = songs.items[1].artists[0].name;
-    let trackTwoArtist = songs.items[1].name;
-    let trackThree = songs.items[2].album.images[0];
-    let trackThreeColorImage = songs.items[2].album.images[2];
-    let trackThreeName = songs.items[2].artists[0].name;
-    let trackThreeArtist = songs.items[2].name;
-    Images.setImageWithDescription("top-song-one", trackOne, "top-song-one-name", trackOneName, "top-song-one-artist-name", trackOneArtist);
-    let songOneColors = await Images.grabImageColors("top-song-one-color-canvas", trackOneColorImage);
-    document.getElementById("top-song-one").style.boxShadow = `2px 1px 12px 15px rgba(${songOneColors[0]}, 1)`;
-    Images.setImageWithDescription("top-song-two", trackTwo, "top-song-two-name", trackTwoName, "top-song-two-artist-name", trackTwoArtist);
-    let songTwoColors = await Images.grabImageColors("top-song-two-color-canvas", trackTwoColorImage);
-    document.getElementById("top-song-two").style.boxShadow = `2px 1px 12px 15px rgba(${songTwoColors[0]}, 1)`;
-    Images.setImageWithDescription("top-song-three", trackThree, "top-song-three-name", trackThreeName, "top-song-three-artist-name", trackThreeArtist);
-    let songThreeColors = await Images.grabImageColors("top-song-three-color-canvas", trackThreeColorImage);
-    document.getElementById("top-song-three").style.boxShadow = `2px 1px 12px 15px rgba(${songThreeColors[0]}, 1)`;
+    for (let i = 0; i < songs.items.length / 2; i++) {
+        let trackImage = songs.items[i].album.images[0];
+        let trackColorImage = songs.items[i].album.images[2];
+        let trackName = songs.items[i].artists[0].name;
+        let trackArtist = songs.items[i].name;
+        let trackId = songs.items[i].id;
+        let features = await track.tracksFeatures(trackId);
+        Images.setImageWithDescription(`top-song-${i + 1}`, trackImage, `top-song-${i + 1}-name`, trackName, `top-song-${i + 1}-artist-name`, trackArtist);
+        let songColors = await Images.grabImageColors(`top-song-${i + 1}-color-canvas`, trackColorImage);
+        document.getElementById(`top-song-${i + 1}`).style.boxShadow = `2px 1px 12px 15px rgba(${songColors[0]}, 1)`;
+        document.getElementById(`spot-${i + 1}-stats`).innerHTML = `Danceability: ${features.danceability} <br> Energy: ${features.energy} <br> Instrumentalness: ${features.instrumentalness}`;
+    }
+    const observedElements = document.querySelectorAll('.song-image');
+    const target = document.getElementById("card-container");
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            const element = entry.target;
+            if (entry.isIntersecting) {
+                element.style.width = "100%";
+            }
+            else {
+                element.style.width = "65%";
+            }
+        });
+    }, {
+        root: target,
+        rootMargin: "0% -33.33% 0% -33.33%",
+        threshold: .50
+    });
+    observedElements.forEach(element => {
+        observer.observe(element);
+    });
+    const cards = document.getElementById("card-container");
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    cards.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - cards.offsetLeft;
+        scrollLeft = cards.scrollLeft;
+    });
+    cards.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+    cards.addEventListener('mouseup', () => {
+        isDown = false;
+    });
+    cards.addEventListener('mousemove', (e) => {
+        if (!isDown)
+            return;
+        e.preventDefault();
+        const x = e.pageX - cards.offsetLeft;
+        const walk = (x - startX); //scroll-fast       
+        cards.scrollLeft = scrollLeft - walk;
+    });
+    //let trackOne = songs.items[0].album.images[0];
+    //let trackOneColorImage = songs.items[0].album.images[2];
+    //let trackOneName = songs.items[0].artists[0].name;
+    //let trackOneArtist = songs.items[0].name;
+    //let trackId = songs.items[0].id;
+    //let features = await track.tracksFeatures(trackId);
+    //let trackTwo = songs.items[1].album.images[0];
+    //let trackTwoColorImage = songs.items[1].album.images[2];
+    //let trackTwoName = songs.items[1].artists[0].name;
+    //let trackTwoArtist = songs.items[1].name;
+    //let trackThree = songs.items[2].album.images[0];
+    //let trackThreeColorImage = songs.items[2].album.images[2];
+    //let trackThreeName = songs.items[2].artists[0].name;
+    //let trackThreeArtist = songs.items[2].name;
+    //Images.setImageWithDescription("top-song-one", trackOne, "top-song-one-name", trackOneName, "top-song-one-artist-name", trackOneArtist);
+    //let songOneColors = await Images.grabImageColors("top-song-one-color-canvas", trackOneColorImage);
+    //document.getElementById("top-song-one").style.boxShadow = `2px 1px 12px 15px rgba(${songOneColors[0]}, 1)`;
+    //Images.setImageWithDescription("top-song-two", trackTwo, "top-song-two-name", trackTwoName, "top-song-two-artist-name", trackTwoArtist);
+    //let songTwoColors = await Images.grabImageColors("top-song-two-color-canvas", trackTwoColorImage);
+    //document.getElementById("top-song-two").style.boxShadow = `2px 1px 12px 15px rgba(${songTwoColors[0]}, 1)`;
+    //document.getElementById("spot-1-stats").innerHTML = `Danceability: ${features.danceability} <br> Energy: ${features.energy} <br> Instrumentalness: ${features.instrumentalness}`
+    //Images.setImageWithDescription("top-song-three", trackThree, "top-song-three-name", trackThreeName, "top-song-three-artist-name", trackThreeArtist);
+    //let songThreeColors = await Images.grabImageColors("top-song-three-color-canvas", trackThreeColorImage);
+    //document.getElementById("top-song-three").style.boxShadow = `2px 1px 12px 15px rgba(${songThreeColors[0]}, 1)`;
     function repeat() {
         setTimeout(async () => {
             if (imageStart < songs.items.length - 1) {

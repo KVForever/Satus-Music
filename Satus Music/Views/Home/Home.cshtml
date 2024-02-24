@@ -32,42 +32,211 @@
     </section>
 
     <section id="top-track-podium" class="scroll-snap row">
-        <h1 class="text-center col-12" id="song-heading">Your Top Songs</h1>
-        <div class="d-flex align-items-center">
-            <div class="spot-2 col-4 text-center">              
-                <canvas id="top-song-two" class="d-flex mx-auto"></canvas>
-                <canvas id="top-song-two-color-canvas" class="d-none"></canvas>
-                <div class="fs-1 p-3 col track-description">
-                    <p id="top-song-two-name" class="fs-2">null</p>
-                    <p id="top-song-two-artist-name" class="fs-2">null</p>
-                </div>
+        <h1 class="text-center" id="song-heading">Your Top Songs</h1>
+        <div class="d-flex align-items-center" id="card-container">
+            <div class="start col-4">
+
             </div>
-            <div class="spot-1 col-4 text-center">
-                <div class="flip-card">
+            <div class="spot-1 col-4 text-center justify-content-center">
+                <div class="flip-card" id="card-1">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <canvas id="top-song-one" class="d-flex mx-auto"></canvas>
-                            <canvas id="top-song-one-color-canvas" class="d-none"></canvas>
+                            <canvas id="top-song-1" class="d-flex mx-auto song-image"></canvas>
+                            <canvas id="top-song-1-color-canvas" class="d-none"></canvas>
                             <div class="fs-1 p-3 col track-description">
-                                <p id="top-song-one-name" class="fs-2">null</p>
-                                <p id="top-song-one-artist-name" class="fs-2">null</p>
+                                <p id="top-song-1-name" class="fs-2">null</p>
+                                <p id="top-song-1-artist-name" class="fs-2">null</p>
                             </div>
                         </div>
                         <div class="flip-card-back">
-                            <p>fasjkfsdiafh fiasfhuia fsfhushf uiasfhfdfs fs f s fs sdfsuifh s fsfsa fsf sdf sdf sdffhsaf sfhufas fsa fsa sdafsdfasfasfsda
+                            <p id="spot-1-stats">
+                                fasjkfsdiafh fiasfhuia fsfhushf uiasfhfdfs fs f s fs sdfsuifh s fsfsa fsf sdf sdf sdffhsaf sfhufas fsa fsa sdafsdfasfasfsda
                                 sdafdfsfasdfsdaffsdfff sdfasf sdfsd fasd fsd fsd fs fsd f sdf sd ff  f f df d
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="spot-3 col-4 text-center">              
-                <canvas id="top-song-three" class="d-flex mx-auto"></canvas>
-                <canvas id="top-song-three-color-canvas" class="d-none"></canvas>
-                <div class="fs-1 p-3 col track-description">
-                    <p id="top-song-three-name" class="fs-2">null</p>
-                    <p id="top-song-three-artist-name" class="fs-2">null</p>
-                </div>        
+            <div class="spot-2 col-4 text-center justify-content-center">
+                <div class="flip-card" id="card-2">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <canvas id="top-song-2" class="d-flex mx-auto  song-image"></canvas>
+                            <canvas id="top-song-2-color-canvas" class="d-none"></canvas>
+                            <div class="fs-1 p-3 col track-description">
+                                <p id="top-song-2-name" class="fs-2">null</p>
+                                <p id="top-song-2-artist-name" class="fs-2">null</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <p id="spot-2-stats">
+                                fasjkfsdiafh fiasfhuia fsfhushf uiasfhfdfs fs f s fs sdfsuifh s fsfsa fsf sdf sdf sdffhsaf sfhufas fsa fsa sdafsdfasfasfsda
+                                sdafdfsfasdfsdaffsdfff sdfasf sdfsd fasd fsd fsd fs fsd f sdf sd ff  f f df d
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spot-3 col-4 text-center justify-content-center">
+                <div class="flip-card" id="card-3">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <canvas id="top-song-3" class="d-flex mx-auto  song-image"></canvas>
+                            <canvas id="top-song-3-color-canvas" class="d-none"></canvas>
+                            <div class="fs-1 p-3 col track-description">
+                                <p id="top-song-3-name" class="fs-2">null</p>
+                                <p id="top-song-3-artist-name" class="fs-2">null</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <p id="spot-3-stats">fasjkfsdiafh fiasfhuia fsfhushf uiasfhfdfs fs f s fs sdfsuifh s fsfsa fsf sdf sdf sdffhsaf sfhufas fsa fsa sdafsdfasfasfsda
+                                sdafdfsfasdfsdaffsdfff sdfasf sdfsd fasd fsd fsd fs fsd f sdf sd ff  f f df d
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spot-4 col-4 text-center justify-content-center">
+                <div class="flip-card" id="card-4">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <canvas id="top-song-4" class="d-flex mx-auto song-image"></canvas>
+                            <canvas id="top-song-4-color-canvas" class="d-none"></canvas>
+                            <div class="fs-1 p-3 col track-description">
+                                <p id="top-song-4-name" class="fs-2">null</p>
+                                <p id="top-song-4-artist-name" class="fs-2">null</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <p id="spot-4-stats">
+                                fasjkfsdiafh fiasfhuia fsfhushf uiasfhfdfs fs f s fs sdfsuifh s fsfsa fsf sdf sdf sdffhsaf sfhufas fsa fsa sdafsdfasfasfsda
+                                sdafdfsfasdfsdaffsdfff sdfasf sdfsd fasd fsd fsd fs fsd f sdf sd ff  f f df d
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spot-5 col-4 text-center justify-content-center">
+                <div class="flip-card" id="card-5">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <canvas id="top-song-5" class="d-flex mx-auto song-image"></canvas>
+                            <canvas id="top-song-5-color-canvas" class="d-none"></canvas>
+                            <div class="fs-1 p-3 col track-description">
+                                <p id="top-song-5-name" class="fs-2">null</p>
+                                <p id="top-song-5-artist-name" class="fs-2">null</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <p id="spot-5-stats">
+                                fasjkfsdiafh fiasfhuia fsfhushf uiasfhfdfs fs f s fs sdfsuifh s fsfsa fsf sdf sdf sdffhsaf sfhufas fsa fsa sdafsdfasfasfsda
+                                sdafdfsfasdfsdaffsdfff sdfasf sdfsd fasd fsd fsd fs fsd f sdf sd ff  f f df d
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spot-6 col-4 text-center justify-content-center">
+                <div class="flip-card" id="card-6">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <canvas id="top-song-6" class="d-flex mx-auto song-image"></canvas>
+                            <canvas id="top-song-6-color-canvas" class="d-none"></canvas>
+                            <div class="fs-1 p-3 col track-description">
+                                <p id="top-song-6-name" class="fs-2">null</p>
+                                <p id="top-song-6-artist-name" class="fs-2">null</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <p id="spot-6-stats">
+                                fasjkfsdiafh fiasfhuia fsfhushf uiasfhfdfs fs f s fs sdfsuifh s fsfsa fsf sdf sdf sdffhsaf sfhufas fsa fsa sdafsdfasfasfsda
+                                sdafdfsfasdfsdaffsdfff sdfasf sdfsd fasd fsd fsd fs fsd f sdf sd ff  f f df d
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spot-7 col-4 text-center justify-content-center">
+                <div class="flip-card" id="card-7">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <canvas id="top-song-7" class="d-flex mx-auto song-image"></canvas>
+                            <canvas id="top-song-7-color-canvas" class="d-none"></canvas>
+                            <div class="fs-1 p-3 col track-description">
+                                <p id="top-song-7-name" class="fs-2">null</p>
+                                <p id="top-song-7-artist-name" class="fs-2">null</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <p id="spot-7-stats">
+                                fasjkfsdiafh fiasfhuia fsfhushf uiasfhfdfs fs f s fs sdfsuifh s fsfsa fsf sdf sdf sdffhsaf sfhufas fsa fsa sdafsdfasfasfsda
+                                sdafdfsfasdfsdaffsdfff sdfasf sdfsd fasd fsd fsd fs fsd f sdf sd ff  f f df d
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spot-8 col-4 text-center justify-content-center">
+                <div class="flip-card" id="card-8">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <canvas id="top-song-8" class="d-flex mx-auto song-image"></canvas>
+                            <canvas id="top-song-8-color-canvas" class="d-none"></canvas>
+                            <div class="fs-1 p-3 col track-description">
+                                <p id="top-song-8-name" class="fs-2">null</p>
+                                <p id="top-song-8-artist-name" class="fs-2">null</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <p id="spot-8-stats">
+                                fasjkfsdiafh fiasfhuia fsfhushf uiasfhfdfs fs f s fs sdfsuifh s fsfsa fsf sdf sdf sdffhsaf sfhufas fsa fsa sdafsdfasfasfsda
+                                sdafdfsfasdfsdaffsdfff sdfasf sdfsd fasd fsd fsd fs fsd f sdf sd ff  f f df d
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spot-9 col-4 text-center justify-content-center">
+                <div class="flip-card" id="card-9">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <canvas id="top-song-9" class="d-flex mx-auto song-image"></canvas>
+                            <canvas id="top-song-9-color-canvas" class="d-none"></canvas>
+                            <div class="fs-1 p-3 col track-description">
+                                <p id="top-song-9-name" class="fs-2">null</p>
+                                <p id="top-song-9-artist-name" class="fs-2">null</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <p id="spot-9-stats">
+                                fasjkfsdiafh fiasfhuia fsfhushf uiasfhfdfs fs f s fs sdfsuifh s fsfsa fsf sdf sdf sdffhsaf sfhufas fsa fsa sdafsdfasfasfsda
+                                sdafdfsfasdfsdaffsdfff sdfasf sdfsd fasd fsd fsd fs fsd f sdf sd ff  f f df d
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spot-10 col-4 text-center justify-content-center">
+                <div class="flip-card" id="card-10">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <canvas id="top-song-10" class="d-flex mx-auto song-image"></canvas>
+                            <canvas id="top-song-10-color-canvas" class="d-none"></canvas>
+                            <div class="fs-1 p-3 col track-description">
+                                <p id="top-song-10-name" class="fs-2">null</p>
+                                <p id="top-song-10-artist-name" class="fs-2">null</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <p id="spot-10-stats">
+                                fasjkfsdiafh fiasfhuia fsfhushf uiasfhfdfs fs f s fs sdfsuifh s fsfsa fsf sdf sdf sdffhsaf sfhufas fsa fsa sdafsdfasfasfsda
+                                sdafdfsfasdfsdaffsdfff sdfasf sdfsd fasd fsd fsd fs fsd f sdf sd ff  f f df d
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="end col-4">
             </div>
         </div>
     </section>
@@ -223,7 +392,7 @@
 
     <section id="top-artist-podium" class="scroll-snap d-flex align-items-center">
         <div id="artist-align" class="row d-flex">
-            <h1 class="text-center col-12 mt-5">Your Top Artists</h1>
+            <h1 class="text-center col-12" id="artist-heading">Your Top Artists</h1>
             <div class="d-flex align-items-center">
                 <div class="spot-2 col-4 text-center">
                     <canvas id="top-artist-two" class="d-flex mx-auto"></canvas>
