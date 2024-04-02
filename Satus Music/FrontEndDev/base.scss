@@ -41,7 +41,6 @@ header {
 	height: 4rem;
 	justify-content: space-between;
 	background-color: rgba(0,0,0,.3);
-	border-bottom: white solid .5px;
 
 	svg {
 		//fill: var(--site-text-color);
@@ -83,6 +82,16 @@ header {
 		&:hover {
 			background-color: rgba(209, 214, 201, .5)
 		}
+	}
+
+	#nav-seperation-line {
+		width: 100%;
+		height: 0;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		border: 1px solid white;
+		
 	}
 }
 

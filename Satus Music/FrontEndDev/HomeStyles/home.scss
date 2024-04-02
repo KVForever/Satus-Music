@@ -121,7 +121,7 @@
     margin-right: 23rem;
 }
 
-#card-container {
+#song-card-container {
     overflow-x: scroll;
     padding-bottom: 2rem;
     padding-top: 2rem;
@@ -210,9 +210,9 @@
         transform-style: preserve-3d;
     }
     /* Do an horizontal flip when you move the mouse over the flip box container */
-    .flip-card:hover .flip-card-inner {
+  /*  .flip-card .flip-card-inner {
         transform: rotateY(180deg);
-    }
+    }*/
     /* Position the front and back side */
     .flip-card-front, .flip-card-back {
         width: 100%;
@@ -230,7 +230,9 @@
         position: absolute;
         top: 0;
         left: 0;
-        background-color: black;
+        background-image: none;
+        background-size: cover;
+        background-repeat: no-repeat;
         color: white;
         transform: rotateY(180deg);
         display: block;
@@ -239,6 +241,16 @@
 
 .flip-card-back {
     display: none;
+
+    & .song-name {
+        font-size: 30px;
+    }
+
+    & .artist-name {
+        font-size: 15px;
+        margin-bottom: 3rem;
+  
+    }
 }
 
 .flip-card-front {
@@ -268,14 +280,17 @@
 }
 
 .flip-card-btn {
-    width: 10%;
-    height: 10%;
-    background-color: black;
-    position: absolute;
-    bottom: 0;
-    right: 5px;
+    background-color: transparent;
+    border: none;
+}
 
-    .bi-arrow-clockwise {
-        color: white;
-    }
+.artist-image {
+    width: 65%;
+}
+
+#artist-card-container {
+    overflow-x: scroll;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    min-height: 65%;
 }

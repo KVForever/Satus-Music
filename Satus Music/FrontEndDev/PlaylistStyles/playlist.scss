@@ -1,0 +1,16 @@
+/*Change Nav bar*/
+
+.shrink-navigation {
+
+    #nav-seperation-line {
+        animation: shrink-bottom-line 1s ease-in forwards
+    }
+}
+
+@keyframes shrink-bottom-line {
+    from {width: 100%}
+    to {
+        width: 0;
+        border: none
+    }
+}

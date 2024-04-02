@@ -43,7 +43,6 @@ header {
   height: 4rem;
   justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.3);
-  border-bottom: white solid 0.5px;
 }
 #navigation svg {
   fill: white;
@@ -78,6 +77,14 @@ header {
 }
 #navigation #end-group:hover {
   background-color: rgba(209, 214, 201, 0.5);
+}
+#navigation #nav-seperation-line {
+  width: 100%;
+  height: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border: 1px solid white;
 }
 
 /***************Home Styles***************/
@@ -200,7 +207,7 @@ header {
   margin-right: 23rem;
 }
 
-#card-container {
+#song-card-container {
   overflow-x: scroll;
   padding-bottom: 2rem;
   padding-top: 2rem;
@@ -258,6 +265,9 @@ header {
 .flippable {
   /* This container is needed to position the front and back side */
   /* Do an horizontal flip when you move the mouse over the flip box container */
+  /*  .flip-card .flip-card-inner {
+        transform: rotateY(180deg);
+    }*/
   /* Position the front and back side */
   /* Style the front side (fallback if image is missing) */
   /* Style the back side */
@@ -280,9 +290,6 @@ header {
   transition: transform 0.6s;
   transform-style: preserve-3d;
 }
-.flippable .flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
 .flippable .flip-card-front, .flippable .flip-card-back {
   width: 100%;
   height: 100%;
@@ -297,7 +304,9 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: black;
+  background-image: none;
+  background-size: cover;
+  background-repeat: no-repeat;
   color: white;
   transform: rotateY(180deg);
   display: block;
@@ -305,6 +314,13 @@ header {
 
 .flip-card-back {
   display: none;
+}
+.flip-card-back .song-name {
+  font-size: 30px;
+}
+.flip-card-back .artist-name {
+  font-size: 15px;
+  margin-bottom: 3rem;
 }
 
 .flip-card-front {
@@ -340,17 +356,36 @@ header {
 }
 
 .flip-card-btn {
-  width: 10%;
-  height: 10%;
-  background-color: black;
-  position: absolute;
-  bottom: 0;
-  right: 5px;
-}
-.flip-card-btn .bi-arrow-clockwise {
-  color: white;
+  background-color: transparent;
+  border: none;
 }
 
+.artist-image {
+  width: 65%;
+}
+
+#artist-card-container {
+  overflow-x: scroll;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+  min-height: 65%;
+}
+
+/***************Playlist styles***********/
+/*Change Nav bar*/
+.shrink-navigation #nav-seperation-line {
+  animation: shrink-bottom-line 1s ease-in forwards;
+}
+
+@keyframes shrink-bottom-line {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+    border: none;
+  }
+}
 /***************Variable Styles***********/
 :root {
   --site-text-color: white;
