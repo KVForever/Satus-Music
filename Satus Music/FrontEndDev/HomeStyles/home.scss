@@ -125,7 +125,7 @@
     overflow-x: scroll;
     padding-bottom: 2rem;
     padding-top: 2rem;
-    min-height: 65%
+    min-height: 66vh;
 }
 
 #song-heading {
@@ -145,13 +145,21 @@
 
 #top-track-podium {
     min-height: 100vh;
+    width: 100vw;
     color: white;
-   
+    margin: 0;
 
     & h1 {
         font-size: 3rem;
     }
-  
+
+    & .song-rank {
+        margin-bottom: 3rem;
+    }
+
+    & .song-name {
+        font-size: 3rem;
+    }
 }
 
 #artist-heading {
@@ -159,9 +167,10 @@
 }
 
 #top-artist-podium {
-    background-color: black;
     color: white;
     height: 100vh;
+    width: 100vw;
+    margin: 0;
 
     & #artist-align {
         width: 100%;
@@ -171,20 +180,16 @@
         font-size: 3rem;
     }
 
-    .spot-1 {
-        
+    & .artist-name {
+        margin-bottom: 0;
     }
 
-    & #top-artist-one {
-        width: 99%;
+    & .artist-rank {
+        margin-bottom: 3rem
     }
 
-    & #top-artist-two {
-        width: 60%;
-    }
-
-    & #top-artist-three {
-        width: 60%;
+    & .song-name {
+        font-size: 3rem;
     }
 }
 
@@ -208,11 +213,15 @@
         text-align: center;
         transition: transform 0.6s;
         transform-style: preserve-3d;
+     
     }
+
     /* Do an horizontal flip when you move the mouse over the flip box container */
-  /*  .flip-card .flip-card-inner {
+
+    /*.flip-card .flip-card-inner {
         transform: rotateY(180deg);
     }*/
+
     /* Position the front and back side */
     .flip-card-front, .flip-card-back {
         width: 100%;
@@ -236,20 +245,10 @@
         color: white;
         transform: rotateY(180deg);
         display: block;
-    }
-}
-
-.flip-card-back {
-    display: none;
-
-    & .song-name {
-        font-size: 30px;
-    }
-
-    & .artist-name {
-        font-size: 15px;
-        margin-bottom: 3rem;
-  
+        background-color: black;
+        padding: 5%;
+        border-radius: 5%;
+        overflow-y: scroll;
     }
 }
 
@@ -292,5 +291,5 @@
     overflow-x: scroll;
     padding-bottom: 2rem;
     padding-top: 2rem;
-    min-height: 65%;
+    min-height: 66vh;
 }

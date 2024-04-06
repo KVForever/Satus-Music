@@ -7,6 +7,38 @@
     <script src="~/js/compiledts/Home/home.js" type="module"> </script>
 }
 
+@section Navigation {
+    <header>
+        <nav>
+            <div class="">
+				<div id="navigation" class="d-flex p-2">
+                   
+                    <div id="start-group" class="d-flex">
+                        <p class="fs-4">Powered by</p>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="bi bi-spotify my-auto ms-2" viewBox="0 0 16 16">
+                            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.669 11.538a.498.498 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686zm.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858zm.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288z" />
+                        </svg>
+                    </div>
+
+
+                    <div id="middle-group" class="fs-4">
+                        <a href="/Home/Home#top-track-podium" aria-label="View your top songs." class="btn btn-lg track-nav-btn">Songs</a>
+                        <a href="/Home/Home#top-artist-podium" aria-label="View your artists" class="btn btn-lg artists-nav-btn">Artists</a>
+                        <a href="/Playlist/PlaylistEditor" aria-label="Edit your playlists" class="btn btn-lg playlist-nav-btn">Playlists</a>
+                        <a href="/Map/Map" aria-label="View your music map." class="btn btn-lg map-nav-btn">Map</a>
+                    </div>
+
+                    <div id="end-group">
+                        <i class="bi bi-gear fs-4"></i>
+                    </div>
+                    <div id="nav-seperation-line"></div>
+                </div>               
+            </div>
+        </nav>
+    </header>
+}
+
 
 <div id="home" class="">
     <section id="landing" class="scroll-snap d-flex align-items-center justify-content-center">
@@ -41,7 +73,7 @@
             <div class="start col-4">
 
             </div>
-            <div class="spot-1 col-4 text-center justify-content-center flippable">
+            <div class="spot-1 col-4 d-flex text-center justify-content-center flippable">
                 <div class="flip-card" id="card-1">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
@@ -51,22 +83,26 @@
                         </div>
                         <div class="flip-card-back">
                             <div id="spot-1-stats">
-                                <p class="song-name"></p>
-                                <p class="artist-name"></p>
-                                <p class="mt-3">Danceability</p>
-                                <div id="dance" class="progress my-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar" style="width: 0%"></div>
-                                </div>
+                                <div style="height:100%">
+                                    <p class="song-name"></p>
+                                    <p class="artist-name"></p>
+                                    <p class="song-rank fs-2">#1</p>
+                                    <p class="mt-3">Danceability</p>
+                                    <div id="dance" class="progress my-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
 
-                                <p>Energy</p>
-                                <div id="energy" class="progress my-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar" style="width: 0%"></div>
-                                </div>
+                                    <p>Energy</p>
+                                    <div id="energy" class="progress my-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
 
-                                <p>Instrumentalness</p>
-                                <div id="instrumentals" class="progress mt-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar" style="width: 0%"></div>
+                                    <p>Instrumentalness</p>
+                                    <div id="instrumentals" class="progress mt-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -84,6 +120,8 @@
                             <div id="spot-2-stats">
                                 <p class="song-name"></p>
                                 <p class="artist-name"></p>
+                                <p class="song-rank fs-2">#2</p>
+
                                 <p class="mt-3">Danceability</p>
                                 <div id="dance" class="progress my-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar" style="width: 0%"></div>
@@ -115,6 +153,8 @@
                             <div id="spot-3-stats">
                                 <p class="song-name"></p>
                                 <p class="artist-name"></p>
+                                <p class="song-rank fs-2">#3</p>
+
                                 <p class="mt-3">Danceability</p>
                                 <div id="dance" class="progress my-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar" style="width: 0%"></div>
@@ -146,6 +186,8 @@
                             <div id="spot-4-stats">
                                 <p class="song-name"></p>
                                 <p class="artist-name"></p>
+                                <p class="song-rank fs-2">#4</p>
+
                                 <p class="mt-3">Danceability</p>
                                 <div id="dance" class="progress my-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar" style="width: 0%"></div>
@@ -177,6 +219,8 @@
                             <div id="spot-5-stats">
                                 <p class="song-name"></p>
                                 <p class="artist-name"></p>
+                                <p class="song-rank fs-2">#5</p>
+
                                 <p class="mt-3">Danceability</p>
                                 <div id="dance" class="progress my-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar" style="width: 0%"></div>
@@ -208,6 +252,8 @@
                             <div id="spot-6-stats">
                                 <p class="song-name"></p>
                                 <p class="artist-name"></p>
+                                <p class="song-rank fs-2">#6</p>
+
                                 <p class="mt-3">Danceability</p>
                                 <div id="dance" class="progress my-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar" style="width: 0%"></div>
@@ -239,6 +285,8 @@
                             <div id="spot-7-stats">
                                 <p class="song-name"></p>
                                 <p class="artist-name"></p>
+                                <p class="song-rank fs-2">#7</p>
+
                                 <p class="mt-3">Danceability</p>
                                 <div id="dance" class="progress my-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar" style="width: 0%"></div>
@@ -270,6 +318,7 @@
                             <div id="spot-8-stats">
                                 <p class="song-name"></p>
                                 <p class="artist-name"></p>
+                                <p class="song-rank fs-2">#8</p>
                                 <p class="mt-3">Danceability</p>
                                 <div id="dance" class="progress my-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar" style="width: 0%"></div>
@@ -301,6 +350,7 @@
                             <div id="spot-9-stats">
                                 <p class="song-name"></p>
                                 <p class="artist-name"></p>
+                                <p class="song-rank fs-2">#9</p>
                                 <p class="mt-3">Danceability</p>
                                 <div id="dance" class="progress my-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar" style="width: 0%"></div>
@@ -332,6 +382,7 @@
                             <div id="spot-10-stats">
                                 <p class="song-name"></p>
                                 <p class="artist-name"></p>
+                                <p class="song-rank fs-2">#10</p>
                                 <p class="mt-3">Danceability</p>
                                 <div id="dance" class="progress my-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar" style="width: 0%"></div>
@@ -518,23 +569,23 @@
                             <div class="flip-card-front">
                                 <canvas id="top-artist-1" class="d-flex mx-auto artist-image"></canvas>
                                 <canvas id="top-artist-1-color-canvas" class="d-none"></canvas>
-                               
                             </div>
                             <div class="flip-card-back">
                                 <div id="artist-spot-1-stats">
-                                <p class="artist-name fs-1"></p>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Followers</p>
-                                    <p class="num-followers"></p>
-                                </div>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Popularity</p>
-                                    <p class="popularity"></p>
-                                </div>
-                                <div class="d-flex justify-content-between px-5">
-                                    <p>genres</p>
-                                    <p class="genres"></p>
-                                </div>
+                                    <p class="artist-name fs-1"></p>
+                                    <p class="artist-rank fs-2">#1</p>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Followers</p>
+                                        <p class="num-followers"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Popularity</p>
+                                        <p class="popularity"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between px-5">
+                                        <p>Genres</p>
+                                        <p class="genres"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -550,19 +601,20 @@
                             </div>
                             <div class="flip-card-back">
                                 <div id="artist-spot-2-stats">
-                                <p class="artist-name fs-1"></p>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Followers</p>
-                                    <p class="num-followers"></p>
-                                </div>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Popularity</p>
-                                    <p class="popularity"></p>
-                                </div>
-                                <div class="d-flex justify-content-between px-5">
-                                    <p>genres</p>
-                                    <p class="genres"></p>
-                                </div>
+                                    <p class="artist-name fs-1"></p>
+                                    <p class="artist-rank fs-2">#2</p>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Followers</p>
+                                        <p class="num-followers"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Popularity</p>
+                                        <p class="popularity"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between px-5">
+                                        <p>Genres</p>
+                                        <p class="genres"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -578,19 +630,20 @@
                             </div>
                             <div class="flip-card-back">
                                 <div id="artist-spot-3-stats">
-                                <p class="artist-name fs-1"></p>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Followers</p>
-                                    <p class="num-followers"></p>
-                                </div>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Popularity</p>
-                                    <p class="popularity"></p>
-                                </div>
-                                <div class="d-flex justify-content-between px-5">
-                                    <p>genres</p>
-                                    <p class="genres"></p>
-                                </div>
+                                    <p class="artist-name fs-1"></p>
+                                    <p class="artist-rank fs-2">#3</p>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Followers</p>
+                                        <p class="num-followers"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Popularity</p>
+                                        <p class="popularity"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between px-5">
+                                        <p>Genres</p>
+                                        <p class="genres"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -606,19 +659,20 @@
                             </div>
                             <div class="flip-card-back">
                                 <div id="artist-spot-4-stats">
-                                <p class="artist-name fs-1"></p>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Followers</p>
-                                    <p class="num-followers"></p>
-                                </div>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Popularity</p>
-                                    <p class="popularity"></p>
-                                </div>
-                                <div class="d-flex justify-content-between px-5">
-                                    <p>genres</p>
-                                    <p class="genres"></p>
-                                </div>
+                                    <p class="artist-name fs-1"></p>
+                                    <p class="artist-rank fs-2">#4</p>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Followers</p>
+                                        <p class="num-followers"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Popularity</p>
+                                        <p class="popularity"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between px-5">
+                                        <p>Genres</p>
+                                        <p class="genres"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -634,19 +688,20 @@
                             </div>
                             <div class="flip-card-back">
                                 <div id="artist-spot-5-stats">
-                                <p class="artist-name fs-1"></p>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Followers</p>
-                                    <p class="num-followers"></p>
-                                </div>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Popularity</p>
-                                    <p class="popularity"></p>
-                                </div>
-                                <div class="d-flex justify-content-between px-5">
-                                    <p>genres</p>
-                                    <p class="genres"></p>
-                                </div>
+                                    <p class="artist-name fs-1"></p>
+                                    <p class="artist-rank fs-2">#5</p>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Followers</p>
+                                        <p class="num-followers"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Popularity</p>
+                                        <p class="popularity"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between px-5">
+                                        <p>Genres</p>
+                                        <p class="genres"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -662,19 +717,20 @@
                             </div>
                             <div class="flip-card-back">
                                 <div id="artist-spot-6-stats">
-                                <p class="artist-name fs-1"></p>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Followers</p>
-                                    <p class="num-followers"></p>
-                                </div>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Popularity</p>
-                                    <p class="popularity"></p>
-                                </div>
-                                <div class="d-flex justify-content-between px-5">
-                                    <p>genres</p>
-                                    <p class="genres"></p>
-                                </div>
+                                    <p class="artist-name fs-1"></p>
+                                    <p class="artist-rank fs-2">#6</p>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Followers</p>
+                                        <p class="num-followers"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Popularity</p>
+                                        <p class="popularity"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between px-5">
+                                        <p>Genres</p>
+                                        <p class="genres"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -690,19 +746,20 @@
                             </div>
                             <div class="flip-card-back">
                                 <div id="artist-spot-7-stats">
-                                <p class="artist-name fs-1"></p>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Followers</p>
-                                    <p class="num-followers"></p>
-                                </div>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Popularity</p>
-                                    <p class="popularity"></p>
-                                </div>
-                                <div class="d-flex justify-content-between px-5">
-                                    <p>genres</p>
-                                    <p class="genres"></p>
-                                </div>
+                                    <p class="artist-name fs-1"></p>
+                                    <p class="artist-rank fs-2">#7</p>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Followers</p>
+                                        <p class="num-followers"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Popularity</p>
+                                        <p class="popularity"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between px-5">
+                                        <p>Genres</p>
+                                        <p class="genres"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -718,19 +775,20 @@
                             </div>
                             <div class="flip-card-back">
                                 <div id="artist-spot-8-stats">
-                                <p class="artist-name fs-1"></p>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Followers</p>
-                                    <p class="num-followers"></p>
-                                </div>
-                                <div class="d-flex justify-content-between mb-4 px-5">
-                                    <p>Popularity</p>
-                                    <p class="popularity"></p>
-                                </div>
-                                <div class="d-flex justify-content-between px-5">
-                                    <p>genres</p>
-                                    <p class="genres"></p>
-                                </div>
+                                    <p class="artist-name fs-1"></p>
+                                    <p class="artist-rank fs-2">#8</p>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Followers</p>
+                                        <p class="num-followers"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
+                                        <p>Popularity</p>
+                                        <p class="popularity"></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between px-5">
+                                        <p>Genres</p>
+                                        <p class="genres"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -747,16 +805,17 @@
                             <div class="flip-card-back">
                                 <div id="artist-spot-9-stats">
                                     <p class="artist-name fs-1"></p>
-                                <div class="d-flex justify-content-between mb-4 px-5">
+                                    <p class="artist-rank fs-2">#9</p>
+                                    <div class="d-flex justify-content-between mb-4 px-5">
                                         <p>Followers</p>
                                         <p class="num-followers"></p>
                                     </div>
-                                <div class="d-flex justify-content-between mb-4 px-5">
+                                    <div class="d-flex justify-content-between mb-4 px-5">
                                         <p>Popularity</p>
                                         <p class="popularity"></p>
                                     </div>
-                                <div class="d-flex justify-content-between px-5">
-                                        <p>genres</p>
+                                    <div class="d-flex justify-content-between px-5">
+                                        <p>Genres</p>
                                         <p class="genres"></p>
                                     </div>
                                     

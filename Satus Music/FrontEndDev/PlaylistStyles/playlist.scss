@@ -1,16 +1,79 @@
 /*Change Nav bar*/
 
-.shrink-navigation {
+#playlist-header {
+    position: relative;
 
-    #nav-seperation-line {
-        animation: shrink-bottom-line 1s ease-in forwards
+    #playlist-nav {
+        height: 5vh;
+        background-color: #011621;
+
+        #playlist-nav-container {
+            height: 100%;
+
+            #links {
+                position: absolute;
+                right: 0;
+                align-items: center;
+                color: white;
+            }
+        }
     }
 }
 
-@keyframes shrink-bottom-line {
-    from {width: 100%}
-    to {
-        width: 0;
-        border: none
+#library-search {
+    color: white;
+    background-color: transparent;
+    border: none;
+}
+
+#playlist-populate {
+    height: 61vh;
+    background-color: #011621;
+    border: solid black 3px;
+    display: flex;
+    flex-direction: column;
+
+    & .heading {
+        flex: 0 0 auto;
+        justify-content: space-between;
     }
+}
+
+#playlists {
+    flex: 11 auto;
+    overflow-y: auto;
+}
+
+.playlist {
+    display: flex;
+    align-items: center;
+    background-color: rgb(1, 18, 28);
+    margin-bottom: 1%;
+}
+
+#playlist-view-one {
+    height: 61vh;
+    background-color: #011621;
+    border: solid black 3px;
+}
+
+#playlist-view-two {
+    height: 33vh;
+    background-color: #011621;
+    border: solid black 3px;
+}
+
+.playlist-search {
+    width: 75%;
+    height: 3%;
+    background-color: black;
+    border: white solid 2px;
+    border-radius: 10px;
+
+    
+}
+
+::placeholder {
+    color: white;
+    margin-left: 3%;
 }

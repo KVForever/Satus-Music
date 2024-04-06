@@ -13,7 +13,7 @@ html {
 }
 
 body {
-	background-color: black;
+	background-color: #011621;
 	color: var(--site-text-color);
 	overflow-x: hidden;
 	-ms-overflow-style: none;
@@ -37,10 +37,12 @@ header {
 	z-index: 1;
 }
 
+
 #navigation {
 	height: 4rem;
-	justify-content: space-between;
 	background-color: rgba(0,0,0,.3);
+	align-items: center;
+	
 
 	svg {
 		//fill: var(--site-text-color);
@@ -50,8 +52,9 @@ header {
 	#start-group {
 		color: white;
 		border-radius: 20px;
-		vertical-align: middle;
 		align-items: center;
+		position: absolute;
+		left: 1%
 	}
 
 	#middle-group {
@@ -76,11 +79,20 @@ header {
 
 	#end-group {
 		background-color: rgba(209, 214, 201, .3);
-		padding: 10px;
+		padding: 8px 10px 8px 10px;
 		border-radius: 20px;
+		position: absolute;
+		right: 1%;
+		width: 4%;
+		display: flex;
+		justify-content: center;
 
 		&:hover {
 			background-color: rgba(209, 214, 201, .5)
+		}
+
+		.bi-gear {
+			color: white;
 		}
 	}
 
@@ -91,7 +103,13 @@ header {
 		bottom: 0;
 		left: 0;
 		border: 1px solid white;
-		
 	}
 }
 
+.home-nav-btn{
+	color: white;
+}
+
+.map-nav-btn {
+	color: white;
+}

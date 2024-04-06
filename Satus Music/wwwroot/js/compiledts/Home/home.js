@@ -8,14 +8,14 @@ const currentTime = new Date().getTime() / 1000;
 var user;
 var track;
 if (currentTime > Number(refresh)) {
-    Auth.authenticate;
+    await Auth.authenticate();
     user = new User(Auth.token);
     track = new Track(Auth.token);
 }
 else {
+    user = new User(token);
+    track = new Track(token);
 }
-user = new User(token);
-track = new Track(token);
 const profile = await user.currentProfile();
 document.getElementById("username").innerText = profile.display_name;
 const songs = await user.usersTopItems("tracks", "short_term");

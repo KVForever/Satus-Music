@@ -10,14 +10,19 @@
 
   <ItemGroup>
     <Compile Remove="Models\**" />
+    <Compile Remove="Scripts\Spotify\NewFolder\**" />
     <Compile Remove="wwwroot\images\**" />
     <Content Remove="Models\**" />
+    <Content Remove="Scripts\Spotify\NewFolder\**" />
     <Content Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="Models\**" />
+    <EmbeddedResource Remove="Scripts\Spotify\NewFolder\**" />
     <EmbeddedResource Remove="wwwroot\images\**" />
     <None Remove="Models\**" />
+    <None Remove="Scripts\Spotify\NewFolder\**" />
     <None Remove="wwwroot\images\**" />
     <TypeScriptCompile Remove="Models\**" />
+    <TypeScriptCompile Remove="Scripts\Spotify\NewFolder\**" />
     <TypeScriptCompile Remove="wwwroot\images\**" />
   </ItemGroup>
 
@@ -38,6 +43,7 @@
     <Folder Include="Scripts\Home\" />
     <Folder Include="Scripts\Playlist\" />
     <Folder Include="Scripts\Spotify\Auth\" />
+    <Folder Include="Scripts\Spotify\Playlist\" />
     <Folder Include="Scripts\Spotify\Tracks\" />
     <Folder Include="wwwroot\css\allstyles\" />
   </ItemGroup>

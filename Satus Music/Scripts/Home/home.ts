@@ -9,7 +9,7 @@ const currentTime = new Date().getTime() / 1000;
 var user;
 var track;
 if (currentTime > Number(refresh)) {
-    Auth.authenticate;
+    await Auth.authenticate();
     user = new User(Auth.token)
     track = new Track(Auth.token)
 } else {
