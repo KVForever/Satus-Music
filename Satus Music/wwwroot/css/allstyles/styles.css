@@ -418,7 +418,9 @@ header {
 #playlist-populate {
   height: 61vh;
   background-color: #011621;
-  border: solid black 3px;
+  border-right: solid black 3px;
+  border-bottom: solid black 3px;
+  border-top: solid black 6px;
   display: flex;
   flex-direction: column;
 }
@@ -432,6 +434,14 @@ header {
   overflow-y: auto;
 }
 
+.playlist-btn {
+  color: white;
+  text-decoration: none;
+}
+.playlist-btn:hover {
+  color: white;
+}
+
 .playlist {
   display: flex;
   align-items: center;
@@ -442,21 +452,24 @@ header {
 #playlist-view-one {
   height: 61vh;
   background-color: #011621;
-  border: solid black 3px;
+  border-left: solid black 3px;
+  border-bottom: solid black 3px;
+  border-top: solid black 6px;
 }
 
 #playlist-view-two {
   height: 33vh;
   background-color: #011621;
-  border: solid black 3px;
+  border-top: solid black 3px;
 }
 
 .playlist-search {
-  width: 75%;
-  height: 3%;
+  width: 50%;
+  height: 4%;
   background-color: black;
   border: white solid 2px;
   border-radius: 10px;
+  color: white;
 }
 
 ::placeholder {

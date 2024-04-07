@@ -24,21 +24,25 @@ console.log(usersPlaylists);
 await Promise.all(usersPlaylists.items.map(async (item) => {
     var playlistId = item.id;
     var playlist = await playlists.getPlaylist(playlistId);
-    var playlistDiv = document.createElement("div");
-    playlistDiv.innerHTML = `
-    <img src="${playlist.images[0].url}" width="64px" height="64px" class="mt-3 rounded"/>
-    <div class="ms-3">
-        <p class="fs-5">${playlist.name}</p>
-        <p># Followers: ${playlist.followers.total} </p>
-    </div>
+    var playlistAnchor = document.createElement("a");
+    playlistAnchor.innerHTML = `
+        <div class="playlist">
+            <img src="${playlist.images[0].url}" width="64px" height="64px" class="mt-3 ms-2 rounded"/>
+            <div class="ms-3">
+                <p class="fs-5">${playlist.name}</p>
+                <p># Followers: ${playlist.followers.total} </p>
+            </div>
+        </div>
     `;
-    playlistDiv.classList.add("playlist");
-    playlistDiv.setAttribute("draggable", "true");
-    document.getElementById("playlists").appendChild(playlistDiv);
+    playlistAnchor.setAttribute("value", playlistId);
+    playlistAnchor.setAttribute("draggable", "true");
+    playlistAnchor.classList.add("playlist-btn");
+    document.getElementById("playlists").appendChild(playlistAnchor);
 }));
-var playlists = document.querySelectorAll("playlist");
-playlists.forEach((playlist) => {
-    playlist.addEventListener("dragstart", () => {
+var playlistDivs = document.querySelectorAll(".playlist-btn");
+playlistDivs.forEach((playlist) => {
+    playlist.addEventListener("dragstart", (item) => {
+        item.dataTransfer.setData("playlistId", playlist.getAttribute("value"));
     });
 });
 //var playlistId =  usersPlaylists.items[0].id;
