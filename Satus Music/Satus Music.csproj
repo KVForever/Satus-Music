@@ -27,10 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Remove="Scripts\Spotify\Auth\auth.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -50,6 +46,7 @@
     <Folder Include="Scripts\Spotify\Playlist\" />
     <Folder Include="Scripts\Spotify\Tracks\" />
     <Folder Include="wwwroot\css\allstyles\" />
+    <Folder Include="wwwroot\js\compiledts\Spotify\Auth\" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

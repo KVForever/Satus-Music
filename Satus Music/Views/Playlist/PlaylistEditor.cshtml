@@ -30,18 +30,51 @@
             <div class="d-flex heading">
                 <p class="fs-2 ms-2">Your Library</p>
                 <button id="library-search"><i class="bi bi-search fs-5"></i></button>
+                <input id="library-search-input" placeholder="Search" />
             </div>
             
             <div id="playlists">
               
             </div>
-           
-            
         </div>
-        <div class="col-8" id="playlist-view-one">
-            <div class="d-flex justify-content-center mt-2">
-                <input class="playlist-search" placeholder="Search" />
+        <div class="col-8" id="playlist-view-one">            
+            <div id="playlist-background"></div>
+            <div id="playlist-view-body">
+                <div class="d-flex" id="playlist-heading">
+                    <input class="playlist-search" placeholder="Search" />
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" id="playlist-image" />
+                    <canvas id="playlist-color-canvas" class="d-none"></canvas>
+                    <div id="playlist-description">
+                        <p id="playlist-title"></p>
+                        <p id="about-playlist"></p>
+                        <div id="playlist-stats">
+                            <p><span id="playlist-owner"></span> <span id="num-tracks"></span> <span id="playlist-duration"></span></p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="p-3" id="playlist-tracks">
+                    <table id="playlist-table" class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Album</th>
+                                <th scope="col">Date Added</th>
+                                <th scope="col">Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>mdo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+           
             
         </div>
     </div>

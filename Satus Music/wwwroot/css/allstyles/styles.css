@@ -401,6 +401,7 @@ header {
 }
 #playlist-header #playlist-nav #playlist-nav-container {
   height: 100%;
+  border-bottom: solid 3px black;
 }
 #playlist-header #playlist-nav #playlist-nav-container #links {
   position: absolute;
@@ -418,15 +419,14 @@ header {
 #playlist-populate {
   height: 61vh;
   background-color: #011621;
-  border-right: solid black 3px;
-  border-bottom: solid black 3px;
-  border-top: solid black 6px;
+  border: solid black 3px;
   display: flex;
   flex-direction: column;
 }
 #playlist-populate .heading {
   flex: 0 0 auto;
   justify-content: space-between;
+  align-items: center;
 }
 
 #playlists {
@@ -447,34 +447,91 @@ header {
   align-items: center;
   background-color: rgb(1, 18, 28);
   margin-bottom: 1%;
+  padding: 3%;
 }
 
 #playlist-view-one {
   height: 61vh;
   background-color: #011621;
-  border-left: solid black 3px;
-  border-bottom: solid black 3px;
-  border-top: solid black 6px;
+  border: solid black 3px;
+  position: relative;
+  padding: 0px;
+}
+#playlist-view-one #playlist-view-body {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+#playlist-view-one #playlist-view-body #playlist-tracks {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+#playlist-view-one #playlist-image {
+  width: 15%;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+}
+#playlist-view-one #playlist-color-canvas {
+  width: 64px;
+  height: 64px;
+}
+#playlist-view-one #playlist-background {
+  position: absolute;
+  width: 100%;
+  height: 75%;
+}
+#playlist-view-one #playlist-description {
+  display: flex;
+  margin: auto 0 auto 1%;
+  flex-direction: column;
+  text-align: left;
+}
+#playlist-view-one #playlist-description #playlist-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+#playlist-view-one #playlist-description #plalist-stats {
+  margin-top: 1rem;
 }
 
 #playlist-view-two {
   height: 33vh;
   background-color: #011621;
-  border-top: solid black 3px;
+  border: solid black 3px;
 }
 
 .playlist-search {
-  width: 50%;
-  height: 4%;
+  width: 30%;
+  height: 10%;
   background-color: black;
   border: white solid 2px;
   border-radius: 10px;
   color: white;
+  position: absolute;
+  left: 65%;
+  margin-top: 1%;
+}
+
+#library-search-input {
+  display: none;
+  width: 50%;
+  height: 75%;
+  border: solid white 2px;
+  background-color: black;
 }
 
 ::placeholder {
   color: white;
   margin-left: 3%;
+}
+
+#playlist-table {
+  color: white;
+  padding: 2%;
 }
 
 /***************Variable Styles***********/

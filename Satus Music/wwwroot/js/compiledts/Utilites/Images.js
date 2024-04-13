@@ -12,8 +12,8 @@ class Images {
             let grabColorImage = new Image();
             grabColorImage.crossOrigin = "anonymous";
             grabColorImage.src = sampleImage.url;
-            colorCanvas.width = sampleImage.width;
-            colorCanvas.height = sampleImage.height;
+            colorCanvas.width = sampleImage.width != null ? sampleImage.width : 640;
+            colorCanvas.height = sampleImage.height != null ? sampleImage.width : 640;
             let topColors = [];
             grabColorImage.onload = function () {
                 colorContext.drawImage(grabColorImage, 0, 0);
