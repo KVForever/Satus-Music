@@ -316,19 +316,8 @@ function repeat() {
             Images.setImageWithDescription("home-canvas", displayImage, "top-track-name", track, "top-track-artist-name", artist);
             let topColors = await Images.grabImageColors("home-color-canvas", colorImage);
             //If the color is closer to white set text to black do the opposite of the opposite is true. They are multiplied because humans percive color and litness differently 
-            let textColor;
-            let endOfFirstNum = topColors[0].indexOf(",")
-            let r = Number(topColors[0].slice(0, endOfFirstNum)) * .3;
-            let endOfSecondNum = topColors[0].indexOf(",", endOfFirstNum + 1);
-            let g = Number(topColors[0].slice(endOfFirstNum + 1, endOfSecondNum)) * .59;
-            let endOfThirdNum = topColors[0].indexOf(",", endOfSecondNum + 1)
-            let b = Number(topColors[0].slice(endOfSecondNum + 1, endOfThirdNum)) * .11;
-            let grayScaleColor = r + g + b;
-            if (grayScaleColor > 128) {
-                textColor = "rgba(0, 0, 0, 1)";
-            } else {
-                textColor = "rgba(255, 255, 255, 1)";
-            }
+            let textColor = blackOrWhite(topColors[0])
+           
 
             document.documentElement.style.setProperty("--site-text-color", textColor);
             document.documentElement.style.setProperty("--home-canvas-border-color", textColor);
@@ -348,13 +337,13 @@ function repeat() {
 }
 
 //If the color is closer to white set text to black do the opposite of the opposite is true. They are multiplied because humans percive color and litness differently 
-function blackOrWhite(topColors) {
-    let endOfFirstNum = topColors[0].indexOf(",")
-    let r = Number(topColors[0].slice(0, endOfFirstNum)) * .3;
-    let endOfSecondNum = topColors[0].indexOf(",", endOfFirstNum + 1);
-    let g = Number(topColors[0].slice(endOfFirstNum + 1, endOfSecondNum)) * .59;
-    let endOfThirdNum = topColors[0].indexOf(",", endOfSecondNum + 1)
-    let b = Number(topColors[0].slice(endOfSecondNum + 1, endOfThirdNum)) * .11;
+function blackOrWhite(color) {
+    let endOfFirstNum = color.indexOf(",")
+    let r = Number(color.slice(0, endOfFirstNum)) * .3;
+    let endOfSecondNum = color.indexOf(",", endOfFirstNum + 1);
+    let g = Number(color.slice(endOfFirstNum + 1, endOfSecondNum)) * .59;
+    let endOfThirdNum = color.indexOf(",", endOfSecondNum + 1)
+    let b = Number(color.slice(endOfSecondNum + 1, endOfThirdNum)) * .11;
     let grayScaleColor = r + g + b;
     if (grayScaleColor > 128) {
         return "rgba(0, 0, 0, 1)";

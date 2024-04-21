@@ -75,29 +75,68 @@ playlistViewOne.addEventListener("drop", async (item) => {
     document.getElementById("playlist-background").style.backgroundImage = playlistBackground;
     document.getElementById("playlist-background").style.backgroundSize = '100% 100%';
     document.getElementById("playlist-background").style.backgroundPosition = "0px 0px";
+    var descriptionTextColor = blackOrWhite(topColors[1]);
+    document.getElementById("playlist-description").style.color = `${descriptionTextColor}`;
     var playlistName = draggedPlaylist.name;
     document.getElementById("playlist-title").innerText = playlistName;
     var playlistDescription = draggedPlaylist.description;
-    document.getElementById("about-playlist").innerText = playlistDescription;
+    document.getElementById("about-playlist").innerHTML = playlistDescription;
     var playlistOwner = draggedPlaylist.owner.display_name;
     var numTracks = draggedPlaylist.tracks.items.length;
-    document.getElementById("playlist-owner").innerText = playlistOwner;
-    document.getElementById("num-tracks").innerText = numTracks;
+    document.getElementById("playlist-owner").innerHTML = playlistOwner + '<i class="bi bi-dot fs-5 align-middle" > </i>';
+    document.getElementById("num-tracks").innerHTML = numTracks + "songs" + '<i class="bi bi-dot fs-5 align-middle"></i>';
     var durationOfPlaylist = 0;
+    document.getElementById("table-body").innerHTML = "";
     for (var i = 0; i < numTracks; i++) {
-        durationOfPlaylist += draggedPlaylist.tracks.items[i].track.duration_ms;
+        document.getElementById("playlist-tracks").style.display = "block";
+        var songDuration = draggedPlaylist.tracks.items[i].track.duration_ms;
+        var tr = document.createElement("tr");
+        var dateAdded;
+        if (playlistOwner != "Spotify") {
+            dateAdded = draggedPlaylist.tracks.items[i].added_at;
+            var end = dateAdded.indexOf("T");
+            dateAdded = dateAdded.slice(0, end);
+        }
+        else {
+            dateAdded = "";
+        }
+        var trContent = `
+            <th scope="row">${i + 1}</th>
+            <td><img src="${draggedPlaylist.tracks.items[i].track.album.images[2].url}" class="me-4"></img>${draggedPlaylist.tracks.items[i].track.name}</td>
+            <td>${draggedPlaylist.tracks.items[i].track.album.name}</td>
+            <td>${dateAdded}</td>
+            <td>${Math.floor(songDuration / 60000)}:${Math.floor((songDuration % 60000) / 1000)}</td>`;
+        tr.innerHTML = trContent;
+        document.getElementById("table-body").appendChild(tr);
+        durationOfPlaylist += songDuration;
     }
     var hrs = Math.floor(durationOfPlaylist / 3600000);
     var min = Math.floor((durationOfPlaylist % 3600000) / 60000);
     var sec = Math.floor((durationOfPlaylist % 60000) / 1000);
     if (hrs > 0) {
-        document.getElementById("playlist-duration").innerText = hrs + "hrs " + min + "mins " + sec + "sec";
+        document.getElementById("playlist-duration").innerText = hrs + "hrs " + min + "mins";
     }
     else {
         document.getElementById("playlist-duration").innerText = min + "mins " + sec + "sec";
     }
+    document.getElementById("playlist-tracks").style.display = "block";
 });
 playlistViewOne.addEventListener("dragleave", (item) => {
     playlistViewOne.style.border = "solid black 3px";
 });
+function blackOrWhite(color) {
+    let endOfFirstNum = color.indexOf(",");
+    let r = Number(color.slice(0, endOfFirstNum)) * .3;
+    let endOfSecondNum = color.indexOf(",", endOfFirstNum + 1);
+    let g = Number(color.slice(endOfFirstNum + 1, endOfSecondNum)) * .59;
+    let endOfThirdNum = color.indexOf(",", endOfSecondNum + 1);
+    let b = Number(color.slice(endOfSecondNum + 1, endOfThirdNum)) * .11;
+    let grayScaleColor = r + g + b;
+    if (grayScaleColor > 128) {
+        return "rgba(0, 0, 0, 1)";
+    }
+    else {
+        return "rgba(255, 255, 255, 1)";
+    }
+}
 //# sourceMappingURL=playlist.js.map

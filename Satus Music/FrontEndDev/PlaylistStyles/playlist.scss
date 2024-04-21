@@ -65,14 +65,12 @@
 
 #playlist-view-one {
     height: 61vh;
-    background-color: #011621;
     border: solid black 3px;
     position: relative;
     padding: 0px;
 
     #playlist-view-body {
-        position: absolute;
-        z-index: 1;
+        height: 50%;
         width: 100%;
 
         #playlist-tracks {
@@ -81,7 +79,15 @@
             height: 100%;
             overflow: scroll;
             background-color: rgba(0, 0, 0, 0.1);
-        }
+            display: none;
+        }    
+    }
+
+    #playlist-tracks {
+        height: 50%;
+        width: 100%;
+        overflow: scroll;
+        display: none;
     }
 
     #playlist-image {
@@ -100,6 +106,7 @@
         position: absolute;
         width: 100%;
         height: 75%;
+        z-index: -1;
     }
 
     #playlist-description {
@@ -109,16 +116,17 @@
         text-align: left;
 
         #playlist-title {
-            font-size: 2rem;
+            font-size: 3rem;
             font-weight: bold;
+        }
+
+        #about-playlist {
         }
 
         #plalist-stats {
             margin-top: 1rem
         }
     }
-
-    
 }
 
 
@@ -131,7 +139,7 @@
 
 .playlist-search {
     width: 30%;
-    height: 10%;
+    height: 5%;
     background-color: black;
     border: white solid 2px;
     border-radius: 10px;
@@ -157,4 +165,5 @@
 #playlist-table {
     color: white;
     padding: 2%;
+    vertical-align: middle;
 }
