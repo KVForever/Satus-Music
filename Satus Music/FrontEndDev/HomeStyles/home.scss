@@ -17,6 +17,9 @@
 #landing-background {
     background-size: 100% 100%;
     background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
+    /*background-image: radial-gradient(18% 28% at 24% 50%,var(--color-0) 7%, #073AFF00 100%),radial-gradient(18% 28% at 18% 71%, var(--color-1) 6%, #073AFF00 100%), radial-gradient(70% 53% at 36% 76%, var(--color-2) 0%, #073AFF00 100%),radial-gradient(42% 53% at 15% 94%, var(--color-3)7%, #073AFF00 100%), radial-gradient(42% 53% at 34% 72%, var(--color-4) 7%, #073AFF00 100%),radial-gradient(18% 28% at 35% 87%, var(--color-5) 7%, #073AFF00 100%), radial-gradient(31% 43% at 7% 98%, var(--color-7) 24%, #073AFF00 100%),radial-gradient(21% 37% at 72% 23%, var(--color-8) 24%, #073AFF00 100%), radial-gradient(35% 56% at 91% 74%, var(--color-9) 9%, #073AFF00 100%),radial-gradient(74% 86% at 67% 38%, var(--color-10) 24%, #073AFF00 100%), linear-gradient(125deg, var(--color-11) 1%, var(--color-12) 100%);    animation: forward 5s background-animation;*/    /*background-color: var(--color-0);*/
+   /* background-color: var(--color-0);*/
+   /* animation: infinite alternate 15s background-animation;*/
     background-image: var(--home-background-color);
     width: 100vw;
     height: 100vh;
@@ -25,8 +28,49 @@
     align-items: center;
 }
 
+@keyframes background-animation {
+    0% {
+        background-color: var(--color-1); 
+    }
+    16% {
+        background-color: var(--color-2);
+    }
+    24% {
+        background-color: var(--color-3);
+    }
+    32% {
+        background-color: var(--color-4);
+    }
+    40% {
+        background-color: var(--color-5);
+    }
+    48% {
+        background-color: var(--color-6);
+    }
+    56% {
+        background-color: var(--color-7);
+    }
+    64% {
+        background-color: var(--color-8);
+    }
+    72% {
+        background-color: var(--color-9);
+    }
+    80% {
+        background-color: var(--color-10);
+    }
+    88% {
+        background-color: var(--color-11);
+    }
+    100% {
+        background-color: var(--color-12);
+    }
+
+    
+}
+
+
 #home-canvas {
-    margin-top: 10%;
     justify-content: center;
     display: flex;
     align-items: center;
@@ -35,6 +79,12 @@
 
 #home-image {
     width: 50%;
+
+    #top-song-heading {
+        margin-top: 10%;
+        font-size: 2.5rem;
+        text-align: center;
+    }
 }
 
 .home-intro {
@@ -124,7 +174,6 @@
 #song-card-container {
     overflow-x: scroll;
     padding-bottom: 2rem;
-    padding-top: 2rem;
     min-height: 66vh;
 }
 

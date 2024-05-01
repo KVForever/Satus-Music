@@ -33,13 +33,13 @@ class Images {
                     const g = imgData.data[i + 1];
                     const b = imgData.data[i + 2];
                     const color = `${r}, ${g}, ${b}`;
-
+                   
                     colorCounts[color] = (colorCounts[color] || 0) + 1;
                 }
 
                 const sortedColors = Object.keys(colorCounts).sort((a, b) => colorCounts[b] - colorCounts[a]);
 
-                for (let i = 0; i < Math.min(sortedColors.length, 20); i++) {
+                for (let i = 0; i < Math.min(sortedColors.length, 70); i++) {
                     topColors.push(sortedColors[i]);
                 }
 

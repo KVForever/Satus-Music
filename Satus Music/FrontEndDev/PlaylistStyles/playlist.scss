@@ -77,10 +77,11 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            padding: 0 1rem 1rem 1rem;
             overflow: scroll;
             background-color: rgba(0, 0, 0, 0.1);
             display: none;
-        }    
+        }
     }
 
     #playlist-tracks {
@@ -88,6 +89,7 @@
         width: 100%;
         overflow: scroll;
         display: none;
+        padding: 0 1rem 1rem 1rem;
     }
 
     #playlist-image {
@@ -166,4 +168,10 @@
     color: white;
     padding: 2%;
     vertical-align: middle;
+
+    #table-head {
+        background: rgba(1,22,33, .8);
+        position: sticky;
+        top: 0;
+    }
 }

@@ -18,10 +18,10 @@ else {
 }
 const profile = await user.currentProfile();
 document.getElementById("username").innerText = profile.display_name;
-const songs = await user.usersTopItems("tracks", "short_term");
-const artists = await user.usersTopItems("artists", "short_term");
-/* let imageStart = Math.floor(Math.random() * 19);*/
-let imageStart = 0;
+const songs = await user.usersTopItems("tracks", "long_term");
+const artists = await user.usersTopItems("artists", "long_term");
+/*let imageStart = Math.floor(Math.random() * 19);*/
+let imageStart = 6;
 /*get initial image information.*/
 let displayImage = songs.items[imageStart].album.images[0];
 let colorImage = songs.items[imageStart].album.images[2];
@@ -35,17 +35,111 @@ let topColors = await Images.grabImageColors("home-color-canvas", colorImage);
 var textColor = blackOrWhite(topColors);
 document.documentElement.style.setProperty("--site-text-color", textColor);
 document.documentElement.style.setProperty("--home-canvas-border-color", textColor);
+/*setInterval(() => {*/
+for (var i = 0; i < 12; i++) {
+    document.documentElement.style.setProperty(`--color-${i}`, `rgb(${topColors[Math.floor(Math.random() * 70)]})`);
+}
+/*}, 500)*/
 /*set initial background colors*/
-let siteBackgroundColor = `radial-gradient(18% 28% at 24% 50%, rgba(${topColors[12]}, 1) 7%, #073AFF00 100%),radial-gradient(18% 28% at 18% 71%, rgba(${topColors[10]}, 1) 6%, #073AFF00 100%),
-radial-gradient(70% 53% at 36% 76%, rgba(${topColors[9]}, 1) 0%, #073AFF00 100%),radial-gradient(42% 53% at 15% 94%, rgba(${topColors[8]}, 1) 7%, #073AFF00 100%),
-radial-gradient(42% 53% at 34% 72%, rgba(${topColors[7]}, 1) 7%, #073AFF00 100%),radial-gradient(18% 28% at 35% 87%, rgba(${topColors[6]}, 1) 7%, #073AFF00 100%),
-radial-gradient(31% 43% at 7% 98%, rgba(${topColors[5]}, 1) 24%, #073AFF00 100%),radial-gradient(21% 37% at 72% 23%, rgba(${topColors[4]}, 1) 24%, #073AFF00 100%),
-radial-gradient(35% 56% at 91% 74%, rgba(${topColors[3]}, 1) 9%, #073AFF00 100%),radial-gradient(74% 86% at 67% 38%, rgba(${topColors[2]}, 1) 24%, #073AFF00 100%),
-linear-gradient(125deg,  rgba(${topColors[0]}, 1) 1%,  rgba(${topColors[1]}, 1) 100%)`;
-document.documentElement.style.setProperty("--home-background-color", siteBackgroundColor);
-document.getElementById("greeting-background").style.background = `linear-gradient(180deg, rgba(${topColors[0]}, 1) 14%, rgba(${topColors[0]}, 1) 33%, rgba(${topColors[0]}, 0.9) 50%, rgba(${topColors[0]}, ${topColors[0]}, 0.00001) 85%)`;
+//var siteBackgroundColor = ""
+//siteBackgroundColor = `radial-gradient(18% 28% at 24% 50%, rgba(${topColors[Math.floor(Math.random() * 70)]}, 1) 7%, #073AFF00 100%),radial-gradient(18% 28% at 18% 71%, rgba(${topColors[Math.floor(Math.random() * 70)]}, 1) 6%, #073AFF00 100%),
+//        radial-gradient(70% 53% at 36% 76%, rgba(${topColors[Math.floor(Math.random() * 70)]}, 1) 0%, #073AFF00 100%),radial-gradient(42% 53% at 15% 94%, rgba(${topColors[Math.floor(Math.random() * 70)]}, 1) 7%, #073AFF00 100%),
+//        radial-gradient(42% 53% at 34% 72%, rgba(${topColors[Math.floor(Math.random() * 70)]}, 1) 7%, #073AFF00 100%),radial-gradient(18% 28% at 35% 87%, rgba(${topColors[Math.floor(Math.random() * 70)]}, 1) 7%, #073AFF00 100%),
+//        radial-gradient(31% 43% at 7% 98%, rgba(${topColors[Math.floor(Math.random() * 70)]}, 1) 24%, #073AFF00 100%),radial-gradient(21% 37% at 72% 23%, rgba(${topColors[Math.floor(Math.random() * 70)]}, 1) 24%, #073AFF00 100%),
+//        radial-gradient(35% 56% at 91% 74%, rgba(${topColors[Math.floor(Math.random() * 70)]}, 1) 9%, #073AFF00 100%),radial-gradient(74% 86% at 67% 38%, rgba(${topColors[Math.floor(Math.random() * 70)]}, 1) 24%, #073AFF00 100%),
+//        linear-gradient(125deg,  rgba(${topColors[Math.floor(Math.random() * 70)]}, 1) 1%,  rgba(${topColors[Math.floor(Math.random() * 70)]}, 1) 100%)`;
+//console.log(siteBackgroundColor);
+//document.documentElement.style.setProperty("--home-background-color", siteBackgroundColor);
+//document.getElementById("greeting-background").style.background = `linear-gradient(180deg, rgba(${topColors[0]}, 1) 14%, rgba(${topColors[0]}, 1) 33%, rgba(${topColors[0]}, 0.9) 50%, rgba(${topColors[0]}, ${topColors[0]}, 0.00001) 85%)`;
+var colors = new Array();
+for (var i = 0; i < 70; i++) {
+    let endOfFirstNum = topColors[i].indexOf(",");
+    let r = Number(topColors[i].slice(0, endOfFirstNum));
+    let endOfSecondNum = topColors[i].indexOf(",", endOfFirstNum + 1);
+    let g = Number(topColors[i].slice(endOfFirstNum + 1, endOfSecondNum));
+    let b = Number(topColors[i].slice(endOfSecondNum + 1));
+    colors.push([r, g, b]);
+}
+var positions = new Array();
+for (var j = 0; j < 24; j++) {
+    positions.push(Math.floor(Math.random() * 100));
+}
+console.log(colors);
+function updateGradient(num1, num2) {
+    clearInterval(changeColor);
+    var start = num1;
+    var start2 = num2;
+    var colorRaw1 = colors[start];
+    var r = colorRaw1[0];
+    var g = colorRaw1[1];
+    var b = colorRaw1[2];
+    var rgbNum1 = "" + r + g + b;
+    var colorRaw2 = colors[start2];
+    var r2 = colorRaw2[0];
+    var g2 = colorRaw2[1];
+    var b2 = colorRaw2[2];
+    var rDist = r2 - r;
+    var gDist = g2 - g;
+    var bDist = b2 - b;
+    var rgbNum2 = "" + r2 + g2 + b2;
+    var rgbNumFormated;
+    var changeColor = setInterval(() => {
+        if (rgbNum1 != rgbNum2) {
+            if (rDist < 0) {
+                r -= 1;
+                rDist++;
+            }
+            else if (rDist > 0) {
+                r += 1;
+                rDist--;
+            }
+            else {
+                r;
+            }
+            if (gDist < 0) {
+                g -= 1;
+                gDist++;
+            }
+            else if (gDist > 0) {
+                g += 1;
+                gDist--;
+            }
+            else {
+                g;
+            }
+            if (bDist < 0) {
+                b -= 1;
+                bDist++;
+            }
+            else if (bDist > 0) {
+                b += 1;
+                bDist--;
+            }
+            else {
+                b;
+            }
+            rgbNumFormated = r + "," + g + "," + b;
+            rgbNum1 = "" + r + g + b;
+            /* console.log(window.innerHeight)*/
+            var siteBackgroundColor = `radial-gradient(18% 28% at 24% ${(positions[23] < window.innerHeight / 2) ? positions[23] += 1 : positions[23] = 0}%, rgba(${rgbNumFormated}, 1) 7%, #073AFF00 100%),radial-gradient(18% 28% at 18% 71%, rgba(${topColors[40]}, 1) 6%, #073AFF00 100%),
+                radial-gradient(70% 53% at 36% 65%, rgba(${topColors[40]}, 1) 0%, #073AFF00 100%),radial-gradient(42% 53% at ${(positions[8] < window.innerHeight) ? positions[8] += 1 : 0}% 94%, rgba(${topColors[5]}, 1) 7%, #073AFF00 100%),
+                radial-gradient(42% 53% at 34% ${(positions[0] < window.innerHeight / 2) ? positions[0] += 1 : positions[0] = 0}%, rgba(${rgbNumFormated}, 1) 7%, #073AFF00 100%),radial-gradient(18% 28% at 35% 87%, rgba(${topColors[2]}, 1) 7%, #073AFF00 100%),
+                radial-gradient(31% 43% at 7% 98%, rgba(${topColors[24]}, 1) 24%, #073AFF00 100%),radial-gradient(21% 37% at 72% ${(positions[5] < window.innerHeight) ? positions[5] += 1 : positions[5] = 0}%, rgba(${topColors[16]}, 1) 2%, #073AFF00 100%),
+                radial-gradient(35% 56% at 74% ${(positions[14] < window.innerHeight / 3) ? positions[14] += 1 : positions[14] = 0}%, rgba(${topColors[2]}, 1) 9%, #073AFF00 100%),radial-gradient(74% 86% at 67% 38%, rgba(${topColors[15]}, 1) 24%, #073AFF00 100%),
+                linear-gradient(125deg,  rgba(${rgbNumFormated}, 1) 1%,  rgba(${rgbNumFormated}, 1) 100%)`;
+            /*console.log(siteBackgroundColor);*/
+            document.documentElement.style.setProperty("--home-background-color", siteBackgroundColor);
+        }
+        else {
+            clearInterval(changeColor);
+            var random = Math.floor(Math.random() * 70);
+            /* updateGradient(start2, random)*/
+        }
+    }, 30);
+}
+updateGradient(Math.floor(Math.random() * 70), Math.floor(Math.random() * 70));
 /*repeate getting image, setting image and information, getting image colors, and setting background colors.*/
-repeat();
+/*repeat();*/
 //use users top songs that I got at the start and set a few canvases with the song image along with getting the descripiton and some other information about the song.
 for (let i = 0; i < songs.items.length / 2; i++) {
     let trackImage = songs.items[i].album.images[0];
@@ -119,7 +213,6 @@ function handleIntersect(entries, observer) {
             element.classList.add("reduce-card");
             element.parentElement.parentElement.style.transform = "rotateY(0deg)";
         }
-        console.log(prevRatio);
     });
 }
 createObserver();
@@ -220,7 +313,6 @@ function artistIntersect(entries, observer) {
             element.classList.add("reduce-card");
             element.parentElement.parentElement.style.transform = "rotateY(0deg)";
         }
-        console.log(artistPrevRatio);
     });
 }
 createArtistObserver();
@@ -270,6 +362,7 @@ function repeat() {
                 radial-gradient(31% 43% at 7% 98%, rgba(${topColors[5]}, 1) 24%, #073AFF00 100%),radial-gradient(21% 37% at 72% 23%, rgba(${topColors[4]}, 1) 24%, #073AFF00 100%),
                 radial-gradient(35% 56% at 91% 74%, rgba(${topColors[3]}, 1) 9%, #073AFF00 100%),radial-gradient(74% 86% at 67% 38%, rgba(${topColors[2]}, 1) 24%, #073AFF00 100%),
                 linear-gradient(125deg,  rgba(${topColors[0]}, 1) 1%,  rgba(${topColors[1]}, 1) 100%)`;
+            console.log(siteBackgroundColor);
             document.documentElement.style.setProperty("--home-background-color", siteBackgroundColor);
             document.getElementById("greeting-background").style.backgroundImage = `linear-gradient(180deg, rgba(${topColors[0]}, 1) 14%, rgba(${topColors[0]}, 1) 33%, rgba(${topColors[0]}, 0.9) 50%, rgba(${topColors[0]}, ${topColors[0]}, 0.00001) 85%)`;
             repeat();
