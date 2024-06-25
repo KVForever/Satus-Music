@@ -37,11 +37,12 @@
               
             </div>
         </div>
-        <div class="col-8" id="playlist-view-one">            
+        <div class="col-8" id="playlist-view-one">  
+            <p id="area-one-default-text">Drag and drop a playlist</p>
             <div id="playlist-background"></div>
             <div id="playlist-view-body">
                 <div class="d-flex" id="playlist-heading">
-                    <input class="playlist-search" placeholder="Search" />
+                    <input id="playlist-search" placeholder="Search" />
                     <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" id="playlist-image" />
                     <canvas id="playlist-color-canvas" class="d-none"></canvas>
                     <div id="playlist-description">
@@ -73,8 +74,32 @@
             
         </div>
     </div>
-    <div class="row m-0" id="playlist-view-two">
-        <div class="col-12">
+    <div class="row m-0" id="playlist-view-two-and-three">
+        <div class="col-4" id="playlist-view-two">
+            <div class="row" id="playlist-view-two-container">
+                <p id="area-two-default-text">Populates once playlist is selected</p>
+            @*     <div class="col-12" id="view-heading">
+                    <p id="view-heading-text" class="fs-2">edit playlist</p>
+                </div>
+                <form id="edit-playlist-form" class="row">
+
+                    <div id="playlist-image-background" class="col-6">
+                        <img src="" id="playlist-image" />
+                    </div>
+                    <div id="input-container" class="col-6">
+                        <input type="text" id="playlist-name-input" placeholder="playlist name"/>
+
+                        <textarea id="playlist-description-input" placeholder="playlist description"/>
+                    </div>
+                   
+                </form> *@
+
+            </div>
+            
+        </div>
+        <div class="col-8" id="playlist-view-three">
+            
+            <p id="area-three-default-text">Drag and drop a track</p>
 
         </div>
     </div>

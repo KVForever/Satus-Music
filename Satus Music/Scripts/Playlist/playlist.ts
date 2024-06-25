@@ -24,6 +24,7 @@ if (currentTime > Number(refresh)) {
 }
 
 console.log(usersPlaylists);
+document.body.style.backgroundColor = "black";
 
 await Promise.all(usersPlaylists.items.map(async (item) => {
     var playlistId = item.id;
@@ -68,13 +69,18 @@ search.addEventListener("click", (item) => {
 })
 
 var playlistViewOne = document.getElementById("playlist-view-one");
+var playlistViewThree = document.getElementById("playlist-view-three");
+
 playlistViewOne.addEventListener("dragover", (item) => {
     item.preventDefault()
     playlistViewOne.style.border = "solid white 3px";
 })
 
 playlistViewOne.addEventListener("drop", async (item) => {
-    
+    document.getElementById("area-one-default-text").style.display = "none";
+    document.getElementById("area-two-default-text").style.display = "none";
+    document.getElementById("playlist-search").style.display = "block";
+    document.getElementById("playlist-background").style.height = "70%";
     playlistViewOne.style.border = "solid black 3px";
     var draggedPlaylist = await playlists.getPlaylist(item.dataTransfer.getData("playlistId"));
     var image = draggedPlaylist.images[0].url;
@@ -96,6 +102,7 @@ playlistViewOne.addEventListener("drop", async (item) => {
     document.getElementById("num-tracks").innerHTML = numTracks + "songs" + '<i class="bi bi-dot fs-5 align-middle"></i>';
     var durationOfPlaylist = 0;
     document.getElementById("table-body").innerHTML = "";
+
     for (var i = 0; i < numTracks; i++) {
         document.getElementById("playlist-tracks").style.display = "block";
         var songDuration = draggedPlaylist.tracks.items[i].track.duration_ms;
@@ -117,7 +124,7 @@ playlistViewOne.addEventListener("drop", async (item) => {
             <td>${Math.floor(songDuration / 60000)}:${Math.floor((songDuration % 60000)/1000)}</td>`
         tr.innerHTML = trContent
         document.getElementById("table-body").appendChild(tr);
-      
+        tr.setAttribute("draggable", "true")
         durationOfPlaylist += songDuration;
     }
     var hrs = Math.floor(durationOfPlaylist / 3600000);
@@ -129,12 +136,33 @@ playlistViewOne.addEventListener("drop", async (item) => {
         document.getElementById("playlist-duration").innerText = min + "mins " + sec + "sec";
     }
     document.getElementById("playlist-tracks").style.display = "block";
-    
+    document.getElementById("playlist-image-background").children[0].setAttribute("src", draggedPlaylist.images[0].url);
 })
 
 playlistViewOne.addEventListener("dragleave", (item) => {
     playlistViewOne.style.border = "solid black 3px";
 });
+
+playlistViewThree.addEventListener("dragover", (item) => {
+    item.preventDefault()
+    playlistViewThree.style.border = "solid white 3px";
+})
+
+playlistViewThree.addEventListener("drop", async (item) => {
+    playlistViewThree.style.borderLeft = "solid black 3px";
+    playlistViewThree.style.borderTop = "solid black 3px";
+    playlistViewThree.style.borderRight = "0";
+    playlistViewThree.style.borderBottom = "0";
+    document.getElementById("area-three-default-text").style.display = "none";
+});
+
+playlistViewThree.addEventListener("dragleave", (item) => {
+    playlistViewThree.style.borderLeft = "solid black 3px";
+    playlistViewThree.style.borderTop = "solid black 3px";
+    playlistViewThree.style.borderRight = "0";
+    playlistViewThree.style.borderBottom = "0";
+});
+
 
 function blackOrWhite(color) {
     let endOfFirstNum = color.indexOf(",")

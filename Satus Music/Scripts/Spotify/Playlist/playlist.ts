@@ -28,7 +28,16 @@ class Playlist {
 
         return data
     }
- 
+
+    //Add cutom playlist image function.
+
+    //Add playlist items function.
+
+    //Remove playlist items function.
+
+    //Update playlist items function.
+
+    //Create playlist function.
 }
 
 export { Playlist }

@@ -490,6 +490,7 @@ header {
   height: 61vh;
   background-color: #011621;
   border: solid black 3px;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
 }
@@ -518,13 +519,23 @@ header {
   background-color: rgb(1, 18, 28);
   margin-bottom: 1%;
   padding: 3%;
+  border-radius: 15px;
 }
 
 #playlist-view-one {
   height: 61vh;
   border: solid black 3px;
+  border-radius: 15px;
+  background-color: #011621;
   position: relative;
   padding: 0px;
+}
+#playlist-view-one #area-one-default-text {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
 }
 #playlist-view-one #playlist-view-body {
   height: 50%;
@@ -539,12 +550,18 @@ header {
   background-color: rgba(0, 0, 0, 0.1);
   display: none;
 }
+#playlist-view-one #playlist-view-body #playlist-heading {
+  position: relative;
+  z-index: 2;
+}
 #playlist-view-one #playlist-tracks {
   height: 50%;
   width: 100%;
   overflow: scroll;
   display: none;
   padding: 0 1rem 1rem 1rem;
+  position: relative;
+  z-index: 2;
 }
 #playlist-view-one #playlist-image {
   width: 15%;
@@ -559,8 +576,9 @@ header {
 #playlist-view-one #playlist-background {
   position: absolute;
   width: 100%;
-  height: 75%;
-  z-index: -1;
+  height: 0%;
+  z-index: 1;
+  border-radius: 15px;
 }
 #playlist-view-one #playlist-description {
   display: flex;
@@ -576,15 +594,96 @@ header {
   margin-top: 1rem;
 }
 
-#playlist-view-two {
+#playlist-view-two-and-three {
   height: 33vh;
-  background-color: #011621;
+  background-color: black;
   border: solid black 3px;
+  border-radius: 15px;
+}
+#playlist-view-two-and-three #playlist-view-two {
+  background-color: #011621;
+  border-right: solid black 3px;
+  border-top: solid black 3px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+#playlist-view-two-and-three #playlist-view-two #playlist-view-two-container {
+  height: 100%;
+  width: 100%;
+}
+#playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #area-two-default-text {
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #view-heading {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+#playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #view-heading #view-heading-text {
+  margin: 0rem 0 0rem 1rem;
+}
+#playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #edit-playlist-form {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+}
+#playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #edit-playlist-form #playlist-image-background {
+  background-color: black;
+  height: 80%;
+  width: 35%;
+}
+#playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #edit-playlist-form #playlist-image-background #playlist-image {
+  width: 100%;
+  height: 100%;
+}
+#playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #edit-playlist-form #input-container {
+  margin-left: 3rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+}
+#playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #edit-playlist-form #input-container #playlist-name-input {
+  border-radius: 15px;
+  border: solid white 2px;
+  margin-bottom: 1rem;
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+}
+#playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #edit-playlist-form #input-container #playlist-description-input {
+  border-radius: 15px;
+  border: solid white 2px;
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+}
+#playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #edit-description-form #description-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#playlist-view-two-and-three #playlist-view-three {
+  background-color: #011621;
+  border-left: solid black 3px;
+  border-top: solid black 3px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
 }
 
-.playlist-search {
+#playlist-search {
   width: 30%;
-  height: 5%;
+  height: 15%;
   background-color: black;
   border: white solid 2px;
   border-radius: 10px;
@@ -592,6 +691,8 @@ header {
   position: absolute;
   left: 65%;
   margin-top: 1%;
+  padding-left: 0.5rem;
+  display: none;
 }
 
 #library-search-input {
@@ -599,7 +700,10 @@ header {
   width: 50%;
   height: 75%;
   border: solid white 2px;
+  border-radius: 15px;
   background-color: black;
+  padding-left: 0.5rem;
+  color: white;
 }
 
 ::placeholder {
