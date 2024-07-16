@@ -3,7 +3,9 @@
 }
 
 @section Scripts {
-    <script src="~/js/compiledts/Playlist/playlist.js" type="module"> </script>
+     <script src="~/js/compiledts/Playlist/playlist.js" type="module" > </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" ></script>
+   
 }
 
 @section Navigation {
@@ -93,7 +95,7 @@
                     </div>
                    
                 </form> *@
-
+                <canvas id="playlist-statistics" style="display: none;"></canvas>
             </div>
             
         </div>

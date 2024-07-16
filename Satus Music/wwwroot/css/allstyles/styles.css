@@ -612,10 +612,13 @@ header {
 }
 #playlist-view-two-and-three #playlist-view-two #playlist-view-two-container {
   height: 100%;
-  width: 100%;
+  width: 98%;
+  align-items: center;
+  justify-content: center;
 }
 #playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #area-two-default-text {
   display: block;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -627,6 +630,11 @@ header {
 }
 #playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #view-heading #view-heading-text {
   margin: 0rem 0 0rem 1rem;
+}
+#playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #playlist-statistics {
+  display: none;
+  width: 100%;
+  height: 100%;
 }
 #playlist-view-two-and-three #playlist-view-two #playlist-view-two-container #edit-playlist-form {
   display: inline-flex;

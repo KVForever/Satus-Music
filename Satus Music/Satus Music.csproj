@@ -49,6 +49,35 @@
     <Folder Include="wwwroot\js\compiledts\Spotify\Auth\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\lib\chart\auto\auto.cjs" />
+    <None Include="wwwroot\lib\chart\auto\auto.js" />
+    <None Include="wwwroot\lib\chart\auto\auto.min.js" />
+    <None Include="wwwroot\lib\chart\dist\chart.cjs" />
+    <None Include="wwwroot\lib\chart\dist\chart.cjs.map" />
+    <None Include="wwwroot\lib\chart\dist\chart.js" />
+    <None Include="wwwroot\lib\chart\dist\chart.js.map" />
+    <None Include="wwwroot\lib\chart\dist\chart.min.js" />
+    <None Include="wwwroot\lib\chart\dist\chart.umd.js" />
+    <None Include="wwwroot\lib\chart\dist\chart.umd.js.map" />
+    <None Include="wwwroot\lib\chart\dist\chart.umd.min.js" />
+    <None Include="wwwroot\lib\chart\dist\chunks\helpers.segment.cjs" />
+    <None Include="wwwroot\lib\chart\dist\chunks\helpers.segment.cjs.map" />
+    <None Include="wwwroot\lib\chart\dist\chunks\helpers.segment.js" />
+    <None Include="wwwroot\lib\chart\dist\chunks\helpers.segment.js.map" />
+    <None Include="wwwroot\lib\chart\dist\chunks\helpers.segment.min.js" />
+    <None Include="wwwroot\lib\chart\dist\helpers.cjs" />
+    <None Include="wwwroot\lib\chart\dist\helpers.cjs.map" />
+    <None Include="wwwroot\lib\chart\dist\helpers.js" />
+    <None Include="wwwroot\lib\chart\dist\helpers.js.map" />
+    <None Include="wwwroot\lib\chart\dist\helpers.min.js" />
+    <None Include="wwwroot\lib\chart\helpers\helpers.cjs" />
+    <None Include="wwwroot\lib\chart\helpers\helpers.js" />
+    <None Include="wwwroot\lib\chart\helpers\helpers.min.js" />
+    <None Include="wwwroot\lib\chart\LICENSE.md" />
+    <None Include="wwwroot\lib\chart\README.md" />
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="call &quot;$(C:\Users\kvassar\source\repos\Satus-Music\Satus Music\Satus Music)compilescss.bat&quot;" />
   </Target>

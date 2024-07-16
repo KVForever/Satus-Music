@@ -2,15 +2,18 @@ import { Auth } from '../Spotify/Auth/auth.js';
 import { User } from '../Spotify/User/user.js';
 import { Images } from '../Utilites/Images.js';
 import { Playlist } from '../Spotify/Playlist/playlist.js';
+import { Track } from '../Spotify/Tracks/track.js';
+/*import { Chart, ChartConfiguration, ChartData, ChartOptions } from '../lib/chart/dist/chart.js';*/
 const token = localStorage.getItem("access_token");
 const refresh = localStorage.getItem("refreshTime");
 const currentTime = new Date().getTime() / 1000;
-var playlists, usersPlaylists;
+var playlists, usersPlaylists, track;
 if (currentTime > Number(refresh)) {
     await Auth.authenticate();
     const user = new User(Auth.token);
     const profile = await user.currentProfile();
     const userId = profile.id;
+    track = new Track(Auth.token);
     playlists = new Playlist(Auth.token, userId);
     usersPlaylists = await playlists.usersPlaylists();
 }
@@ -18,21 +21,21 @@ else {
     const user = new User(token);
     const profile = await user.currentProfile();
     const userId = profile.id;
+    track = new Track(token);
     playlists = new Playlist(token, userId);
     usersPlaylists = await playlists.usersPlaylists();
 }
-console.log(usersPlaylists);
 document.body.style.backgroundColor = "black";
 await Promise.all(usersPlaylists.items.map(async (item) => {
     var playlistId = item.id;
-    var playlist = await playlists.getPlaylist(playlistId);
+    /* var playlist = await playlists.getPlaylist(playlistId);*/
     var playlistAnchor = document.createElement("a");
     playlistAnchor.innerHTML = `
         <div class="playlist">
-            <img src="${playlist.images[0].url}" width="64px" height="64px" class="rounded"/>
+            <img src="${item.images[0].url}" width="64px" height="64px" class="rounded"/>
             <div class="ms-3">
-                <p class="fs-5">${playlist.name}</p>
-                <p>Followers: ${playlist.followers.total}</p>
+                <p class="fs-5">${item.name}</p>
+                <p>Owner: ${item.owner.display_name}</p>
             </div>
         </div>
     `;
@@ -52,6 +55,11 @@ playlistDivs.forEach((playlist) => {
         prev = playlist;
     });
     playlist.addEventListener("dragstart", (item) => {
+        if (prev != null) {
+            prev.children[0].style.backgroundColor = "#01121c";
+        }
+        playlist.children[0].style.backgroundColor = "#0d6efd";
+        prev = playlist;
         item.dataTransfer.setData("playlistId", playlist.getAttribute("value"));
     });
 });
@@ -67,9 +75,14 @@ playlistViewOne.addEventListener("dragover", (item) => {
     item.preventDefault();
     playlistViewOne.style.border = "solid white 3px";
 });
+var playlistStats = new Array();
+var danceability = 0;
+var energy = 0;
+var instrumentalness = 0;
+var valence = 0;
+var acousticness = 0;
 playlistViewOne.addEventListener("drop", async (item) => {
     document.getElementById("area-one-default-text").style.display = "none";
-    document.getElementById("area-two-default-text").style.display = "none";
     document.getElementById("playlist-search").style.display = "block";
     document.getElementById("playlist-background").style.height = "70%";
     playlistViewOne.style.border = "solid black 3px";
@@ -94,6 +107,8 @@ playlistViewOne.addEventListener("drop", async (item) => {
     var durationOfPlaylist = 0;
     document.getElementById("table-body").innerHTML = "";
     for (var i = 0; i < numTracks; i++) {
+        let trackId = draggedPlaylist.tracks.items[i].track.id;
+        let features = await track.tracksFeatures(trackId);
         document.getElementById("playlist-tracks").style.display = "block";
         var songDuration = draggedPlaylist.tracks.items[i].track.duration_ms;
         var tr = document.createElement("tr");
@@ -106,6 +121,11 @@ playlistViewOne.addEventListener("drop", async (item) => {
         else {
             dateAdded = "";
         }
+        danceability += features.danceability;
+        energy += features.energy;
+        instrumentalness += features.instrumentalness;
+        valence += features.valence;
+        acousticness += features.acousticness;
         var trContent = `
             <th scope="row">${i + 1}</th>
             <td><img src="${draggedPlaylist.tracks.items[i].track.album.images[2].url}" class="me-4"></img>${draggedPlaylist.tracks.items[i].track.name}</td>
@@ -117,6 +137,11 @@ playlistViewOne.addEventListener("drop", async (item) => {
         tr.setAttribute("draggable", "true");
         durationOfPlaylist += songDuration;
     }
+    danceability = (danceability / draggedPlaylist.tracks.items.length) * 100;
+    energy = (energy / draggedPlaylist.tracks.items.length) * 100;
+    instrumentalness = (instrumentalness / draggedPlaylist.tracks.items.length) * 100;
+    valence = (valence / draggedPlaylist.tracks.items.length) * 100;
+    acousticness = (acousticness / draggedPlaylist.tracks.items.length) * 100;
     var hrs = Math.floor(durationOfPlaylist / 3600000);
     var min = Math.floor((durationOfPlaylist % 3600000) / 60000);
     var sec = Math.floor((durationOfPlaylist % 60000) / 1000);
@@ -127,7 +152,56 @@ playlistViewOne.addEventListener("drop", async (item) => {
         document.getElementById("playlist-duration").innerText = min + "mins " + sec + "sec";
     }
     document.getElementById("playlist-tracks").style.display = "block";
-    document.getElementById("playlist-image-background").children[0].setAttribute("src", draggedPlaylist.images[0].url);
+    var oldcanv = document.getElementById('playlist-statistics');
+    oldcanv.remove();
+    var canv = document.createElement('canvas');
+    canv.id = 'playlist-statistics';
+    document.getElementById('playlist-view-two-container').appendChild(canv);
+    (async function () {
+        // @ts-ignore
+        new Chart("playlist-statistics", {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Danceability',
+                    'Energy',
+                    'Instrumentalness',
+                    'Valence',
+                    'Acousticness'
+                ],
+                datasets: [{
+                        label: 'Playlist Statistics',
+                        data: [danceability, energy, instrumentalness, valence, acousticness],
+                        backgroundColor: [
+                            'rgb(13, 110, 253)',
+                            'rgb(13, 110, 253)',
+                            'rgb(13, 110, 253)',
+                            'rgb(13, 110, 253)',
+                            'rgb(13, 110, 253)'
+                        ],
+                        borderColor: [
+                            'rgb(0,0,0)',
+                            'rgb(0,0,0)',
+                            'rgb(0,0,0)',
+                            'rgb(0,0,0)',
+                            'rgb(0,0,0)'
+                        ],
+                        hoverBackgroundColor: [
+                            "#FFFFFF"
+                        ],
+                        borderWidth: 1
+                    }],
+            },
+            options: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        });
+    })();
+    document.getElementById("playlist-statistics").style.display = "block";
+    document.getElementById("area-two-default-text").style.display = "none";
+    document.getElementById("playlist-view-two").style.backgroundColor = "#FFFFFF";
 });
 playlistViewOne.addEventListener("dragleave", (item) => {
     playlistViewOne.style.border = "solid black 3px";
@@ -164,4 +238,5 @@ function blackOrWhite(color) {
         return "rgba(255, 255, 255, 1)";
     }
 }
+export { playlistStats };
 //# sourceMappingURL=playlist.js.map
